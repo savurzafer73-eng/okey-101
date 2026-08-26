@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>101 Okey</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#071b12;
+    font-family:Arial,sans-serif;
+    color:white;
+    overflow:hidden;
+}
+
+.game{
+    width:100%;
+    height:100vh;
+    position:relative;
+    background:
+      radial-gradient(circle at center,#168044 0%,#07552e 45%,#032b19 100%);
+}
+
+/* MASA */
+.table{
+    position:absolute;
+    width:min(92vw,850px);
+    height:min(75vh,600px);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:45%;
+    background:#08733d;
+    border:18px solid #4b2a16;
+    box-shadow:
+      inset 0 0 35px #003c21,
+      0 12px 30px #000;
+}
+
+/* OYUNCULAR */
+.player{
+    position:absolute;
+    text-align:center;
+    z-index:5;
+}
+
+.player-name{
+    background:#111b18;
+    padding:6px 12px;
+    border-radius:15px;
+    font-size:13px;
+}
+
+.you{
+    bottom:8px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.top{
+    top:5px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.left{
+    left:5px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.right{
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* TAŞLAR */
+.tiles{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:4px;
+    max-width:85vw;
+}
+
+.tile{
+    width:42px;
+    height:58px;
+    background:linear-gradient(145deg,#fff,#ddd);
+    border-radius:6px;
+    color:#d21d1d;
+    font-size:25px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 5px #0008;
+    border:1px solid #aaa;
+    cursor:pointer;
+    user-select:none;
+}
+
+.tile.black{color:#111}
+.tile.blue{color:#075dc7}
+.tile.red{color:#d71919}
+.tile.yellow{color:#d29b00}
+
+.tile.selected{
+    transform:translateY(-14px);
+    box-shadow:0 7px 10px #000;
+}
+
+/* ORTA */
+.center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+
+.info{
+    background:#07140eaa;
+    padding:10px 18px;
+    border-radius:20px;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.discard{
+    min-height:65px;
+    display:flex;
+    justify-content:center;
+}
+
+.actions{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    z-index:20;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:12px 17px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#f1b72b;
+    color:#17100a;
+    box-shadow:0 3px 8px #0008;
+}
+
+button:active{
+    transform:scale(.95);
+}
+
+button:disabled{
+    opacity:.4;
+}
+
+/* SOL/SAĞ TAŞLAR */
+.sideTiles{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.sideTiles .tile{
+    width:35px;
+    height:45px;
+    font-size:20px;
+}
+
+.status{
+    position:absolute;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#000b;
+    padding:8px 15px;
+    border-radius:18px;
+    z-index:30;
+    font-size:13px;
+}
+
+/* MOBİL */
+@media(max-width:600px){
+    .table{
+        width:96vw;
+        height:68vh;
+        border-width:11px;
+    }
+
+    .tile{
+        width:30px;
+        height:43px;
+        font-size:19px;
+    }
+
+    .tiles{
+        gap:2px;
+        max-width:94vw;
+    }
+
+    .top .tile{
+        width:22px;
+        height:31px;
+        font-size:13px;
+    }
+
+    .sideTiles .tile{
+        width:25px;
+        height:35px;
+        font-size:15px;
+    }
+
+    .actions{
+        bottom:4px;
+    }
+
+    button{
+        padding:10px 11px;
+        font-size:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<div class="status" id="status">
+Senin sıran
+</div>
+
+<div class="table">
+
+    <!-- ÜST OYUNCU -->
+    <div class="player top">
+        <div class="player-name">🤖 Ali</div>
+        <div class="tiles" id="aliTiles"></div>
+    </div>
+
+    <!-- SOL -->
+    <div class="player left">
+        <div class="player-name">🤖 Mehmet</div>
+        <div class="sideTiles" id="mehmetTiles"></div>
+    </div>
+
+    <!-- SAĞ -->
+    <div class="player right">
+        <div class="player-name">🤖 Ahmet</div>
+        <div class="sideTiles" id="ahmetTiles"></div>
+    </div>
+
+    <!-- SEN -->
+    <div class="player you">
+        <div class="player-name">👤 Zafer</div>
+        <div class="tiles" id="myTiles"></div>
+    </div>
+
+    <!-- ORTA -->
+    <div class="center">
+        <div class="info">
+            🀄 101 OKEY<br>
+            <span id="tileCount">Taş: 106</span>
+        </div>
+
+        <div class="discard" id="discard"></div>
+    </div>
+
+</div>
+
+<div class="actions">
+    <button id="drawBtn" onclick="drawTile()">🎴 Taş Çek</button>
+    <button id="discardBtn" onclick="discardTile()">🗑️ Taş At</button>
+    <button onclick="newGame()">🔄 Yeni Oyun</button>
+</div>
+
+</div>
+
+<script>
+
+/* -----------------------
+   TAŞ SİSTEMİ
+----------------------- */
+
+const colors=[
+    {name:"red",symbol:"●"},
+    {name:"blue",symbol:"●"},
+    {name:"black",symbol:"●"},
+    {name:"yellow",symbol:"●"}
+];
+
+let deck=[];
+let myHand=[];
+let selected=null;
+let discardPile=[];
+let gameOver=false;
+
+function createDeck(){
+
+    deck=[];
+
+    for(let c of colors){
+        for(let n=1;n<=13;n++){
+            deck.push({
+                number:n,
+                color:c.name
+            });
+
+            deck.push({
+                number:n,
+                color:c.name
+            });
+        }
+    }
+
+    // 2 sahte okey
+    deck.push({number:0,color:"black",joker:true});
+    deck.push({number:0,color:"black",joker:true});
+
+    shuffle(deck);
+}
+
+function shuffle(array){
+    for(let i=array.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [array[i],array[j]]=[array[j],array[i]];
+    }
+}
+
+function tileHTML(tile,index){
+
+    if(tile.joker){
+        return `<div class="tile red"
+            onclick="selectTile(${index})">★</div>`;
+    }
+
+    return `<div class="tile ${tile.color}"
+        onclick="selectTile(${index})">${tile.number}</div>`;
+}
+
+/* -----------------------
+   YENİ OYUN
+----------------------- */
+
+function newGame(){
+
+    createDeck();
+
+    myHand=[];
+
+    // 14 taş
+    for(let i=0;i<14;i++){
+        myHand.push(deck.pop());
+    }
+
+    discardPile=[];
+
+    selected=null;
+    gameOver=false;
+
+    render();
+
+    setStatus("Senin sıran — bir taş seç");
+}
+
+function render(){
+
+    const my=document.getElementById("myTiles");
+
+    my.innerHTML="";
+
+    myHand.forEach((tile,i)=>{
+        let html=tileHTML(tile,i);
+
+        if(i===selected){
+            html=html.replace(
+                'class="tile',
+                'class="tile selected'
+            );
+        }
+
+        my.innerHTML+=html;
+    });
+
+    // bilgisayar taşları
+    document.getElementById("aliTiles").innerHTML=
+        hiddenTiles(14);
+
+    document.getElementById("mehmetTiles").innerHTML=
+        hiddenTiles(14);
+
+    document.getElementById("ahmetTiles").innerHTML=
+        hiddenTiles(14);
+
+    // atılan taş
+    let discard=document.getElementById("discard");
+
+    discard.innerHTML="";
+
+    if(discardPile.length){
+
+        let t=discardPile[discardPile.length-1];
+
+        discard.innerHTML=tileHTML(t,-1)
+            .replace("onclick=\"selectTile(-1)\"","");
+    }
+
+    document.getElementById("tileCount").innerText=
+        "Kalan taş: "+deck.length;
+}
+
+function hiddenTiles(count){
+
+    let result="";
+
+    for(let i=0;i<count;i++){
+        result+=`
+        <div class="tile black"
+        style="background:linear-gradient(135deg,#1e5b4a,#073426);
+        color:white">◆</div>`;
+    }
+
+    return result;
+}
+
+/* -----------------------
+   TAŞ SEÇ
+----------------------- */
+
+function selectTile(index){
+
+    if(index<0 || gameOver)return;
+
+    selected=index;
+
+    render();
+
+    setStatus(
+        "Seçilen taş: "+
+        (myHand[index].joker ? "OKEY" :
+        myHand[index].number)
+    );
+}
+
+/* -----------------------
+   TAŞ ÇEK
+----------------------- */
+
+function drawTile(){
+
+    if(gameOver)return;
+
+    if(myHand.length>=15){
+        setStatus("Önce bir taş atmalısın!");
+        return;
+    }
+
+    if(deck.length===0){
+        setStatus("Ortada taş kalmadı!");
+        return;
+    }
+
+    myHand.push(deck.pop());
+
+    selected=null;
+
+    render();
+
+    setStatus("Taş çektin. Şimdi bir taş seç ve at.");
+}
+
+/* -----------------------
+   TAŞ AT
+----------------------- */
+
+function discardTile(){
+
+    if(gameOver)return;
+
+    if(selected===null){
+        setStatus("Önce atacağın taşı seç!");
+        return;
+    }
+
+    let tile=myHand.splice(selected,1)[0];
+
+    discardPile.push(tile);
+
+    selected=null;
+
+    render();
+
+    setStatus("Taş attın. Bilgisayar oynuyor...");
+
+    setTimeout(computerTurn,900);
+}
+
+/* -----------------------
+   BİLGİSAYAR
+----------------------- */
+
+function computerTurn(){
+
+    if(gameOver)return;
+
+    // Basit yapay zekâ
+    if(deck.length>0){
+        deck.pop();
+    }
+
+    setStatus("Bilgisayar oynadı. Sıra sende.");
+
+    render();
+
+    checkWin();
+}
+
+/* -----------------------
+   KAZANMA
+----------------------- */
+
+function checkWin(){
+
+    if(myHand.length===0){
+
+        gameOver=true;
+
+        setStatus("🏆 TEBRİKLER! OYUNU KAZANDIN!");
+
+        alert("🏆 Tebrikler Zafer! 101 Okey oyununu kazandın.");
+    }
+}
+
+function setStatus(text){
+
+    document.getElementById("status").innerText=text;
+}
+
+/* BAŞLAT */
+newGame();
+
+</script>
+
+</body>
+</html>
