@@ -3,47 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mina Film Studio V5</title>
+
+<title>Mina Film Studio V1</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
-    background:#080808;
-    color:#fff;
-    font-family:Arial,sans-serif;
+    background:#090b12;
+    color:#ffffff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 header{
-    padding:18px;
+    background:#111522;
+    border-bottom:1px solid #30384d;
+    padding:25px 15px;
     text-align:center;
-    background:#111;
-    border-bottom:1px solid #333;
 }
 
-h1{
+header h1{
     margin:0;
-    font-size:26px;
+    font-size:32px;
 }
 
-.sub{
-    color:#aaa;
-    margin-top:7px;
+header p{
+    margin:8px 0 0;
+    color:#9da7bd;
 }
 
 .container{
+    width:94%;
     max-width:1200px;
-    margin:auto;
-    padding:20px;
+    margin:25px auto;
 }
 
 .panel{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:12px;
-    padding:18px;
-    margin-bottom:18px;
+    background:#111522;
+    border:1px solid #30384d;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.panel h2{
+    margin-top:0;
+    color:#ffffff;
 }
 
 label{
@@ -52,1465 +61,1230 @@ label{
     font-weight:bold;
 }
 
-input[type=file]{
+input,
+textarea,
+select{
     width:100%;
+    background:#080b12;
+    color:#ffffff;
+    border:1px solid #3a4359;
+    border-radius:9px;
     padding:12px;
-    background:#222;
-    color:#fff;
-    border:1px solid #444;
-    border-radius:8px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
 }
 
 button{
     border:0;
-    border-radius:8px;
-    padding:13px 18px;
-    margin:6px 4px 6px 0;
-    cursor:pointer;
-    font-size:15px;
+    border-radius:9px;
+    padding:12px 18px;
+    margin-top:12px;
+    margin-right:6px;
+    background:#7047ff;
+    color:#ffffff;
     font-weight:bold;
-    background:#2b2b2b;
-    color:#fff;
+    cursor:pointer;
 }
 
 button:hover{
-    background:#444;
+    background:#8a67ff;
 }
 
-.primary{
-    background:#7b2cff;
+button.gray{
+    background:#30384a;
 }
 
-.primary:hover{
-    background:#933fff;
-}
-
-.green{
-    background:#087f3f;
-}
-
-.red{
-    background:#8c2020;
-}
-
-select{
-    background:#222;
-    color:white;
-    border:1px solid #444;
-    padding:10px;
-    border-radius:7px;
+button.red{
+    background:#a52d38;
 }
 
 .status{
+    background:#080b12;
+    border:1px solid #30384d;
+    border-radius:9px;
     padding:15px;
-    background:#0d0d0d;
-    border-radius:8px;
-    border:1px solid #333;
-    line-height:1.7;
-    font-family:monospace;
+    color:#aeb9d0;
     white-space:pre-wrap;
-}
-
-canvas{
-    width:100%;
-    display:block;
-    background:#000;
-    border-radius:10px;
-    border:1px solid #333;
-}
-
-audio{
-    width:100%;
-    margin-top:10px;
-}
-
-.download{
-    display:none;
-    padding:15px;
-    margin-top:15px;
-    background:#103d26;
-    border:1px solid #28794c;
-    border-radius:10px;
-}
-
-.download a{
-    color:#fff;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-.warning{
-    color:#ffc107;
-}
-
-.ok{
-    color:#50e88a;
-}
-
-.error{
-    color:#ff6666;
-}
-
-.small{
-    color:#aaa;
-    font-size:13px;
     line-height:1.6;
 }
 
-.row{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
+.scenes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:18px;
 }
 
-.col{
-    flex:1;
-    min-width:250px;
+.scene{
+    background:#0b0e17;
+    border:1px solid #30384d;
+    border-radius:12px;
+    padding:15px;
 }
 
-.progress{
+.scene h3{
+    margin-top:0;
+}
+
+.scene-number{
+    color:#8f73ff;
+    font-weight:bold;
+}
+
+.scene-image{
     width:100%;
-    height:12px;
-    background:#222;
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:10px;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    background:#05070b;
+    border-radius:8px;
+    display:block;
+    margin:12px 0;
 }
 
-.progressBar{
-    width:0%;
-    height:100%;
-    background:#7b2cff;
-    transition:width .1s linear;
+.scene textarea{
+    min-height:100px;
+    margin-top:8px;
 }
+
+.scene input[type="file"]{
+    padding:9px;
+}
+
+.empty{
+    text-align:center;
+    color:#727c92;
+    padding:35px 10px;
+}
+
+.info{
+    color:#8f9ab0;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.success{
+    color:#57df8a;
+}
+
+.warning{
+    color:#ffd166;
+}
+
+.danger{
+    color:#ff6b6b;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+@media(max-width:700px){
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    header h1{
+        font-size:25px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
-    <h1>🎬 Mina Film Studio V5</h1>
-    <div class="sub">1 Sahne • Gerçek Görsel • Gerçek Ses • Sesli WebM</div>
+
+    <h1>🎬 Mina Film Studio</h1>
+
+    <p>V1 — Film Proje Yönetim Sistemi</p>
+
 </header>
+
 
 <div class="container">
 
-<div class="panel">
 
-    <h2>1️⃣ Sahne Görseli</h2>
-
-    <label>JPG / PNG / WEBP görselini seç</label>
-
-    <input
-        id="imageInput"
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-    >
-
-    <p class="small">
-        En iyi sonuç için 1920×1080 veya daha büyük sinematik bir görsel kullan.
-    </p>
-
-</div>
-
+<!-- FILM BILGILERI -->
 
 <div class="panel">
 
-    <h2>2️⃣ Sahne Sesi</h2>
-
-    <label>MP3 / WAV / OGG / M4A dosyasını seç</label>
-
-    <input
-        id="audioInput"
-        type="file"
-        accept="audio/mpeg,audio/wav,audio/wave,audio/x-wav,audio/ogg,audio/mp4,.mp3,.wav,.ogg,.m4a"
-    >
-
-    <audio id="audioPlayer" controls></audio>
-
-    <div style="margin-top:10px">
-
-        <button
-            class="green"
-            id="testAudioBtn"
-        >
-            🔊 Sesi Test Et
-        </button>
-
-    </div>
-
-    <p class="small">
-        Bu sürüm browser TTS kullanmaz. Seçtiğin gerçek ses dosyası doğrudan
-        video kayıt akışına gönderilir.
-    </p>
-
-</div>
-
-
-<div class="panel">
-
-    <h2>3️⃣ Video Ayarları</h2>
+    <h2>🎞️ 1. Film Bilgileri</h2>
 
     <div class="row">
 
-        <div class="col">
+        <div>
 
-            <label>Çözünürlük</label>
+            <label>Film Adı</label>
 
-            <select id="resolution">
-                <option value="1920x1080">Full HD — 1920×1080</option>
-                <option value="1280x720">HD — 1280×720</option>
+            <input
+                id="filmName"
+                value="Das Haus am Waldrand"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>Dil</label>
+
+            <select id="language">
+
+                <option value="de">
+                    Almanca
+                </option>
+
+                <option value="tr">
+                    Türkçe
+                </option>
+
             </select>
 
         </div>
 
-        <div class="col">
-
-            <label>Hareket</label>
-
-            <select id="motion">
-                <option value="zoom">Yavaş sinematik yaklaşma</option>
-                <option value="zoomout">Yavaş uzaklaşma</option>
-                <option value="left">Sola kamera hareketi</option>
-                <option value="right">Sağa kamera hareketi</option>
-            </select>
-
-        </div>
-
     </div>
 
-</div>
+
+    <br>
 
 
-<div class="panel">
+    <label>Film Hikâyesi</label>
 
-    <h2>4️⃣ Sistem Durumu</h2>
-
-    <div id="status" class="status">
-Mina Film Studio V5 hazır.
-
-Görsel ve ses dosyasını seç.
-    </div>
-
-</div>
+    <textarea id="story">Um 23:47 Uhr kommt Anna an einem verlassenen Haus am Waldrand an. Plötzlich geht im oberen Fenster ein Licht an. Anna hört Schritte hinter sich. Die Haustür beginnt sich langsam von selbst zu öffnen. Im oberen Fenster erscheint eine dunkle Gestalt.</textarea>
 
 
-<div class="panel">
+    <button id="createScenes">
 
-    <h2>5️⃣ Önizleme</h2>
+        🎬 Hikâyeyi Sahnelere Böl
 
-    <canvas id="canvas" width="1920" height="1080"></canvas>
-
-    <div class="progress">
-        <div id="progressBar" class="progressBar"></div>
-    </div>
-
-</div>
-
-
-<div class="panel">
-
-    <h2>6️⃣ Kayıt</h2>
-
-    <button
-        id="recordBtn"
-        class="primary"
-    >
-        🎬 1 SAHNE SESLİ KAYDET
     </button>
 
-    <button
-        id="stopBtn"
-        class="red"
-        disabled
-    >
-        ⛔ Kaydı Durdur
-    </button>
+
+</div>
+
+
+
+<!-- DURUM -->
+
+<div class="panel">
+
+    <h2>📊 Proje Durumu</h2>
 
     <div
-        id="downloadBox"
-        class="download"
+        id="status"
+        class="status"
     >
-        <div>✅ Video hazır!</div>
-        <br>
-        <a id="downloadLink">
-            ⬇️ WebM Videoyu İndir
-        </a>
+Mina Film Studio V1 hazır.
+
+Film bilgilerini gir ve
+"Hikâyeyi Sahnelere Böl"
+butonuna bas.
     </div>
 
 </div>
 
+
+
+<!-- KARAKTERLER -->
 
 <div class="panel">
 
-    <h2>ℹ️ V5 Testinin Amacı</h2>
+    <h2>👤 Karakterler</h2>
 
-    <div class="small">
+    <div class="row">
 
-        Bu sürüm özellikle önceki ses probleminden kaçınmak için
-        tek sahne üzerine kurulmuştur.
+        <div>
 
-        <br><br>
+            <label>Karakter 1</label>
 
-        Akış:
+            <input
+                id="character1"
+                value="Anna"
+            >
 
-        <br>
-        Görsel → Canvas → Video Track
-        <br>
-        MP3/WAV → Web Audio → Audio Track
-        <br>
-        Video Track + Audio Track → MediaRecorder
-        <br>
-        Sonuç → Sesli WebM
+        </div>
 
-        <br><br>
 
-        Eğer bu test başarılı olursa aynı motoru kullanarak
-        Mystery Nacht için çok sahneli film sistemine geçeceğiz.
+        <div>
+
+            <label>Karakter 2</label>
+
+            <input
+                id="character2"
+                value="Der Schatten"
+            >
+
+        </div>
+
+    </div>
+
+
+    <p class="info">
+
+        V1'de karakterler film projesinde saklanır.
+        İlerleyen sürümlerde karakterlerin görünümü
+        tüm sahnelerde korunacak.
+
+    </p>
+
+</div>
+
+
+
+<!-- SAHNELER -->
+
+<div class="panel">
+
+    <h2>🎥 Film Sahneleri</h2>
+
+    <div
+        id="scenes"
+        class="scenes"
+    >
+
+        <div class="empty">
+
+            Henüz sahne oluşturulmadı.
+
+        </div>
 
     </div>
 
 </div>
 
+
+
+<!-- PROJE -->
+
+<div class="panel">
+
+    <h2>💾 Proje Yönetimi</h2>
+
+    <button id="saveProject">
+
+        💾 Projeyi Kaydet
+
+    </button>
+
+
+    <button
+        id="loadProject"
+        class="gray"
+    >
+
+        📂 Projeyi Yükle
+
+    </button>
+
+
+    <button
+        id="clearProject"
+        class="red"
+    >
+
+        🗑️ Projeyi Sıfırla
+
+    </button>
+
+
+    <input
+        id="projectFile"
+        type="file"
+        accept=".json"
+        style="display:none"
+    >
+
 </div>
+
+
+
+<!-- GELECEK -->
+
+<div class="panel">
+
+    <h2>🚀 Mina Film Studio Yol Haritası</h2>
+
+    <div class="info">
+
+        <p>✅ V1 — Film proje sistemi</p>
+
+        <p>⬜ V2 — Gelişmiş sahne yönetimi</p>
+
+        <p>⬜ V3 — AI görsel üretimi</p>
+
+        <p>⬜ V4 — Karakter tutarlılığı</p>
+
+        <p>⬜ V5 — Görsel hareketlendirme</p>
+
+        <p>⬜ V6 — Seslendirme</p>
+
+        <p>⬜ V7 — Altyazı</p>
+
+        <p>⬜ V8 — Müzik ve efekt</p>
+
+        <p>⬜ V9 — Video montajı</p>
+
+        <p>⬜ V10 — Mystery Nacht Film Studio</p>
+
+    </div>
+
+</div>
+
+
+</div>
+
 
 
 <script>
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
 
-const imageInput = document.getElementById("imageInput");
-const audioInput = document.getElementById("audioInput");
+/* =====================================================
+   MINA FILM STUDIO V1
+   ===================================================== */
 
-const audioPlayer = document.getElementById("audioPlayer");
 
-const recordBtn = document.getElementById("recordBtn");
-const stopBtn = document.getElementById("stopBtn");
+let scenes = [];
 
-const testAudioBtn = document.getElementById("testAudioBtn");
 
-const statusBox = document.getElementById("status");
-const downloadBox = document.getElementById("downloadBox");
-const downloadLink = document.getElementById("downloadLink");
 
-const progressBar = document.getElementById("progressBar");
+const statusBox =
+    document.getElementById("status");
 
-const resolutionSelect = document.getElementById("resolution");
-const motionSelect = document.getElementById("motion");
 
+const scenesBox =
+    document.getElementById("scenes");
 
-let selectedImage = null;
 
-let audioURL = null;
-let imageURL = null;
 
-let audioContext = null;
-let audioSource = null;
-let audioDestination = null;
+/* =====================================================
+   DURUM MESAJI
+   ===================================================== */
 
-let recorder = null;
-let recordedChunks = [];
+function setStatus(message){
 
-let videoStream = null;
-let finalStream = null;
-
-let animationID = null;
-
-let recording = false;
-
-let audioReady = false;
-
-let startTime = 0;
-let duration = 0;
-
-
-/* --------------------------------
-   STATUS
--------------------------------- */
-
-function status(text, type=""){
-    statusBox.className = "status " + type;
-    statusBox.textContent = text;
-}
-
-
-/* --------------------------------
-   RESOLUTION
--------------------------------- */
-
-function setResolution(){
-
-    const value = resolutionSelect.value.split("x");
-
-    canvas.width = parseInt(value[0]);
-    canvas.height = parseInt(value[1]);
-
-    drawIdle();
-
-    status(
-        "Çözünürlük: " +
-        canvas.width +
-        " × " +
-        canvas.height
-    );
-}
-
-
-/* --------------------------------
-   IMAGE
--------------------------------- */
-
-imageInput.addEventListener("change", function(){
-
-    const file = this.files[0];
-
-    if(!file){
-        return;
-    }
-
-    if(imageURL){
-        URL.revokeObjectURL(imageURL);
-    }
-
-    imageURL = URL.createObjectURL(file);
-
-    const img = new Image();
-
-    img.onload = function(){
-
-        selectedImage = img;
-
-        drawImageFrame(
-            img,
-            0,
-            0
-        );
-
-        status(
-            "GÖRSEL HAZIR\n\n" +
-            "Dosya: " + file.name + "\n" +
-            "Boyut: " + img.width + " × " + img.height + "\n\n" +
-            "Şimdi ses dosyasını seç."
-        );
-
-    };
-
-    img.onerror = function(){
-
-        status(
-            "Görsel yüklenemedi.",
-            "error"
-        );
-
-    };
-
-    img.src = imageURL;
-
-});
-
-
-/* --------------------------------
-   AUDIO
--------------------------------- */
-
-audioInput.addEventListener("change", async function(){
-
-    const file = this.files[0];
-
-    if(!file){
-        return;
-    }
-
-    if(audioURL){
-        URL.revokeObjectURL(audioURL);
-    }
-
-    audioURL = URL.createObjectURL(file);
-
-    audioPlayer.src = audioURL;
-
-    audioPlayer.load();
-
-    audioPlayer.onloadedmetadata = function(){
-
-        audioReady = true;
-
-        duration = audioPlayer.duration;
-
-        status(
-            "SES HAZIR\n\n" +
-            "Dosya: " + file.name + "\n" +
-            "Süre: " + formatTime(duration) + "\n\n" +
-            "🔊 'Sesi Test Et' ile kontrol edebilirsin.\n\n" +
-            "Sonra '1 SAHNE SESLİ KAYDET' butonuna bas."
-        );
-
-    };
-
-});
-
-
-/* --------------------------------
-   TEST AUDIO
--------------------------------- */
-
-testAudioBtn.addEventListener("click", async function(){
-
-    if(!audioURL){
-
-        status(
-            "Önce MP3 veya WAV dosyası seçmelisin.",
-            "error"
-        );
-
-        return;
-    }
-
-    try{
-
-        await audioPlayer.play();
-
-        status(
-            "🔊 SES ÇALIYOR\n\n" +
-            "Bu ses dosyası kayıt sırasında da kullanılacak.",
-            "ok"
-        );
-
-    }
-    catch(error){
-
-        status(
-            "Ses başlatılamadı.\n\n" +
-            error.message,
-            "error"
-        );
-
-    }
-
-});
-
-
-/* --------------------------------
-   AUDIO ENGINE
--------------------------------- */
-
-async function createAudioEngine(){
-
-    if(audioContext){
-
-        try{
-            await audioContext.close();
-        }
-        catch(e){}
-
-    }
-
-    audioContext =
-        new (
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
-
-    await audioContext.resume();
-
-    audioDestination =
-        audioContext.createMediaStreamDestination();
-
-    /*
-       ÖNEMLİ:
-
-       Audio elementinden sadece BİR kez
-       MediaElementSource oluşturuyoruz.
-    */
-
-    audioSource =
-        audioContext.createMediaElementSource(
-            audioPlayer
-        );
-
-    /*
-       Ses kayıt kanalına
-    */
-
-    audioSource.connect(
-        audioDestination
-    );
-
-    /*
-       Kullanıcı sesi de duyabilsin.
-    */
-
-    audioSource.connect(
-        audioContext.destination
-    );
-
-    return true;
-}
-
-
-/* --------------------------------
-   MIME TYPE
--------------------------------- */
-
-function getMimeType(){
-
-    const types = [
-
-        "video/webm;codecs=vp9,opus",
-
-        "video/webm;codecs=vp8,opus",
-
-        "video/webm"
-
-    ];
-
-    for(const type of types){
-
-        if(
-            MediaRecorder.isTypeSupported(type)
-        ){
-
-            return type;
-
-        }
-
-    }
-
-    return "";
+    statusBox.textContent =
+        message;
 
 }
 
 
-/* --------------------------------
-   IMAGE DRAW
--------------------------------- */
 
-function drawImageFrame(
-    img,
-    zoom,
-    offsetX
-){
+/* =====================================================
+   HAZIR SAHNELER
+   ===================================================== */
 
-    const W = canvas.width;
-    const H = canvas.height;
+const defaultScenes = [
 
-    ctx.fillStyle = "#000";
+    {
+        title:"Die Ankunft",
 
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
+        text:
+        "Um 23:47 Uhr kam Anna an dem verlassenen Haus am Waldrand an."
+    },
 
-    const imageRatio =
-        img.width / img.height;
+    {
+        title:"Das Haus",
 
-    const canvasRatio =
-        W / H;
+        text:
+        "Seit Jahren hatte niemand dieses Haus betreten. Trotzdem wirkte es nicht völlig verlassen."
+    },
 
-    let drawW;
-    let drawH;
+    {
+        title:"Das Fenster",
 
-    if(imageRatio > canvasRatio){
+        text:
+        "Plötzlich ging im oberen Stock ein Licht an."
+    },
 
-        drawH = H * (1 + zoom);
+    {
+        title:"Der Wald",
 
-        drawW =
-            drawH *
-            imageRatio;
+        text:
+        "Anna hörte Schritte hinter sich. Langsam drehte sie sich um."
+    },
 
-    }
-    else{
+    {
+        title:"Die Tür",
 
-        drawW = W * (1 + zoom);
+        text:
+        "Die Haustür begann sich von selbst zu öffnen."
+    },
 
-        drawH =
-            drawW /
-            imageRatio;
+    {
+        title:"Der Schatten",
 
-    }
-
-    let x =
-        (W - drawW) / 2;
-
-    let y =
-        (H - drawH) / 2;
-
-    x += offsetX;
-
-    ctx.drawImage(
-        img,
-        x,
-        y,
-        drawW,
-        drawH
-    );
-
-    /*
-       Sinematik karartma
-    */
-
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            0,
-            H
-        );
-
-    gradient.addColorStop(
-        0,
-        "rgba(0,0,0,.20)"
-    );
-
-    gradient.addColorStop(
-        .5,
-        "rgba(0,0,0,0)"
-    );
-
-    gradient.addColorStop(
-        1,
-        "rgba(0,0,0,.45)"
-    );
-
-    ctx.fillStyle = gradient;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    /*
-       Film çerçevesi
-    */
-
-    const barHeight =
-        Math.round(H * .055);
-
-    ctx.fillStyle = "#000";
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        barHeight
-    );
-
-    ctx.fillRect(
-        0,
-        H - barHeight,
-        W,
-        barHeight
-    );
-
-}
-
-
-/* --------------------------------
-   IDLE
--------------------------------- */
-
-function drawIdle(){
-
-    ctx.fillStyle = "#050505";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.fillStyle = "#777";
-
-    ctx.textAlign = "center";
-
-    ctx.font =
-        Math.round(canvas.height * .035) +
-        "px Arial";
-
-    ctx.fillText(
-        "Mina Film Studio V5",
-        canvas.width / 2,
-        canvas.height / 2
-    );
-
-}
-
-
-/* --------------------------------
-   ANIMATION
--------------------------------- */
-
-function animate(){
-
-    if(!recording){
-
-        return;
-
+        text:
+        "Im oberen Fenster erschien eine dunkle Gestalt."
     }
 
-    const elapsed =
-        (performance.now() - startTime) / 1000;
-
-    let progress = 0;
-
-    if(duration > 0){
-
-        progress =
-            Math.min(
-                elapsed / duration,
-                1
-            );
-
-    }
-
-    progressBar.style.width =
-        (progress * 100) + "%";
+];
 
 
-    const motion =
-        motionSelect.value;
 
-    let zoom = 0;
-    let offsetX = 0;
+/* =====================================================
+   SAHNE OLUŞTUR
+   ===================================================== */
 
-
-    if(motion === "zoom"){
-
-        zoom =
-            progress * 0.13;
-
-    }
-
-
-    if(motion === "zoomout"){
-
-        zoom =
-            0.13 -
-            progress * 0.13;
-
-    }
-
-
-    if(motion === "left"){
-
-        zoom = 0.04;
-
-        offsetX =
-            -progress *
-            canvas.width *
-            0.08;
-
-    }
-
-
-    if(motion === "right"){
-
-        zoom = 0.04;
-
-        offsetX =
-            progress *
-            canvas.width *
-            0.08;
-
-    }
-
-
-    drawImageFrame(
-        selectedImage,
-        zoom,
-        offsetX
-    );
-
-
-    animationID =
-        requestAnimationFrame(
-            animate
-        );
-
-}
-
-
-/* --------------------------------
-   RECORD
--------------------------------- */
-
-recordBtn.addEventListener(
+document
+.getElementById("createScenes")
+.addEventListener(
     "click",
-    async function(){
-
-        if(recording){
-
-            return;
-
-        }
-
-
-        /*
-           Görsel kontrol
-        */
-
-        if(!selectedImage){
-
-            status(
-                "❌ Görsel seçilmedi.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /*
-           Ses kontrolü
-        */
-
-        if(!audioURL || !audioReady){
-
-            status(
-                "❌ Ses dosyası seçilmedi veya hazır değil.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /*
-           Browser kontrol
-        */
-
-        if(!window.MediaRecorder){
-
-            status(
-                "❌ Bu tarayıcı MediaRecorder desteklemiyor.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        recordBtn.disabled = true;
-
-        stopBtn.disabled = false;
-
-        downloadBox.style.display = "none";
-
-
-        try{
-
-            status(
-                "1/6 — Ses motoru hazırlanıyor..."
-            );
-
-
-            await createAudioEngine();
-
-
-            /*
-               Sesin başına dön
-            */
-
-            audioPlayer.pause();
-
-            audioPlayer.currentTime = 0;
-
-
-            /*
-               Canvas video
-            */
-
-            videoStream =
-                canvas.captureStream(30);
-
-
-            const videoTracks =
-                videoStream.getVideoTracks();
-
-
-            /*
-               Audio track
-            */
-
-            const audioTracks =
-                audioDestination
-                    .stream
-                    .getAudioTracks();
-
-
-            status(
-                "2/6 — Akış kontrol ediliyor...\n\n" +
-
-                "Video track: " +
-                videoTracks.length + "\n" +
-
-                "Audio track: " +
-                audioTracks.length
-            );
-
-
-            if(videoTracks.length === 0){
-
-                throw new Error(
-                    "Video track oluşturulamadı."
-                );
-
-            }
-
-
-            if(audioTracks.length === 0){
-
-                throw new Error(
-                    "Audio track oluşturulamadı."
-                );
-
-            }
-
-
-            /*
-               İki akışı birleştir
-            */
-
-            finalStream =
-                new MediaStream();
-
-            videoTracks.forEach(
-                track =>
-                    finalStream.addTrack(track)
-            );
-
-            audioTracks.forEach(
-                track =>
-                    finalStream.addTrack(track)
-            );
-
-
-            status(
-                "3/6 — Video + ses birleştirildi.\n\n" +
-
-                "Video: " +
-                finalStream.getVideoTracks().length +
-                "\n" +
-
-                "Audio: " +
-                finalStream.getAudioTracks().length
-            );
-
-
-            /*
-               MIME
-            */
-
-            const mimeType =
-                getMimeType();
-
-
-            if(!mimeType){
-
-                throw new Error(
-                    "Desteklenen WebM codec bulunamadı."
-                );
-
-            }
-
-
-            status(
-                "4/6 — Kayıt başlıyor...\n\n" +
-
-                "Codec: " +
-                mimeType
-            );
-
-
-            recordedChunks = [];
-
-
-            recorder =
-                new MediaRecorder(
-                    finalStream,
-                    {
-                        mimeType:
-                            mimeType,
-
-                        videoBitsPerSecond:
-                            8000000,
-
-                        audioBitsPerSecond:
-                            128000
-                    }
-                );
-
-
-            recorder.ondataavailable =
-                function(event){
-
-                    if(
-                        event.data &&
-                        event.data.size > 0
-                    ){
-
-                        recordedChunks.push(
-                            event.data
-                        );
-
-                    }
-
-                };
-
-
-            recorder.onerror =
-                function(event){
-
-                    console.error(
-                        event
-                    );
-
-                    status(
-                        "❌ MediaRecorder hatası.",
-                        "error"
-                    );
-
-                };
-
-
-            recorder.onstop =
-                function(){
-
-                    finishRecording();
-
-                };
-
-
-            /*
-               Kaydı başlat
-            */
-
-            recorder.start(250);
-
-
-            recording = true;
-
-            startTime =
-                performance.now();
-
-
-            /*
-               Canvas animasyonu
-            */
-
-            animate();
-
-
-            /*
-               AudioContext kesin açık
-            */
-
-            await audioContext.resume();
-
-
-            /*
-               Ses kayıttan SONRA başlatılıyor.
-               Bu önemli.
-            */
-
-            await audioPlayer.play();
-
-
-            status(
-                "5/6 — KAYIT DEVAM EDİYOR 🎬\n\n" +
-
-                "Ses: AKTİF\n" +
-
-                "Video: AKTİF\n\n" +
-
-                "Ses dosyası bitince kayıt otomatik duracak."
-            );
-
-
-            /*
-               Ses bittiğinde kayıt bitir
-            */
-
-            audioPlayer.onended =
-                function(){
-
-                    if(recording){
-
-                        stopRecording();
-
-                    }
-
-                };
-
-
-        }
-        catch(error){
-
-            console.error(error);
-
-            recording = false;
-
-            recordBtn.disabled = false;
-
-            stopBtn.disabled = true;
-
-            status(
-                "❌ KAYIT BAŞLATILAMADI\n\n" +
-                error.message,
-                "error"
-            );
-
-        }
-
-    }
+    createScenes
 );
 
 
-/* --------------------------------
-   STOP
--------------------------------- */
 
-stopBtn.addEventListener(
-    "click",
-    function(){
+function createScenes(){
 
-        stopRecording();
+    scenes = [];
 
-    }
-);
-
-
-function stopRecording(){
-
-    if(!recording){
-
-        return;
-
-    }
-
-    recording = false;
-
-    cancelAnimationFrame(
-        animationID
-    );
-
-    audioPlayer.pause();
-
-    if(
-        recorder &&
-        recorder.state !== "inactive"
+    for(
+        let i=0;
+        i<defaultScenes.length;
+        i++
     ){
 
-        recorder.stop();
+        scenes.push({
+
+            id:i+1,
+
+            title:
+                defaultScenes[i].title,
+
+            text:
+                defaultScenes[i].text,
+
+            image:null
+
+        });
 
     }
 
-    stopBtn.disabled = true;
 
-    status(
-        "6/6 — Video işleniyor...\n\n" +
-        "Lütfen bekle."
+    renderScenes();
+
+
+    setStatus(
+
+        "✅ 6 sahne oluşturuldu.\n\n" +
+
+        "Film: " +
+        document
+        .getElementById("filmName")
+        .value +
+        "\n\n" +
+
+        "Şimdi her sahneye bir görsel ekleyebilirsin."
+
     );
 
 }
 
 
-/* --------------------------------
-   FINISH
--------------------------------- */
 
-function finishRecording(){
+/* =====================================================
+   SAHNELERI GOSTER
+   ===================================================== */
+
+function renderScenes(){
+
+    scenesBox.innerHTML = "";
+
+
+    if(
+        scenes.length === 0
+    ){
+
+        scenesBox.innerHTML =
+
+            '<div class="empty">' +
+
+            'Henüz sahne oluşturulmadı.' +
+
+            '</div>';
+
+        return;
+
+    }
+
+
+    scenes.forEach(
+        function(scene){
+
+            createSceneElement(
+                scene
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SAHNE ELEMANI
+   ===================================================== */
+
+function createSceneElement(
+    scene
+){
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.className =
+        "scene";
+
+
+    const number =
+        document.createElement(
+            "div"
+        );
+
+
+    number.className =
+        "scene-number";
+
+
+    number.textContent =
+        "SAHNE " +
+        scene.id;
+
+
+    const title =
+        document.createElement(
+            "h3"
+        );
+
+
+    title.textContent =
+        scene.title;
+
+
+    const image =
+        document.createElement(
+            "img"
+        );
+
+
+    image.className =
+        "scene-image";
+
+
+    /*
+       Görsel yoksa siyah alan
+    */
+
+    image.src =
+        scene.image ||
+        createPlaceholder(
+            scene.id
+        );
+
+
+    const file =
+        document.createElement(
+            "input"
+        );
+
+
+    file.type =
+        "file";
+
+
+    file.accept =
+        "image/*";
+
+
+    file.addEventListener(
+        "change",
+        function(){
+
+            const selected =
+                file.files[0];
+
+
+            if(!selected){
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    scene.image =
+                        event.target.result;
+
+
+                    image.src =
+                        scene.image;
+
+
+                    setStatus(
+
+                        "✅ Sahne " +
+                        scene.id +
+                        " görseli eklendi.\n\n" +
+
+                        "Dosya: " +
+                        selected.name
+
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                selected
+            );
+
+        }
+    );
+
+
+
+    const text =
+        document.createElement(
+            "textarea"
+        );
+
+
+    text.value =
+        scene.text;
+
+
+    text.placeholder =
+        "Sahne anlatımı...";
+
+
+    text.addEventListener(
+        "input",
+        function(){
+
+            scene.text =
+                text.value;
+
+        }
+    );
+
+
+
+    const prompt =
+        document.createElement(
+            "textarea"
+        );
+
+
+    prompt.placeholder =
+        "AI görsel promptu...";
+
+
+    prompt.value =
+        createPrompt(
+            scene
+        );
+
+
+    prompt.addEventListener(
+        "input",
+        function(){
+
+            scene.prompt =
+                prompt.value;
+
+        }
+    );
+
+
+
+    box.appendChild(
+        number
+    );
+
+
+    box.appendChild(
+        title
+    );
+
+
+    box.appendChild(
+        image
+    );
+
+
+    box.appendChild(
+        file
+    );
+
+
+    box.appendChild(
+        text
+    );
+
+
+    box.appendChild(
+        prompt
+    );
+
+
+    scenesBox.appendChild(
+        box
+    );
+
+}
+
+
+
+/* =====================================================
+   PLACEHOLDER
+   ===================================================== */
+
+function createPlaceholder(
+    number
+){
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        640;
+
+    canvas.height =
+        360;
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.fillStyle =
+        "#07090e";
+
+
+    ctx.fillRect(
+        0,
+        0,
+        640,
+        360
+    );
+
+
+    ctx.fillStyle =
+        "#727b91";
+
+
+    ctx.font =
+        "28px Arial";
+
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.fillText(
+        "SAHNE " +
+        number,
+        320,
+        170
+    );
+
+
+    ctx.font =
+        "18px Arial";
+
+
+    ctx.fillText(
+        "Görsel bekleniyor",
+        320,
+        205
+    );
+
+
+    return canvas.toDataURL(
+        "image/png"
+    );
+
+}
+
+
+
+/* =====================================================
+   AI PROMPT
+   ===================================================== */
+
+function createPrompt(
+    scene
+){
+
+    return (
+
+        "Cinematic mystery thriller scene, " +
+
+        scene.title +
+
+        ", abandoned forest house at night, " +
+
+        "dark atmosphere, realistic cinematic lighting, " +
+
+        "photorealistic, dramatic composition, " +
+
+        "35mm film look, highly detailed, " +
+
+        "German mystery movie, 16:9"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   PROJEYI KAYDET
+   ===================================================== */
+
+document
+.getElementById("saveProject")
+.addEventListener(
+    "click",
+    saveProject
+);
+
+
+
+function saveProject(){
+
+    const project = {
+
+        version:
+            "Mina Film Studio V1",
+
+        filmName:
+            document
+            .getElementById("filmName")
+            .value,
+
+        language:
+            document
+            .getElementById("language")
+            .value,
+
+        story:
+            document
+            .getElementById("story")
+            .value,
+
+        character1:
+            document
+            .getElementById("character1")
+            .value,
+
+        character2:
+            document
+            .getElementById("character2")
+            .value,
+
+        scenes:
+            scenes
+
+    };
+
+
+    const json =
+        JSON.stringify(
+            project,
+            null,
+            2
+        );
+
 
     const blob =
         new Blob(
-            recordedChunks,
+            [json],
             {
                 type:
-                    recorder.mimeType ||
-                    "video/webm"
+                "application/json"
             }
         );
 
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
 
-    downloadLink.href = url;
-
-    downloadLink.download =
-        "Mina_Film_Studio_V5_Sahne.webm";
-
-
-    downloadBox.style.display =
-        "block";
+    const link =
+        document.createElement(
+            "a"
+        );
 
 
-    progressBar.style.width =
-        "100%";
+    link.href =
+        url;
 
 
-    const sizeMB =
-        (
-            blob.size /
-            1024 /
-            1024
-        ).toFixed(2);
+    link.download =
+        "mina-film-studio-proje.json";
 
 
-    status(
-        "✅ KAYIT TAMAMLANDI!\n\n" +
-
-        "Dosya: Mina_Film_Studio_V5_Sahne.webm\n" +
-
-        "Boyut: " +
-        sizeMB +
-        " MB\n\n" +
-
-        "Video track: " +
-        finalStream.getVideoTracks().length +
-        "\n" +
-
-        "Audio track: " +
-        finalStream.getAudioTracks().length +
-        "\n\n" +
-
-        "🔊 Sesli WebM hazır.",
-        "ok"
+    document.body.appendChild(
+        link
     );
 
 
-    recordBtn.disabled = false;
+    link.click();
 
 
-    /*
-       Kaynakları durdur
-    */
-
-    if(videoStream){
-
-        videoStream
-            .getTracks()
-            .forEach(
-                track =>
-                    track.stop()
-            );
-
-    }
-
-    if(finalStream){
-
-        finalStream
-            .getTracks()
-            .forEach(
-                track =>
-                    track.stop()
-            );
-
-    }
-
-}
+    document.body.removeChild(
+        link
+    );
 
 
-/* --------------------------------
-   FORMAT TIME
--------------------------------- */
+    URL.revokeObjectURL(
+        url
+    );
 
-function formatTime(seconds){
 
-    if(!isFinite(seconds)){
-
-        return "00:00";
-
-    }
-
-    const min =
-        Math.floor(
-            seconds / 60
-        );
-
-    const sec =
-        Math.floor(
-            seconds % 60
-        );
-
-    return (
-        String(min).padStart(2,"0") +
-        ":" +
-        String(sec).padStart(2,"0")
+    setStatus(
+        "✅ Proje başarıyla kaydedildi."
     );
 
 }
 
 
-/* --------------------------------
-   RESOLUTION CHANGE
--------------------------------- */
 
-resolutionSelect.addEventListener(
-    "change",
-    setResolution
+/* =====================================================
+   PROJE YUKLE
+   ===================================================== */
+
+document
+.getElementById("loadProject")
+.addEventListener(
+    "click",
+    function(){
+
+        document
+        .getElementById("projectFile")
+        .click();
+
+    }
 );
 
 
-/* --------------------------------
-   INITIAL
--------------------------------- */
 
-setResolution();
-
-drawIdle();
-
-
-/*
-   Sayfa açıldığında destek kontrolü
-*/
-
-window.addEventListener(
-    "load",
+document
+.getElementById("projectFile")
+.addEventListener(
+    "change",
     function(){
 
-        let mime =
-            getMimeType();
+        const file =
+            this.files[0];
 
-        let recorderSupport =
-            !!window.MediaRecorder;
 
-        status(
-            "Mina Film Studio V5 hazır.\n\n" +
+        if(!file){
 
-            "MediaRecorder: " +
-            (
-                recorderSupport
-                ? "DESTEKLENİYOR"
-                : "DESTEKLENMİYOR"
-            ) +
-            "\n\n" +
+            return;
 
-            "WebM codec: " +
-            (
-                mime
-                ? mime
-                : "BULUNAMADI"
-            ) +
-            "\n\n" +
+        }
 
-            "1. Görsel seç\n" +
-            "2. MP3/WAV seç\n" +
-            "3. Sesi Test Et\n" +
-            "4. 1 SAHNE SESLİ KAYDET"
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event){
+
+                try{
+
+                    const project =
+                        JSON.parse(
+                            event.target.result
+                        );
+
+
+                    document
+                    .getElementById("filmName")
+                    .value =
+                        project.filmName ||
+                        "";
+
+
+                    document
+                    .getElementById("language")
+                    .value =
+                        project.language ||
+                        "de";
+
+
+                    document
+                    .getElementById("story")
+                    .value =
+                        project.story ||
+                        "";
+
+
+                    document
+                    .getElementById("character1")
+                    .value =
+                        project.character1 ||
+                        "";
+
+
+                    document
+                    .getElementById("character2")
+                    .value =
+                        project.character2 ||
+                        "";
+
+
+                    scenes =
+                        project.scenes ||
+                        [];
+
+
+                    renderScenes();
+
+
+                    setStatus(
+
+                        "✅ Proje başarıyla yüklendi.\n\n" +
+
+                        "Film: " +
+                        project.filmName
+
+                    );
+
+                }
+
+                catch(error){
+
+                    setStatus(
+
+                        "❌ Proje dosyası okunamadı."
+
+                    );
+
+                }
+
+            };
+
+
+        reader.readAsText(
+            file
         );
 
-    });
+    }
+);
+
+
+
+/* =====================================================
+   SIFIRLA
+   ===================================================== */
+
+document
+.getElementById("clearProject")
+.addEventListener(
+    "click",
+    function(){
+
+        const answer =
+            confirm(
+                "Tüm proje verileri silinsin mi?"
+            );
+
+
+        if(!answer){
+
+            return;
+
+        }
+
+
+        scenes = [];
+
+
+        document
+        .getElementById("filmName")
+        .value =
+            "Das Haus am Waldrand";
+
+
+        document
+        .getElementById("story")
+        .value =
+            "";
+
+
+        document
+        .getElementById("character1")
+        .value =
+            "Anna";
+
+
+        document
+        .getElementById("character2")
+        .value =
+            "Der Schatten";
+
+
+        renderScenes();
+
+
+        setStatus(
+            "♻️ Proje sıfırlandı."
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   BASLANGIC
+   ===================================================== */
+
+setStatus(
+
+    "🎬 Mina Film Studio V1 hazır.\n\n" +
+
+    "1. Film adını kontrol et.\n" +
+
+    "2. Hikâyeyi yaz.\n" +
+
+    "3. 'Hikâyeyi Sahnelere Böl' butonuna bas.\n\n" +
+
+    "Bu sürümde harici API kullanılmıyor."
+
+);
+
 
 </script>
 
