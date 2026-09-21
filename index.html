@@ -2,1921 +2,2592 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>101 Okey Deluxe</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Mina Film Studio V2</title>
 
 <style>
 *{
     box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
-    background:#03170d;
 }
 
 body{
-    color:white;
+    margin:0;
+    background:#060a10;
+    color:#f2f4f7;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-#game{
-    position:relative;
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
-    background:
-    radial-gradient(
-        ellipse at center,
-        #159052 0%,
-        #08723c 42%,
-        #064c2b 72%,
-        #021b10 100%
-    );
-}
-
-/* =========================
-   ÜST BAR
-========================= */
-
-.header{
-    position:absolute;
-    top:6px;
-    left:50%;
-    transform:translateX(-50%);
-    width:94%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:100;
-}
-
-.logo{
-    font-size:19px;
-    font-weight:900;
-    text-shadow:0 2px 4px #000;
-}
-
-.info{
-    background:#06140eea;
-    border:1px solid #ffffff22;
-    border-radius:16px;
-    padding:7px 11px;
-    font-size:11px;
-}
-
-/* =========================
-   MASA
-========================= */
-
-.table{
-    position:absolute;
-    width:min(96vw,1100px);
-    height:min(77vh,700px);
-
-    left:50%;
-    top:48%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:46%;
-
-    background:
-    radial-gradient(
-        ellipse at center,
-        #169352,
-        #08713c 70%,
-        #07572f
-    );
-
-    border:18px solid #4b2a17;
-
-    box-shadow:
-        inset 0 0 55px #002d18,
-        inset 0 0 12px #000,
-        0 20px 45px #000;
-}
-
-/* =========================
-   OYUNCULAR
-========================= */
-
-.player{
-    position:absolute;
-    z-index:20;
+header{
+    padding:20px;
+    background:#0c121c;
+    border-bottom:1px solid #273244;
     text-align:center;
 }
 
-.name{
-    display:inline-block;
-    background:#06140fec;
-    border:1px solid #ffffff25;
-    padding:5px 10px;
-    border-radius:18px;
-    font-size:12px;
-    margin-bottom:3px;
-}
-
-.top{
-    top:2px;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-.left{
-    left:1px;
-    top:47%;
-    transform:translateY(-50%);
-}
-
-.right{
-    right:1px;
-    top:47%;
-    transform:translateY(-50%);
-}
-
-.bottom{
-    left:50%;
-    bottom:1px;
-    transform:translateX(-50%);
-}
-
-/* =========================
-   RAKİP TAKOZLARI
-========================= */
-
-.opponentRack{
-    padding:5px 9px;
-    border-radius:8px;
-
-    background:
-    linear-gradient(
-        180deg,
-        #a96834,
-        #74401f 50%,
-        #482411
-    );
-
-    border:2px solid #32180b;
-
-    box-shadow:
-        inset 0 4px 5px #d8955c66,
-        inset 0 -4px 6px #1e0b04,
-        0 5px 10px #000b;
-
-    display:flex;
-    justify-content:center;
-}
-
-.sideRack{
-    min-height:185px;
-    align-items:center;
-}
-
-/* =========================
-   İKİ KATLI ANA TAKOZ
-========================= */
-
-.doubleRack{
-    position:relative;
-
-    width:min(94vw,900px);
-
-    height:126px;
-
-    padding:9px 10px 12px;
-
-    border-radius:
-        8px
-        8px
-        15px
-        15px;
-
-    background:
-    linear-gradient(
-        180deg,
-        #ad6b36 0%,
-        #82491f 42%,
-        #633419 70%,
-        #452310 100%
-    );
-
-    border:3px solid #30170a;
-
-    box-shadow:
-        inset 0 5px 6px #d9965b77,
-        inset 0 -7px 8px #1c0a04,
-        0 8px 14px #000c;
-}
-
-/* ÜST YUVA */
-
-.rackRow{
-    position:absolute;
-
-    left:7px;
-    right:7px;
-
-    height:46px;
-
-    display:flex;
-    align-items:flex-end;
-
-    padding:4px;
-
-    border-radius:5px;
-
-    background:
-    linear-gradient(
-        180deg,
-        #351b0d,
-        #190b05
-    );
-
-    box-shadow:
-    inset 0 4px 6px #000,
-    inset 0 -1px 0 #c1793f55;
-}
-
-.rackTop{
-    top:8px;
-}
-
-.rackBottom{
-    bottom:8px;
-}
-
-/* ORTA AHŞAP AYRAÇ */
-
-.doubleRack:after{
-    content:"";
-
-    position:absolute;
-
-    left:5px;
-    right:5px;
-
-    top:59px;
-
-    height:8px;
-
-    border-radius:4px;
-
-    background:
-    linear-gradient(
-        180deg,
-        #c17a42,
-        #70401e,
-        #3a1c0c
-    );
-
-    box-shadow:
-    0 2px 3px #000;
-}
-
-/* =========================
-   TAŞ ELİ
-========================= */
-
-.hand{
-    width:100%;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    justify-content:flex-start;
-
-    gap:2px;
-
-    overflow-x:auto;
-    overflow-y:hidden;
-
-    scrollbar-width:none;
-}
-
-.hand::-webkit-scrollbar{
-    display:none;
-}
-
-.tile{
-    flex:0 0 auto;
-
-    width:39px;
-    height:54px;
-
-    border-radius:6px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #d8d8d8
-    );
-
-    border:1px solid #999;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:24px;
-    font-weight:bold;
-
-    box-shadow:
-        0 3px 5px #0009,
-        inset 0 1px 1px #fff;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    transition:
-        transform .13s,
-        box-shadow .13s;
-}
-
-.tile.selected{
-    transform:translateY(-14px);
-
-    border:2px solid #ffd42f;
-
-    box-shadow:
-        0 9px 13px #000,
-        0 0 8px #ffd42f;
-}
-
-.red{
-    color:#d71919;
-}
-
-.blue{
-    color:#075dc7;
-}
-
-.black{
-    color:#111;
-}
-
-.yellow{
-    color:#c99100;
-}
-
-.joker{
-    color:#d71919;
+header h1{
+    margin:0;
     font-size:27px;
 }
 
-/* =========================
-   RAKİP TAŞLARI
-========================= */
-
-.backTile{
-    flex:0 0 auto;
-
-    width:24px;
-    height:34px;
-
-    border-radius:4px;
-
-    background:
-    repeating-linear-gradient(
-        45deg,
-        #175d46,
-        #175d46 5px,
-        #082f23 5px,
-        #082f23 10px
-    );
-
-    border:1px solid #78bda3;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-
-    font-size:11px;
-
-    box-shadow:0 2px 3px #0009;
-}
-
-/* =========================
-   ORTA
-========================= */
-
-.center{
-    position:absolute;
-
-    left:50%;
-    top:44%;
-
-    transform:translate(-50%,-50%);
-
-    text-align:center;
-
-    z-index:10;
-}
-
-.turn{
-    background:#06140ee8;
-
-    border:1px solid #ffffff22;
-
-    padding:7px 14px;
-
-    border-radius:20px;
-
+header p{
+    margin:7px 0 0;
+    color:#9da9ba;
     font-size:13px;
-
-    margin-bottom:10px;
-
-    white-space:nowrap;
 }
 
-.piles{
-    display:flex;
-    justify-content:center;
-    gap:16px;
+.app{
+    max-width:1200px;
+    margin:auto;
+    padding:16px;
 }
 
-.pileBox{
-    font-size:10px;
+.panel{
+    background:#0d141f;
+    border:1px solid #263347;
+    border-radius:15px;
+    padding:16px;
+    margin-bottom:15px;
 }
 
-.pile{
-    width:52px;
-    height:69px;
-
-    border-radius:7px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
-
-    box-shadow:0 5px 9px #0009;
+h2,h3{
+    margin-top:0;
 }
 
-.deck{
-    color:white;
-
-    border:2px solid #85cdb0;
-
-    background:
-    repeating-linear-gradient(
-        45deg,
-        #155b45,
-        #155b45 5px,
-        #082f23 5px,
-        #082f23 10px
-    );
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.discard{
-    background:white;
-    font-size:25px;
+.grid3{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:12px;
 }
 
-/* =========================
-   AÇILANLAR
-========================= */
-
-.meldArea{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    margin-top:100px;
-
-    width:360px;
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:5px;
-
-    z-index:9;
+@media(max-width:800px){
+    .grid,
+    .grid3{
+        grid-template-columns:1fr;
+    }
 }
 
-.meld{
-    display:flex;
-
-    gap:2px;
-
-    padding:4px;
-
-    border-radius:6px;
-
-    background:#0004;
+label{
+    display:block;
+    color:#aeb9c8;
+    font-size:13px;
+    margin-bottom:6px;
 }
 
-.meld .tile{
-    width:27px;
-    height:38px;
-    font-size:15px;
-    cursor:default;
+input,
+textarea,
+select{
+    width:100%;
+    padding:11px;
+    border-radius:9px;
+    border:1px solid #2b394d;
+    background:#070b11;
+    color:#fff;
+    outline:none;
 }
 
-/* =========================
-   MESAJ
-========================= */
-
-.message{
-    position:absolute;
-
-    top:74%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:#000d;
-
-    padding:8px 15px;
-
-    border-radius:20px;
-
-    font-size:12px;
-
-    z-index:120;
-
-    white-space:nowrap;
-}
-
-/* =========================
-   BUTONLAR
-========================= */
-
-.controls{
-    position:absolute;
-
-    bottom:4px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:98%;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:5px;
-
-    z-index:130;
+textarea{
+    min-height:110px;
+    resize:vertical;
 }
 
 button{
     border:0;
-
-    border-radius:11px;
-
-    padding:10px 11px;
-
-    background:#f0b92d;
-
-    color:#211504;
-
+    border-radius:9px;
+    padding:11px 15px;
+    margin:4px;
+    color:#fff;
+    background:#26364c;
+    cursor:pointer;
     font-weight:bold;
+}
 
-    box-shadow:0 3px 7px #0009;
+button:hover{
+    background:#354961;
+}
 
+.primary{
+    background:#8b1f43;
+}
+
+.primary:hover{
+    background:#a92751;
+}
+
+.green{
+    background:#176847;
+}
+
+.orange{
+    background:#86551c;
+}
+
+.red{
+    background:#7c2930;
+}
+
+.status{
+    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
+    background:#070b11;
+    color:#aeb9c8;
+    font-size:13px;
+}
+
+#stage{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#020406;
+    overflow:hidden;
+    border-radius:13px;
+    border:1px solid #303d50;
+}
+
+#canvas{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.subtitle{
+    position:absolute;
+    left:5%;
+    right:5%;
+    bottom:7%;
+    text-align:center;
+    font-size:clamp(15px,2vw,27px);
+    font-weight:bold;
+    line-height:1.3;
+    text-shadow:
+        0 2px 4px #000,
+        0 0 10px #000;
+    pointer-events:none;
+}
+
+.sceneLabel{
+    position:absolute;
+    left:15px;
+    top:15px;
+    padding:7px 10px;
+    border-radius:6px;
+    background:rgba(0,0,0,.55);
+    font-size:12px;
+}
+
+.progress{
+    height:8px;
+    margin-top:12px;
+    background:#202a38;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.progressBar{
+    height:100%;
+    width:0%;
+    background:#a4264d;
+}
+
+.sceneGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+@media(max-width:850px){
+    .sceneGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+.sceneCard{
+    padding:12px;
+    background:#080d14;
+    border:1px solid #273448;
+    border-radius:10px;
     cursor:pointer;
 }
 
-button:active{
-    transform:scale(.95);
+.sceneCard.active{
+    border-color:#b22b55;
+    background:#15101a;
 }
 
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-    position:fixed;
-
-    inset:0;
-
-    background:#000b;
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:300;
+.sceneCard strong{
+    display:block;
+    margin-bottom:5px;
 }
 
-.modal.show{
-    display:flex;
+.sceneCard small{
+    color:#8f9bac;
 }
 
-.modalBox{
-    width:min(90%,390px);
-
-    background:#10251b;
-
-    border:2px solid #528e70;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    text-align:center;
-
-    box-shadow:0 15px 40px #000;
-}
-
-.modalBox h2{
-    margin-top:0;
-}
-
-.modalBox button{
+.output{
+    background:#070b11;
+    border:1px solid #243044;
+    border-radius:10px;
+    padding:12px;
     margin-top:10px;
+    white-space:pre-wrap;
+    line-height:1.5;
+    color:#dce2e9;
+    font-size:13px;
 }
 
-/* =========================
-   MOBİL
-========================= */
+.character{
+    padding:10px;
+    background:#080d14;
+    border:1px solid #253247;
+    border-radius:9px;
+    margin-top:8px;
+}
 
-@media(max-width:600px){
+.character strong{
+    display:block;
+    margin-bottom:5px;
+}
 
-    .table{
-        width:98vw;
-        height:69vh;
-        border-width:10px;
-    }
+.badge{
+    display:inline-block;
+    padding:4px 7px;
+    border-radius:5px;
+    background:#202d40;
+    color:#aebbd0;
+    font-size:11px;
+    margin:2px;
+}
 
-    .logo{
-        font-size:14px;
-    }
+.small{
+    color:#8996a8;
+    font-size:12px;
+    line-height:1.5;
+}
 
-    .info{
-        font-size:9px;
-        padding:6px 8px;
-    }
+.hidden{
+    display:none;
+}
 
-    /* İKİ KATLI TAKOZ */
+a.download{
+    display:none;
+    background:#176847;
+    color:#fff;
+    text-decoration:none;
+    padding:11px 15px;
+    border-radius:9px;
+    font-weight:bold;
+    margin:4px;
+}
 
-    .doubleRack{
-        width:95vw;
-        height:105px;
-        padding:6px 6px 8px;
-    }
+.timeline{
+    display:flex;
+    gap:4px;
+    overflow:auto;
+    padding:5px 0;
+}
 
-    .rackRow{
-        left:5px;
-        right:5px;
-        height:37px;
-        padding:3px;
-    }
+.timeline div{
+    min-width:90px;
+    padding:9px;
+    background:#182333;
+    border-radius:7px;
+    text-align:center;
+    font-size:11px;
+}
 
-    .rackTop{
-        top:6px;
-    }
-
-    .rackBottom{
-        bottom:6px;
-    }
-
-    .doubleRack:after{
-        top:49px;
-        height:7px;
-    }
-
-    .tile{
-        width:27px;
-        height:39px;
-        font-size:17px;
-    }
-
-    .joker{
-        font-size:21px;
-    }
-
-    .opponentRack{
-        padding:4px 5px;
-    }
-
-    .backTile{
-        width:18px;
-        height:26px;
-        font-size:8px;
-    }
-
-    .sideRack{
-        min-height:145px;
-    }
-
-    .center{
-        top:42%;
-    }
-
-    .pile{
-        width:42px;
-        height:57px;
-    }
-
-    .meldArea{
-        width:270px;
-        margin-top:70px;
-    }
-
-    .meld .tile{
-        width:21px;
-        height:30px;
-        font-size:12px;
-    }
-
-    .message{
-        top:69%;
-        font-size:10px;
-    }
-
-    .controls{
-        bottom:2px;
-        gap:3px;
-    }
-
-    button{
-        padding:8px 6px;
-        font-size:10px;
-    }
+.timeline .active{
+    background:#8b1f43;
 }
 </style>
 </head>
 
 <body>
 
-<div id="game">
+<header>
 
-<!-- =========================
-     HEADER
-========================= -->
+<h1>🎬 Mina Film Studio V2</h1>
 
-<div class="header">
+<p>
+Hikâye → Karakter → Sahne → Sinematik Prompt → Hareket → Ses → Altyazı → Film
+</p>
 
-    <div class="logo">
-        🎴 101 OKEY
-    </div>
+</header>
 
-    <div class="info">
-        Puan:
-        <b id="score">0</b>
-        &nbsp; | &nbsp;
-        Kalan:
-        <b id="remaining">0</b>
-    </div>
 
-</div>
+<div class="app">
 
-<!-- =========================
-     MASA
-========================= -->
 
-<div class="table">
+<!-- PROJE -->
 
-    <!-- ALİ -->
+<div class="panel">
 
-    <div class="player top">
+<h2>🎞️ Film Projesi</h2>
 
-        <div class="name">
-            🤖 Ali
-        </div>
+<div class="grid">
 
-        <div class="opponentRack">
+<div>
 
-            <div class="hand"
-                 id="ali">
-            </div>
+<label>Film adı</label>
 
-        </div>
-
-    </div>
-
-    <!-- MEHMET -->
-
-    <div class="player left">
-
-        <div class="name">
-            🤖 Mehmet
-        </div>
-
-        <div class="opponentRack sideRack">
-
-            <div class="hand"
-                 id="mehmet"
-                 style="flex-direction:column">
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- AHMET -->
-
-    <div class="player right">
-
-        <div class="name">
-            🤖 Ahmet
-        </div>
-
-        <div class="opponentRack sideRack">
-
-            <div class="hand"
-                 id="ahmet"
-                 style="flex-direction:column">
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ORTA -->
-
-    <div class="center">
-
-        <div class="turn"
-             id="turn">
-            🟢 Senin sıran
-        </div>
-
-        <div class="piles">
-
-            <div class="pileBox">
-
-                <div class="pile deck"
-                     id="deck">
-                    0
-                </div>
-
-                <span>Deste</span>
-
-            </div>
-
-            <div class="pileBox">
-
-                <div class="pile discard"
-                     id="discard">
-                    -
-                </div>
-
-                <span>Atılan</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- AÇILANLAR -->
-
-    <div class="meldArea"
-         id="meldArea">
-    </div>
-
-    <!-- =====================
-         SENİN İKİ KATLI TAKOZUN
-    ====================== -->
-
-    <div class="player bottom">
-
-        <div class="doubleRack">
-
-            <!-- ÜST SIRA -->
-
-            <div class="rackRow rackTop">
-
-                <div class="hand"
-                     id="handTop">
-                </div>
-
-            </div>
-
-            <!-- ALT SIRA -->
-
-            <div class="rackRow rackBottom">
-
-                <div class="hand"
-                     id="handBottom">
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="name">
-            👤 Zafer
-        </div>
-
-    </div>
+<input
+id="filmName"
+value="Das Haus am Waldrand">
 
 </div>
 
-<!-- MESAJ -->
 
-<div class="message"
-     id="message">
-    Oyun hazırlanıyor...
-</div>
+<div>
 
-<!-- BUTONLAR -->
+<label>Film dili</label>
 
-<div class="controls">
+<select id="language">
 
-    <button onclick="drawTile()">
-        🎴 Çek
-    </button>
+<option value="de-DE">
+Deutsch
+</option>
 
-    <button onclick="discardTile()">
-        🗑️ At
-    </button>
+<option value="tr-TR">
+Türkçe
+</option>
 
-    <button onclick="openMeld()">
-        🧩 Per
-    </button>
+<option value="en-US">
+English
+</option>
 
-    <button onclick="openPair()">
-        👥 Çift
-    </button>
-
-    <button onclick="sortHand()">
-        🔢 Sırala
-    </button>
-
-    <button onclick="newGame()">
-        🔄 Yeni
-    </button>
+</select>
 
 </div>
 
 </div>
 
-<!-- MODAL -->
 
-<div class="modal"
-     id="modal">
+<br>
 
-    <div class="modalBox">
 
-        <h2 id="modalTitle">
-            101 Okey
-        </h2>
+<label>Hikâye fikri</label>
 
-        <p id="modalText"></p>
+<textarea id="story">Um 23:47 Uhr geschah etwas, das später niemand erklären konnte. Anna fährt nachts zu einem verlassenen Haus am Waldrand. Seit Jahren ist niemand mehr dort gewesen. Doch als sie ankommt, brennt plötzlich Licht im oberen Stock.</textarea>
 
-        <button onclick="closeModal()">
-            Tamam
-        </button>
 
-    </div>
+<br>
+
+<button
+class="primary"
+onclick="generateFilm()">
+
+🤖 Filmi Oluştur
+
+</button>
+
+
+<button onclick="resetProject()">
+
+↻ Sıfırla
+
+</button>
+
+
+<button
+class="green"
+onclick="saveProject()">
+
+💾 Projeyi Kaydet
+
+</button>
+
+
+<button
+onclick="loadProject()">
+
+📂 Projeyi Yükle
+
+</button>
+
+<input
+type="file"
+id="projectFile"
+accept=".json"
+class="hidden"
+onchange="readProject(event)">
+
+
+<div
+class="status"
+id="status">
+
+Hazır. Hikâyeni girip “Filmi Oluştur” düğmesine bas.
 
 </div>
+
+</div>
+
+
+<!-- KARAKTERLER -->
+
+<div class="panel">
+
+<h2>👤 Karakterler</h2>
+
+<div
+id="characters">
+
+<div class="small">
+Film oluşturulduğunda karakterler burada görünecek.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ÖNİZLEME -->
+
+<div class="panel">
+
+<h2>🎥 Film Önizleme</h2>
+
+<div id="stage">
+
+<canvas
+id="canvas"
+width="1280"
+height="720">
+</canvas>
+
+<div
+class="sceneLabel"
+id="sceneLabel">
+
+Sahne 1 / 8
+
+</div>
+
+<div
+class="subtitle"
+id="subtitle">
+Mina Film Studio hazır.
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div
+class="progressBar"
+id="progressBar">
+</div>
+
+</div>
+
+
+<div>
+
+<button
+class="primary"
+onclick="playFilm()">
+
+▶ Filmi Oynat
+
+</button>
+
+
+<button
+onclick="pauseFilm()">
+
+⏸ Duraklat
+
+</button>
+
+
+<button
+onclick="stopFilm()">
+
+⏹ Durdur
+
+</button>
+
+
+<button
+class="green"
+onclick="recordFilm()">
+
+🔴 Film Kaydet
+
+</button>
+
+
+<a
+id="download"
+class="download">
+
+⬇ WebM Filmi İndir
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ZAMAN ÇİZELGESİ -->
+
+<div class="panel">
+
+<h3>🎞️ Zaman Çizelgesi</h3>
+
+<div
+class="timeline"
+id="timeline">
+
+</div>
+
+</div>
+
+
+<!-- SAHNELER -->
+
+<div class="panel">
+
+<h2>🎬 Sahne Yönetimi</h2>
+
+<div
+class="sceneGrid"
+id="sceneGrid">
+
+</div>
+
+</div>
+
+
+<!-- SAHNE DETAYI -->
+
+<div class="panel">
+
+<h2>🔎 Seçili Sahne</h2>
+
+<div class="grid">
+
+<div>
+
+<label>Sahne başlığı</label>
+
+<input
+id="sceneTitle"
+readonly>
+
+</div>
+
+
+<div>
+
+<label>Süre</label>
+
+<input
+id="sceneDuration"
+readonly>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<label>🎨 Görsel Prompt</label>
+
+<div
+class="output"
+id="imagePrompt">
+-
+</div>
+
+
+<label>🎥 Hareket Prompt</label>
+
+<div
+class="output"
+id="motionPrompt">
+-
+</div>
+
+
+<label>🎙️ Almanca Anlatım</label>
+
+<div
+class="output"
+id="voiceText">
+-
+</div>
+
+
+<label>💬 Altyazı</label>
+
+<div
+class="output"
+id="subtitleText">
+-
+</div>
+
+
+<button
+class="orange"
+onclick="speakCurrent()">
+
+🔊 Bu Sahneyi Seslendir
+
+</button>
+
+
+<button
+onclick="stopVoice()">
+
+🔇 Sesi Durdur
+
+</button>
+
+</div>
+
+
+<!-- SES -->
+
+<div class="panel">
+
+<h2>🎙️ Ses Ayarları</h2>
+
+<select id="voiceSelect">
+
+<option>
+Sesler yükleniyor...
+</option>
+
+</select>
+
+<br><br>
+
+<label>Konuşma hızı</label>
+
+<input
+id="speechRate"
+type="range"
+min="0.6"
+max="1.2"
+step="0.05"
+value="0.9">
+
+<p class="small">
+
+Seslendirme V2'de tarayıcının yerleşik TTS sistemini kullanır.
+Bu nedenle API anahtarı gerekmez.
+
+</p>
+
+</div>
+
+
+<!-- TEKNİK BİLGİ -->
+
+<div class="panel">
+
+<h3>ℹ️ Mina Film Studio V2</h3>
+
+<p class="small">
+
+Bu sürüm film planlama ve temel yerel video motorudur.
+Sinematik sahne hareketleri tarayıcı Canvas üzerinde oluşturulur.
+Gerçek AI görsel ve image-to-video modeli henüz sisteme zorunlu olarak
+bağlanmamıştır. Bu mimari özellikle servis hatalarının bütün sistemi
+bozmaması için hazırlanmıştır.
+
+Bir sonraki aşamada gerçek AI görsel/video motoru ayrı bir modül olarak
+eklenebilir.
+
+</p>
+
+</div>
+
+</div>
+
 
 <script>
 
-/* ======================================
-   OYUN DEĞİŞKENLERİ
-====================================== */
+/* =========================================================
+   MİNA FILM STUDIO V2
+========================================================= */
 
-const COLORS=[
-    "red",
-    "blue",
-    "black",
-    "yellow"
+const canvas =
+document.getElementById("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+let scenes = [];
+
+let characters = [];
+
+let currentScene = 0;
+
+let playing = false;
+
+let paused = false;
+
+let sceneStart = 0;
+
+let sceneElapsed = 0;
+
+let animationId = null;
+
+let recorder = null;
+
+let recordedChunks = [];
+
+
+/* =========================================================
+   DURUM
+========================================================= */
+
+function status(text){
+
+document.getElementById(
+"status"
+).textContent=text;
+
+}
+
+
+/* =========================================================
+   HİKÂYE ANALİZİ
+========================================================= */
+
+function generateFilm(){
+
+const story =
+document.getElementById(
+"story"
+).value.trim();
+
+if(!story){
+
+alert(
+"Lütfen önce hikâye yaz."
+);
+
+return;
+
+}
+
+status(
+"🤖 Mina hikâyeyi analiz ediyor..."
+);
+
+setTimeout(()=>{
+
+createCharacters(story);
+
+createScenes(story);
+
+currentScene=0;
+
+renderAll();
+
+status(
+"✅ Film planı hazır. 8 sahne oluşturuldu."
+);
+
+},400);
+
+}
+
+
+/* =========================================================
+   KARAKTERLER
+========================================================= */
+
+function createCharacters(story){
+
+characters=[
+
+{
+name:"Anna",
+age:"28",
+description:
+"28-jährige deutsche Frau, braune Haare, dunkle Jacke, neugierig und vorsichtig."
+},
+
+{
+name:"Der Schatten",
+age:"Unbekannt",
+description:
+"Eine geheimnisvolle dunkle Gestalt, deren Gesicht nicht erkennbar ist."
+}
+
 ];
 
-let deck=[];
-let hand=[];
-let discard=[];
-let openedMelds=[];
+renderCharacters();
 
-let selected=[];
-
-let score=0;
-
-let turn="me";
-
-let finished=false;
-
-let opened=false;
-
-let indicator=null;
-
-let jokerNumber=null;
-
-/* ======================================
-   DESTE
-====================================== */
-
-function createDeck(){
-
-    deck=[];
-
-    for(const color of COLORS){
-
-        for(let n=1;n<=13;n++){
-
-            deck.push({
-                color:color,
-                number:n,
-                fake:false
-            });
-
-            deck.push({
-                color:color,
-                number:n,
-                fake:false
-            });
-        }
-    }
-
-    deck.push({
-        color:"black",
-        number:0,
-        fake:true
-    });
-
-    deck.push({
-        color:"black",
-        number:0,
-        fake:true
-    });
-
-    shuffle(deck);
-
-    indicator=deck.pop();
-
-    if(indicator.fake){
-        indicator=deck.pop();
-    }
-
-    jokerNumber=
-        indicator.number===13
-        ?1
-        :indicator.number+1;
 }
 
-/* ======================================
-   KARIŞTIR
-====================================== */
 
-function shuffle(array){
+function renderCharacters(){
 
-    for(
-        let i=array.length-1;
-        i>0;
-        i--
-    ){
+const box =
+document.getElementById(
+"characters"
+);
 
-        const j=
-            Math.floor(
-                Math.random()*(i+1)
-            );
+box.innerHTML="";
 
-        [
-            array[i],
-            array[j]
-        ]=[
-            array[j],
-            array[i]
-        ];
-    }
+characters.forEach(c=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className="character";
+
+div.innerHTML=
+
+"<strong>👤 "+
+c.name+
+"</strong>"+
+
+"<span class='badge'>"+
+c.age+
+"</span>"+
+
+"<p class='small'>"+
+c.description+
+"</p>";
+
+box.appendChild(div);
+
+});
+
 }
 
-/* ======================================
-   YENİ OYUN
-====================================== */
 
-function newGame(){
+/* =========================================================
+   SAHNELER
+========================================================= */
 
-    createDeck();
+function createScenes(story){
 
-    hand=[];
+const base=[
+    
+{
+title:"Die Ankunft",
+type:"house",
+duration:8000,
+voice:
+"Um 23 Uhr siebenundvierzig kam Anna an dem verlassenen Haus am Waldrand an."
+},
 
-    for(let i=0;i<14;i++){
+{
+title:"Das Haus",
+type:"house",
+duration:8000,
+voice:
+"Seit Jahren hatte niemand dieses Haus betreten. Trotzdem wirkte es nicht völlig verlassen."
+},
 
-        hand.push(
-            deck.pop()
-        );
-    }
+{
+title:"Das Fenster",
+type:"window",
+duration:8000,
+voice:
+"Plötzlich ging im oberen Stock ein Licht an."
+},
 
-    discard=[];
+{
+title:"Der Wald",
+type:"forest",
+duration:8000,
+voice:
+"Anna hörte Schritte hinter sich. Langsam drehte sie sich um."
+},
 
-    openedMelds=[];
+{
+title:"Die Tür",
+type:"door",
+duration:8000,
+voice:
+"Die Haustür begann sich von selbst zu öffnen."
+},
 
-    selected=[];
+{
+title:"Der Schatten",
+type:"shadow",
+duration:8000,
+voice:
+"Im oberen Fenster erschien eine dunkle Gestalt."
+},
 
-    score=0;
+{
+title:"Die Wahrheit",
+type:"shadow",
+duration:8000,
+voice:
+"Anna erkannte etwas, das sie nie wieder vergessen würde."
+},
 
-    turn="me";
-
-    finished=false;
-
-    opened=false;
-
-    sortHand();
-
-    render();
-
-    message(
-        "Gösterge: "+
-        tileName(indicator)+
-        " | Okey: "+
-        jokerNumber
-    );
+{
+title:"Das Ende",
+type:"ending",
+duration:8000,
+voice:
+"Am nächsten Morgen war das Haus wieder dunkel. Doch Anna wusste, dass dort jemand gewesen war."
 }
 
-/* ======================================
-   TAŞ ADI
-====================================== */
+];
 
-function tileName(tile){
 
-    if(!tile){
-        return "-";
-    }
+scenes=base.map((s,i)=>{
 
-    if(tile.fake){
-        return "SAHTE OKEY";
-    }
+return{
 
-    return (
-        tile.number+
-        " "+
-        tile.color.toUpperCase()
-    );
+id:i+1,
+
+title:s.title,
+
+type:s.type,
+
+duration:s.duration,
+
+voice:s.voice,
+
+subtitle:s.voice,
+
+imagePrompt:
+buildImagePrompt(s),
+
+motionPrompt:
+buildMotionPrompt(s)
+
+};
+
+});
+
 }
 
-/* ======================================
-   SIRALA
-====================================== */
 
-function sortHand(){
+/* =========================================================
+   PROMPTLAR
+========================================================= */
 
-    hand.sort(
-        (a,b)=>{
+function buildImagePrompt(scene){
 
-            if(a.fake)return 1;
+const common=
+"cinematic German mystery thriller, " +
+"photorealistic, dark atmospheric lighting, " +
+"realistic environment, cinematic composition, " +
+"35mm film look, dramatic shadows, high detail";
 
-            if(b.fake)return -1;
+const map={
 
-            if(a.color!==b.color){
+house:
+"an abandoned old house at the edge of a dark German forest at night, heavy rain, mysterious atmosphere",
 
-                return COLORS.indexOf(a.color)
-                    -
-                    COLORS.indexOf(b.color);
-            }
+window:
+"an abandoned German forest house at night, one upper window suddenly glowing with warm light, heavy rain",
 
-            return a.number-b.number;
-        }
-    );
+forest:
+"dark German forest at midnight, wet trees, fog, a frightened woman standing alone between the trees",
 
-    selected=[];
+door:
+"old abandoned German house, front door slowly opening by itself, darkness inside, rain outside",
 
-    render();
+shadow:
+"old abandoned German house at night, mysterious human silhouette behind an upper window",
+
+ending:
+"abandoned German forest house at dawn, cold morning fog, mysterious and unsettling atmosphere"
+
+};
+
+return (
+map[scene.type]||
+map.house
+)+
+", "+
+common;
+
 }
 
-/* ======================================
-   TAŞ HTML
-====================================== */
 
-function tileHTML(tile,index){
+function buildMotionPrompt(scene){
 
-    if(tile.fake){
+const map={
 
-        return `
-        <div
-            class="tile joker ${
-                selected.includes(index)
-                ?"selected":""
-            }"
-            onclick="selectTile(${index})">
-            ★
-        </div>`;
-    }
+house:
+"slow cinematic camera push toward the abandoned house, rain falling continuously, tree branches moving in the wind, subtle fog movement",
 
-    const isJoker=
-        tile.number===jokerNumber;
+window:
+"camera slowly moves toward the house, rain falls, the upper window suddenly turns on, subtle lightning in the background",
 
-    return `
-    <div
-        class="tile ${tile.color} ${
-            selected.includes(index)
-            ?"selected":""
-        }"
-        onclick="selectTile(${index})">
+forest:
+"slow handheld cinematic camera movement through wet trees, fog drifting, the woman slowly turns her head, branches moving in wind",
 
-        ${
-            isJoker
-            ?"★"
-            :tile.number
-        }
+door:
+"camera slowly approaches the front door, the door gradually opens by itself, darkness visible inside",
 
-    </div>`;
+shadow:
+"slow camera zoom toward the upper window, dark silhouette slowly moves behind the curtain, rain and fog continue",
+
+ending:
+"slow aerial-style camera pull away from the abandoned house, morning fog drifting between trees, quiet cinematic ending"
+
+};
+
+return (
+map[scene.type]||
+map.house
+);
+
 }
 
-/* ======================================
-   EKRANI ÇİZ
-====================================== */
 
-function render(){
+/* =========================================================
+   RENDER SAHNE
+========================================================= */
 
-    const top=
-        document.getElementById(
-            "handTop"
-        );
+function renderSceneList(){
 
-    const bottom=
-        document.getElementById(
-            "handBottom"
-        );
+const grid=
+document.getElementById(
+"sceneGrid"
+);
 
-    top.innerHTML="";
-    bottom.innerHTML="";
+grid.innerHTML="";
 
-    /*
-      14 taşın ilk 7'si üst,
-      kalan 7'si alt sıraya.
-    */
+scenes.forEach((scene,i)=>{
 
-    hand.forEach(
-        (tile,index)=>{
+const card=
+document.createElement(
+"div"
+);
 
-            const html=
-                tileHTML(
-                    tile,
-                    index
-                );
+card.className=
+"sceneCard"+
+(i===currentScene?
+" active":
+"");
 
-            if(index<7){
+card.innerHTML=
 
-                top.innerHTML+=html;
+"<strong>"+
+(i+1)+". "+
+scene.title+
+"</strong>"+
 
-            }else{
+"<small>"+
+(scene.duration/1000)+
+" saniye</small>";
 
-                bottom.innerHTML+=html;
-            }
-        }
-    );
+card.onclick=()=>{
 
-    document.getElementById(
-        "ali"
-    ).innerHTML=
-        hiddenTiles(14);
+stopAnimationOnly();
 
-    document.getElementById(
-        "mehmet"
-    ).innerHTML=
-        hiddenSide(14);
+currentScene=i;
 
-    document.getElementById(
-        "ahmet"
-    ).innerHTML=
-        hiddenSide(14);
+sceneElapsed=0;
 
-    document.getElementById(
-        "score"
-    ).innerText=score;
+renderAll();
 
-    document.getElementById(
-        "remaining"
-    ).innerText=deck.length;
+};
 
-    document.getElementById(
-        "deck"
-    ).innerText=deck.length;
+grid.appendChild(card);
 
-    const d=
-        document.getElementById(
-            "discard"
-        );
+});
 
-    if(discard.length){
-
-        const t=
-            discard[
-                discard.length-1
-            ];
-
-        d.innerHTML=
-            t.fake
-            ?"★"
-            :t.number;
-
-    }else{
-
-        d.innerHTML="-";
-    }
-
-    document.getElementById(
-        "turn"
-    ).innerText=
-        turn==="me"
-        ?"🟢 Senin sıran"
-        :"🔴 Bilgisayar oynuyor";
-
-    renderMelds();
 }
 
-/* ======================================
-   RAKİP TAŞLARI
-====================================== */
 
-function hiddenTiles(count){
+function renderTimeline(){
 
-    let html="";
+const timeline=
+document.getElementById(
+"timeline"
+);
 
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
+timeline.innerHTML="";
 
-        html+=`
-        <div class="backTile">
-            ◆
-        </div>`;
-    }
+scenes.forEach((scene,i)=>{
 
-    return html;
+const d=
+document.createElement(
+"div"
+);
+
+if(i===currentScene)
+d.className="active";
+
+d.innerHTML=
+"🎬 "+(i+1)+
+"<br>"+
+scene.title;
+
+timeline.appendChild(d);
+
+});
+
 }
 
-function hiddenSide(count){
 
-    let html="";
+/* =========================================================
+   SAHNE DETAYI
+========================================================= */
 
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
+function renderDetails(){
 
-        html+=`
-        <div class="backTile">
-            ◆
-        </div>`;
-    }
+if(!scenes.length)
+return;
 
-    return html;
+const s=
+scenes[currentScene];
+
+document.getElementById(
+"sceneTitle"
+).value=s.title;
+
+document.getElementById(
+"sceneDuration"
+).value=
+(s.duration/1000)+
+" saniye";
+
+document.getElementById(
+"imagePrompt"
+).textContent=
+s.imagePrompt;
+
+document.getElementById(
+"motionPrompt"
+).textContent=
+s.motionPrompt;
+
+document.getElementById(
+"voiceText"
+).textContent=
+s.voice;
+
+document.getElementById(
+"subtitleText"
+).textContent=
+s.subtitle;
+
 }
 
-/* ======================================
-   TAŞ SEÇ
-====================================== */
 
-function selectTile(index){
+function renderAll(){
 
-    if(
-        turn!=="me"||
-        finished
-    ){
-        return;
-    }
+renderSceneList();
 
-    if(
-        selected.includes(index)
-    ){
+renderTimeline();
 
-        selected=
-            selected.filter(
-                x=>x!==index
-            );
+renderDetails();
 
-    }else{
+drawFrame(
+scenes.length?
+scenes[currentScene].type:
+"house",
+0
+);
 
-        selected.push(index);
-    }
+updateUI();
 
-    render();
-
-    message(
-        selected.length+
-        " taş seçildi."
-    );
 }
 
-/* ======================================
-   TAŞ ÇEK
-====================================== */
 
-function drawTile(){
+/* =========================================================
+   OYNATMA
+========================================================= */
 
-    if(turn!=="me"){
+function playFilm(){
 
-        message(
-            "Sıra sende değil."
-        );
+if(!scenes.length){
 
-        return;
-    }
+alert(
+"Önce filmi oluştur."
+);
 
-    if(hand.length>=15){
+return;
 
-        message(
-            "Önce bir taş at."
-        );
-
-        return;
-    }
-
-    if(deck.length===0){
-
-        finishGame();
-
-        return;
-    }
-
-    hand.push(
-        deck.pop()
-    );
-
-    selected=[];
-
-    render();
-
-    message(
-        "Taş çektin. Bir taş at."
-    );
 }
 
-/* ======================================
-   TAŞ AT
-====================================== */
+if(playing)
+return;
 
-function discardTile(){
+playing=true;
 
-    if(
-        turn!=="me"||
-        finished
-    ){
-        return;
-    }
+paused=false;
 
-    if(selected.length!==1){
+sceneStart=
+performance.now()-
+sceneElapsed;
 
-        message(
-            "Atmak için 1 taş seç."
-        );
+status(
+"🎬 Film oynatılıyor..."
+);
 
-        return;
-    }
+requestAnimationFrame(
+animate
+);
 
-    if(hand.length!==15){
-
-        message(
-            "Önce taş çekmelisin."
-        );
-
-        return;
-    }
-
-    const index=
-        selected[0];
-
-    const tile=
-        hand.splice(
-            index,
-            1
-        )[0];
-
-    discard.push(tile);
-
-    selected=[];
-
-    render();
-
-    message(
-        "Taş atıldı."
-    );
-
-    turn="cpu";
-
-    render();
-
-    setTimeout(
-        computerTurn,
-        850
-    );
 }
 
-/* ======================================
-   SERİ KONTROL
-====================================== */
 
-function isRun(tiles){
+function pauseFilm(){
 
-    if(tiles.length<3){
-        return false;
-    }
+if(!playing)
+return;
 
-    const normal=
-        tiles.filter(
-            t=>!t.fake
-        );
+playing=false;
 
-    const jokers=
-        tiles.filter(
-            t=>t.fake
-        ).length;
+paused=true;
 
-    if(normal.length===0){
-        return true;
-    }
+cancelAnimationFrame(
+animationId
+);
 
-    const color=
-        normal[0].color;
+status(
+"⏸ Film duraklatıldı."
+);
 
-    if(
-        !normal.every(
-            t=>t.color===color
-        )
-    ){
-        return false;
-    }
-
-    const nums=
-        normal
-        .map(
-            t=>t.number
-        )
-        .sort(
-            (a,b)=>a-b
-        );
-
-    let gaps=0;
-
-    for(
-        let i=1;
-        i<nums.length;
-        i++
-    ){
-
-        if(
-            nums[i]===nums[i-1]
-        ){
-            return false;
-        }
-
-        gaps+=
-            nums[i]-
-            nums[i-1]-
-            1;
-    }
-
-    return gaps<=jokers;
 }
 
-/* ======================================
-   GRUP KONTROL
-====================================== */
 
-function isGroup(tiles){
+function stopFilm(){
 
-    if(
-        tiles.length<3||
-        tiles.length>4
-    ){
-        return false;
-    }
+stopAnimationOnly();
 
-    const normal=
-        tiles.filter(
-            t=>!t.fake
-        );
+speechSynthesis.cancel();
 
-    if(normal.length===0){
-        return true;
-    }
+currentScene=0;
 
-    const number=
-        normal[0].number;
+sceneElapsed=0;
 
-    if(
-        !normal.every(
-            t=>t.number===number
-        )
-    ){
-        return false;
-    }
+renderAll();
 
-    const colors=
-        new Set(
-            normal.map(
-                t=>t.color
-            )
-        );
+status(
+"⏹ Film durduruldu."
+);
 
-    return colors.size===
-        normal.length;
 }
 
-/* ======================================
-   PER DEĞERİ
-====================================== */
 
-function meldValue(tiles){
+function stopAnimationOnly(){
 
-    return tiles.reduce(
-        (sum,t)=>{
+playing=false;
 
-            if(t.fake){
+paused=false;
 
-                return sum+jokerNumber;
-            }
+cancelAnimationFrame(
+animationId
+);
 
-            return sum+t.number;
-
-        },
-        0
-    );
 }
 
-/* ======================================
-   PER AÇ
-====================================== */
 
-function openMeld(){
+function animate(now){
 
-    if(turn!=="me"){
-        return;
-    }
+if(!playing)
+return;
 
-    if(selected.length<3){
+sceneElapsed=
+now-sceneStart;
 
-        showModal(
-            "🧩 Per Aç",
-            "En az 3 taş seç."
-        );
+const s=
+scenes[currentScene];
 
-        return;
-    }
+let p=
+sceneElapsed/
+s.duration;
 
-    const tiles=
-        selected.map(
-            i=>hand[i]
-        );
+if(p>=1){
 
-    if(
-        !isRun(tiles)&&
-        !isGroup(tiles)
-    ){
+currentScene++;
 
-        showModal(
-            "❌ Geçersiz Per",
-            "Seçilen taşlar geçerli seri veya grup değil."
-        );
+if(currentScene>=scenes.length){
 
-        return;
-    }
+playing=false;
 
-    const value=
-        meldValue(tiles);
+currentScene=0;
 
-    if(
-        !opened&&
-        value<101
-    ){
+sceneElapsed=0;
 
-        showModal(
-            "🔒 101 Açılışı",
-            "İlk açılışta toplam değer en az 101 olmalı.\n\nSeçilen değer: "+
-            value
-        );
+drawFrame(
+"ending",
+1
+);
 
-        return;
-    }
+updateUI();
 
-    opened=true;
+status(
+"🎬 Film tamamlandı."
+);
 
-    score+=value;
+return;
 
-    openedMelds.push(
-        tiles.map(
-            t=>({...t})
-        )
-    );
-
-    const indexes=
-        [...selected]
-        .sort(
-            (a,b)=>b-a
-        );
-
-    indexes.forEach(
-        i=>{
-            hand.splice(i,1);
-        }
-    );
-
-    selected=[];
-
-    render();
-
-    showModal(
-        "🎉 Per Açıldı",
-        "Açılan per değeri: "+
-        value
-    );
-
-    checkWin();
 }
 
-/* ======================================
-   ÇİFT
-====================================== */
+sceneStart=now;
 
-function openPair(){
+sceneElapsed=0;
 
-    if(turn!=="me"){
-        return;
-    }
+p=0;
 
-    if(selected.length!==2){
-
-        showModal(
-            "👥 Çift",
-            "İki taş seç."
-        );
-
-        return;
-    }
-
-    const a=
-        hand[selected[0]];
-
-    const b=
-        hand[selected[1]];
-
-    const same=
-        !a.fake&&
-        !b.fake&&
-        a.number===b.number&&
-        a.color===b.color;
-
-    if(!same){
-
-        showModal(
-            "❌ Geçersiz Çift",
-            "İki taş aynı renk ve aynı numara olmalı."
-        );
-
-        return;
-    }
-
-    opened=true;
-
-    score+=10;
-
-    openedMelds.push([
-        {...a},
-        {...b}
-    ]);
-
-    const indexes=
-        [...selected]
-        .sort(
-            (a,b)=>b-a
-        );
-
-    indexes.forEach(
-        i=>{
-            hand.splice(i,1);
-        }
-    );
-
-    selected=[];
-
-    render();
-
-    showModal(
-        "👥 Çift Açıldı",
-        "+10 puan"
-    );
-
-    checkWin();
 }
 
-/* ======================================
-   AÇILANLAR
-====================================== */
+drawFrame(
+s.type,
+p
+);
 
-function renderMelds(){
+updateUI();
 
-    const area=
-        document.getElementById(
-            "meldArea"
-        );
+animationId=
+requestAnimationFrame(
+animate
+);
 
-    area.innerHTML="";
-
-    openedMelds.forEach(
-        meld=>{
-
-            const div=
-                document.createElement(
-                    "div"
-                );
-
-            div.className="meld";
-
-            meld.forEach(
-                tile=>{
-
-                    const el=
-                        document.createElement(
-                            "div"
-                        );
-
-                    el.className=
-                        "tile "+
-                        (
-                            tile.fake
-                            ?"joker"
-                            :tile.color
-                        );
-
-                    el.innerText=
-                        tile.fake
-                        ?"★"
-                        :
-                        (
-                            tile.number===
-                            jokerNumber
-                            ?"★"
-                            :tile.number
-                        );
-
-                    div.appendChild(el);
-                }
-            );
-
-            area.appendChild(div);
-        }
-    );
 }
 
-/* ======================================
-   BİLGİSAYAR
-====================================== */
 
-function computerTurn(){
+/* =========================================================
+   UI
+========================================================= */
 
-    if(finished){
-        return;
-    }
+function updateUI(){
 
-    if(deck.length>0){
+if(!scenes.length)
+return;
 
-        deck.pop();
-    }
+const scene=
+scenes[currentScene];
 
-    /*
-      Rakiplerin basit karar sistemi.
-      Sonraki sürümde gerçek AI
-      elindeki taşlara göre oynayabilir.
-    */
+document.getElementById(
+"sceneLabel"
+).textContent=
+"Sahne "+
+(currentScene+1)+
+" / "+
+scenes.length+
+" — "+
+scene.title;
 
-    if(
-        discard.length>0&&
-        Math.random()<0.25
-    ){
+document.getElementById(
+"subtitle"
+).textContent=
+scene.subtitle;
 
-        discard.pop();
-    }
+let total=0;
 
-    if(deck.length>0){
+for(let i=0;i<currentScene;i++)
+total+=scenes[i].duration;
 
-        discard.push({
+total+=Math.min(
+sceneElapsed,
+scene.duration
+);
 
-            color:
-                COLORS[
-                    Math.floor(
-                        Math.random()*
-                        COLORS.length
-                    )
-                ],
+const duration=
+scenes.reduce(
+(a,b)=>a+b.duration,
+0
+);
 
-            number:
-                Math.floor(
-                    Math.random()*13
-                )+1,
+document.getElementById(
+"progressBar"
+).style.width=
+((total/duration)*100)+
+"%";
 
-            fake:false
-        });
-    }
+renderSceneList();
 
-    turn="me";
+renderTimeline();
+
+}
+
+
+/* =========================================================
+   SİNEMATİK CANVAS
+========================================================= */
+
+function drawFrame(type,p){
+
+const w=canvas.width;
+
+const h=canvas.height;
+
+ctx.clearRect(
+0,0,w,h
+);
+
+
+/* gökyüzü */
+
+const sky=
+ctx.createLinearGradient(
+0,0,0,h
+);
+
+sky.addColorStop(
+0,
+"#02040a"
+);
+
+sky.addColorStop(
+0.55,
+"#0b121d"
+);
+
+sky.addColorStop(
+1,
+"#020304"
+);
+
+ctx.fillStyle=sky;
+
+ctx.fillRect(
+0,0,w,h
+);
+
+
+drawMoon();
+
+
+if(type==="forest"){
+
+drawForest();
+
+}else{
+
+drawForest();
+
+drawHouse(
+p,
+type
+);
+
+}
+
+
+drawRain();
+
+
+if(type==="window"||
+type==="shadow"){
+
+drawWindowLight(
+p,
+type
+);
+
+}
+
+
+if(type==="door"){
+
+drawDoor(
+p
+);
+
+}
+
+
+if(type==="ending"){
+
+drawEnding();
+
+}
+
+
+/* vignette */
+
+const v=
+ctx.createRadialGradient(
+w/2,
+h/2,
+100,
+w/2,
+h/2,
+700
+);
+
+v.addColorStop(
+0,
+"rgba(0,0,0,0)"
+);
+
+v.addColorStop(
+1,
+"rgba(0,0,0,.72)"
+);
+
+ctx.fillStyle=v;
+
+ctx.fillRect(
+0,0,w,h
+);
+
+}
+
+
+/* =========================================================
+   AY
+========================================================= */
+
+function drawMoon(){
+
+ctx.beginPath();
+
+ctx.arc(
+1040,
+120,
+48,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle=
+"#c7d0d9";
+
+ctx.fill();
+
+ctx.beginPath();
+
+ctx.arc(
+1058,
+111,
+48,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle=
+"#02040a";
+
+ctx.fill();
+
+}
+
+
+/* =========================================================
+   ORMAN
+========================================================= */
+
+function drawForest(){
+
+const w=canvas.width;
+
+const h=canvas.height;
+
+for(let i=0;i<24;i++){
+
+const x=
+(i*71)%w;
+
+const top=
+220+
+((i*83)%170);
+
+ctx.fillStyle=
+"#07100f";
+
+ctx.beginPath();
+
+ctx.moveTo(
+x,
+top
+);
+
+ctx.lineTo(
+x-95,
+h
+);
+
+ctx.lineTo(
+x+95,
+h
+);
+
+ctx.closePath();
+
+ctx.fill();
+
+}
+
+}
+
+
+/* =========================================================
+   EV
+========================================================= */
+
+function drawHouse(p,type){
+
+const w=canvas.width;
+
+const h=canvas.height;
+
+const zoom=
+1+p*.16;
+
+ctx.save();
+
+ctx.translate(
+w/2,
+h/2
+);
+
+ctx.scale(
+zoom,
+zoom
+);
+
+ctx.translate(
+-w/2,
+-h/2
+);
+
+
+/* gövde */
+
+ctx.fillStyle=
+"#101518";
+
+ctx.fillRect(
+420,
+325,
+440,
+280
+);
+
+
+/* çatı */
+
+ctx.fillStyle=
+"#080b0e";
+
+ctx.beginPath();
+
+ctx.moveTo(
+350,
+335
+);
+
+ctx.lineTo(
+640,
+155
+);
+
+ctx.lineTo(
+930,
+335
+);
+
+ctx.closePath();
+
+ctx.fill();
+
+
+/* kapı */
+
+ctx.fillStyle=
+"#050708";
+
+ctx.fillRect(
+590,
+455,
+105,
+150
+);
+
+
+/* pencereler */
+
+drawWindow(
+490,
+370,
+false
+);
+
+drawWindow(
+730,
+370,
+type==="window"||
+type==="shadow"
+);
+
+
+/* zemin */
+
+ctx.fillStyle=
+"#060a0c";
+
+ctx.fillRect(
+0,
+605,
+w,
+115
+);
+
+ctx.restore();
+
+}
+
+
+/* =========================================================
+   PENCERE
+========================================================= */
+
+function drawWindow(x,y,light){
+
+ctx.fillStyle=
+light?
+"#d2a84e":
+"#05080a";
+
+ctx.fillRect(
+x,
+y,
+95,
+105
+);
+
+ctx.strokeStyle=
+"#252d33";
+
+ctx.lineWidth=8;
+
+ctx.strokeRect(
+x,
+y,
+95,
+105
+);
+
+ctx.beginPath();
+
+ctx.moveTo(
+x+47,
+y
+);
+
+ctx.lineTo(
+x+47,
+y+105
+);
+
+ctx.moveTo(
+x,
+y+52
+);
+
+ctx.lineTo(
+x+95,
+y+52
+);
+
+ctx.stroke();
+
+}
+
+
+/* =========================================================
+   IŞIK
+========================================================= */
+
+function drawWindowLight(p,type){
+
+const pulse=
+.65+
+Math.sin(
+p*Math.PI
+)*.35;
+
+const glow=
+ctx.createRadialGradient(
+778,
+420,
+15,
+778,
+420,
+250
+);
+
+glow.addColorStop(
+0,
+"rgba(255,210,90,"+
+(pulse*.30)+
+")"
+);
+
+glow.addColorStop(
+1,
+"rgba(255,210,90,0)"
+);
+
+ctx.fillStyle=glow;
+
+ctx.fillRect(
+500,
+250,
+550,
+350
+);
+
+
+if(type==="shadow"){
+
+ctx.fillStyle=
+"rgba(4,4,7,.8)";
+
+ctx.beginPath();
+
+ctx.ellipse(
+778,
+418,
+22,
+43,
+0,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+}
+
+}
+
+
+/* =========================================================
+   KAPI
+========================================================= */
+
+function drawDoor(p){
+
+const open=
+Math.sin(
+Math.min(p,1)*
+Math.PI/2
+);
+
+ctx.save();
+
+ctx.translate(
+642,
+455
+);
+
+ctx.rotate(
+-open*.68
+);
+
+ctx.fillStyle=
+"#07090b";
+
+ctx.fillRect(
+-52,
+0,
+105,
+150
+);
+
+ctx.restore();
+
+}
+
+
+/* =========================================================
+   YAĞMUR
+========================================================= */
+
+function drawRain(){
+
+const w=canvas.width;
+
+const h=canvas.height;
+
+ctx.lineWidth=2;
+
+const time=
+performance.now();
+
+for(let i=0;i<170;i++){
+
+const x=
+(i*79+
+time*.23)%w;
+
+const y=
+(i*43+
+time*.55)%h;
+
+ctx.strokeStyle=
+"rgba(170,195,215,.25)";
+
+ctx.beginPath();
+
+ctx.moveTo(
+x,
+y
+);
+
+ctx.lineTo(
+x-7,
+y+22
+);
+
+ctx.stroke();
+
+}
+
+}
+
+
+/* =========================================================
+   FİNAL
+========================================================= */
+
+function drawEnding(){
+
+const w=canvas.width;
+
+ctx.fillStyle=
+"rgba(0,0,0,.35)";
+
+ctx.fillRect(
+0,0,
+canvas.width,
+canvas.height
+);
+
+ctx.textAlign="center";
+
+ctx.fillStyle=
+"#d9dde1";
+
+ctx.font=
+"bold 36px Arial";
+
+ctx.fillText(
+document.getElementById(
+"filmName"
+).value.toUpperCase(),
+w/2,
+250
+);
+
+ctx.font=
+"20px Arial";
+
+ctx.fillStyle=
+"#9ca8b7";
+
+ctx.fillText(
+"Eine Mystery-Nacht Geschichte",
+w/2,
+295
+);
+
+}
+
+
+/* =========================================================
+   TTS
+========================================================= */
+
+const voiceSelect=
+document.getElementById(
+"voiceSelect"
+);
+
+
+function loadVoices(){
+
+const voices=
+speechSynthesis.getVoices();
+
+voiceSelect.innerHTML="";
+
+const automatic=
+document.createElement(
+"option"
+);
+
+automatic.value="";
+
+automatic.textContent=
+"Otomatik ses seç";
+
+voiceSelect.appendChild(
+automatic
+);
+
+voices.forEach(
+(v,i)=>{
+
+const option=
+document.createElement(
+"option"
+);
+
+option.value=i;
+
+option.textContent=
+v.name+
+" ("+
+v.lang+
+")";
+
+voiceSelect.appendChild(
+option
+);
+
+});
+
+}
+
+
+loadVoices();
+
+speechSynthesis.onvoiceschanged=
+loadVoices;
+
+
+function speakCurrent(){
+
+if(!scenes.length)
+return;
+
+speechSynthesis.cancel();
+
+const text=
+scenes[currentScene].voice;
+
+const u=
+new SpeechSynthesisUtterance(
+text
+);
+
+u.lang=
+document.getElementById(
+"language"
+).value;
+
+u.rate=
+Number(
+document.getElementById(
+"speechRate"
+).value
+);
+
+u.pitch=.92;
+
+u.volume=1;
+
+const voices=
+speechSynthesis.getVoices();
+
+if(voiceSelect.value!==""){
+
+u.voice=
+voices[
+Number(voiceSelect.value)
+];
+
+}
+
+speechSynthesis.speak(u);
+
+status(
+"🔊 "+
+scenes[currentScene].title+
+" seslendiriliyor."
+);
+
+}
+
+
+function stopVoice(){
+
+speechSynthesis.cancel();
+
+status(
+"🔇 Ses durduruldu."
+);
+
+}
+
+
+/* =========================================================
+   VİDEO KAYIT
+========================================================= */
+
+async function recordFilm(){
+
+if(!scenes.length){
+
+alert(
+"Önce filmi oluştur."
+);
+
+return;
+
+}
+
+if(!canvas.captureStream){
+
+alert(
+"Bu tarayıcı video kaydını desteklemiyor."
+);
+
+return;
+
+}
+
+if(!window.MediaRecorder){
+
+alert(
+"Bu tarayıcı MediaRecorder desteklemiyor."
+);
+
+return;
+
+}
+
+
+recordedChunks=[];
+
+
+const stream=
+canvas.captureStream(30);
+
+
+let options={};
+
+if(MediaRecorder.isTypeSupported(
+"video/webm;codecs=vp9"
+)){
+
+options={
+mimeType:
+"video/webm;codecs=vp9"
+};
+
+}else{
+
+options={
+mimeType:
+"video/webm"
+};
+
+}
+
+
+recorder=
+new MediaRecorder(
+stream,
+options
+);
+
+
+recorder.ondataavailable=
+e=>{
+
+if(e.data.size>0)
+recordedChunks.push(e.data);
+
+};
+
+
+recorder.onstop=()=>{
+
+const blob=
+new Blob(
+recordedChunks,
+{
+type:"video/webm"
+}
+);
+
+const url=
+URL.createObjectURL(
+blob
+);
+
+const link=
+document.getElementById(
+"download"
+);
+
+link.href=url;
+
+link.download=
+(
+document.getElementById(
+"filmName"
+).value||
+"mina-film"
+)+
+".webm";
+
+link.style.display=
+"inline-block";
+
+status(
+"✅ Film kaydı tamamlandı."
+);
+
+};
+
+
+document.getElementById(
+"download"
+).style.display=
+"none";
+
+
+recorder.start();
+
+
+status(
+"🔴 Film kaydediliyor..."
+);
+
+
+await playForRecording();
+
+
+recorder.stop();
+
+}
+
+
+function playForRecording(){
+
+return new Promise(
+resolve=>{
+
+let index=0;
+
+function next(){
+
+if(index>=scenes.length){
+
+resolve();
+
+return;
+
+}
+
+currentScene=index;
+
+const scene=
+scenes[index];
+
+const start=
+performance.now();
+
+function frame(now){
+
+const p=
+Math.min(
+1,
+(now-start)/
+scene.duration
+);
+
+drawFrame(
+scene.type,
+p
+);
+
+updateUI();
+
+if(p<1){
+
+requestAnimationFrame(
+frame
+);
+
+}else{
+
+index++;
+
+setTimeout(
+next,
+80
+);
+
+}
+
+}
+
+requestAnimationFrame(
+frame
+);
+
+}
+
+next();
+
+});
+
+}
+
+
+/* =========================================================
+   PROJE KAYDET
+========================================================= */
+
+function saveProject(){
+
+const project={
+
+version:"Mina Film Studio V2",
+
+filmName:
+document.getElementById(
+"filmName"
+).value,
+
+language:
+document.getElementById(
+"language"
+).value,
+
+story:
+document.getElementById(
+"story"
+).value,
+
+characters:characters,
+
+scenes:scenes
+
+};
+
+
+const blob=
+new Blob(
+[
+JSON.stringify(
+project,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+
+const url=
+URL.createObjectURL(
+blob
+);
+
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+(
+project.filmName||
+"mina-film-project"
+)+
+".json";
+
+a.click();
+
+URL.revokeObjectURL(
+url
+);
+
+status(
+"💾 Proje kaydedildi."
+);
+
+}
+
+
+/* =========================================================
+   PROJE YÜKLE
+========================================================= */
+
+function loadProject(){
+
+document.getElementById(
+"projectFile"
+).click();
+
+}
+
+
+function readProject(event){
+
+const file=
+event.target.files[0];
+
+if(!file)
+return;
+
+const reader=
+new FileReader();
+
+reader.onload=
+e=>{
+
+try{
+
+const project=
+JSON.parse(
+e.target.result
+);
+
+document.getElementById(
+"filmName"
+).value=
+project.filmName||"";
+
+document.getElementById(
+"language"
+).value=
+project.language||
+"de-DE";
+
+document.getElementById(
+"story"
+).value=
+project.story||"";
+
+characters=
+project.characters||[];
+
+scenes=
+project.scenes||[];
+
+currentScene=0;
+
+renderCharacters();
+
+renderAll();
+
+status(
+"📂 Proje yüklendi."
+);
+
+}catch(error){
+
+alert(
+"Proje dosyası okunamadı."
+);
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+/* =========================================================
+   SIFIRLA
+========================================================= */
+
+function resetProject(){
+
+stopAnimationOnly();
+
+speechSynthesis.cancel();
+
+scenes=[];
+
+characters=[];
+
+currentScene=0;
+
+sceneElapsed=0;
+
+document.getElementById(
+"sceneGrid"
+).innerHTML="";
+
+document.getElementById(
+"timeline"
+).innerHTML="";
+
+document.getElementById(
+"characters"
+).innerHTML=
+'<div class="small">Film oluşturulduğunda karakterler burada görünecek.</div>';
+
+document.getElementById(
+"imagePrompt"
+).textContent="-";
+
+document.getElementById(
+"motionPrompt"
+).textContent="-";
+
+document.getElementById(
+"voiceText"
+).textContent="-";
+
+document.getElementById(
+"subtitleText"
+).textContent="-";
+
+subtitle.textContent=
+"Mina Film Studio hazır.";
+
+sceneLabel.textContent=
+"Sahne 1 / 8";
+
+barReset();
+
+status(
+"Yeni proje hazır."
+);
+
+}
+
+
+function barReset(){
+
+document.getElementById(
+"progressBar"
+).style.width="0%";
+
+}
+
+
+/* =========================================================
+   BAŞLANGIÇ
+========================================================= */
+
+drawFrame(
+"house",
+0
+);
+
+</script>
+
+</body>
+</html>
