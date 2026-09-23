@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mina Film Studio V4.2</title>
+<title>Mina Video AI V5.0 — GeldStory</title>
 
 <style>
 *{
@@ -259,26 +259,60 @@ button.orange{
 <body>
 
 <header>
-    <h1>🎬 Mina Film Studio V4.2</h1>
-    <p>Görsel + hareket + ses + altyazı + WEBM video</p>
+    <h1>🎬 Mina Video AI V5.0 — GeldStory</h1>
+    <p>Gerçek başarı hikâyeleri → sahneler → görsel → ses → altyazı → WEBM</p>
 </header>
 
 <div class="container">
 
 <div class="panel">
-    <h2>🎞️ Film Bilgileri</h2>
+    <h2>💰 GeldStory — Hikâye Oluşturucu</h2>
 
-    <label>Film adı</label>
-    <input id="filmName" type="text" value="Das Haus am Waldrand">
+    <div class="grid">
+        <div>
+            <label>Hikâye başlığı</label>
+            <input id="filmName" type="text" value="Colonel Sanders – Vom Scheitern zum Erfolg">
 
-    <label>Hikâye</label>
-    <textarea id="story">Um 23:47 Uhr erreicht Anna ein verlassenes Haus am Waldrand. Im oberen Fenster brennt plötzlich Licht. Sie hört Schritte. Die Tür öffnet sich von selbst. Dann erscheint ein Schatten.</textarea>
+            <label>Dil</label>
+            <select id="storyLanguage">
+                <option value="de">Deutsch</option>
+                <option value="tr">Türkçe</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Sahne sayısı</label>
+            <select id="sceneCount">
+                <option value="6">6 sahne</option>
+                <option value="8">8 sahne</option>
+                <option value="10" selected>10 sahne</option>
+                <option value="12">12 sahne</option>
+                <option value="15">15 sahne</option>
+            </select>
+
+            <label>Video formatı</label>
+            <select id="videoFormat" onchange="applyVideoFormat()">
+                <option value="16:9" selected>YouTube 16:9</option>
+                <option value="9:16">Shorts 9:16</option>
+                <option value="1:1">Kare 1:1</option>
+            </select>
+        </div>
+    </div>
+
+    <label>Hikâye metni</label>
+    <textarea id="story" style="min-height:150px">Harland Sanders hatte kein leichtes Leben. Er verlor früh seinen Vater und musste als Kind arbeiten. Im Laufe seines Lebens wechselte er viele Berufe und erlebte mehrere Rückschläge. Erst im hohen Alter begann sein größter Erfolg. Er entwickelte sein berühmtes Hühnchenrezept und begann, Restaurants sein Konzept anzubieten. Viele lehnten ihn ab. Trotzdem gab er nicht auf. Schließlich wurde aus seinem Rezept eine weltbekannte Marke. Seine Geschichte zeigt, dass ein später Start nicht das Ende bedeutet.</textarea>
 
     <div style="margin-top:10px">
+        <button class="primary" onclick="generateGeldStory()">✨ GELDSTORY SAHNELERE OLUŞTUR</button>
         <button class="green" onclick="saveProject()">💾 PROJEYİ KAYDET</button>
         <button onclick="loadProject()">📂 PROJEYİ YÜKLE</button>
         <button class="red" onclick="resetProject()">♻️ SIFIRLA</button>
     </div>
+
+    <p class="small">
+        Sistem hikâyeyi giriş → mücadele → dönüm noktası → başarı → ders yapısına böler.
+        Her sahneye anlatım, altyazı ve görsel promptu oluşturur.
+    </p>
 </div>
 
 <div class="grid">
@@ -288,6 +322,7 @@ button.orange{
 
     <div class="previewWrap">
         <canvas id="previewCanvas" width="1280" height="720"></canvas>
+        <div id="formatStatus" class="small" style="margin-top:8px">Format: 16:9 — 1280×720</div>
     </div>
 
     <div style="margin-top:10px">
@@ -321,7 +356,7 @@ button.orange{
     </div>
 
     <div class="status" id="statusBox">
-Mina Film Studio V4.2 hazır.
+Mina Video AI V5.0 — GeldStory hazır.
     </div>
 
     <div class="downloadBox" id="downloadBox">
@@ -364,7 +399,7 @@ Mina Film Studio V4.2 hazır.
    MINA FILM STUDIO V4.2
    ========================================================= */
 
-const TOTAL_SCENES = 6;
+let TOTAL_SCENES = 10;
 
 const canvas = document.getElementById("previewCanvas");
 const ctx = canvas.getContext("2d");
@@ -464,15 +499,12 @@ function init(){
 
     scenes = JSON.parse(JSON.stringify(defaultScenes));
 
-    renderSceneEditor();
-
     checkSupport();
+    applyVideoFormat();
+    generateGeldStory(false);
 
-    drawPlaceholder();
-
-    log("Mina Film Studio V4.2 başlatıldı.");
-    log("6 sahne hazır.");
-    log("Sahneler 1 → 2 → 3 → 4 → 5 → 6 sırasıyla render edilecek.");
+    log("Mina Video AI V5.0 — GeldStory başlatıldı.");
+    log("GeldStory formatı: giriş → mücadele → dönüm noktası → başarı → ders.");
 
 }
 
@@ -515,6 +547,145 @@ function checkSupport(){
 
 }
 
+
+
+/* =========================================================
+   GELDSTORY ENGINE V5.0
+   ========================================================= */
+
+const geldStoryPhases = [
+    "Hook",
+    "Başlangıç",
+    "Mücadele",
+    "Reddedilmeler",
+    "Dönüm Noktası",
+    "İlk Başarı",
+    "Büyüme",
+    "Büyük Sonuç",
+    "Gerçek Ders",
+    "Kapanış"
+];
+
+function splitStoryIntoSentences(text){
+    return String(text || "")
+        .replace(/\r/g, " ")
+        .replace(/\n+/g, " ")
+        .split(/(?<=[.!?])\s+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+}
+
+function distributeSentences(sentences, count){
+    const out = Array.from({length: count}, () => []);
+    if(!sentences.length) return out;
+    sentences.forEach((s, i) => {
+        const idx = Math.min(count - 1, Math.floor(i * count / sentences.length));
+        out[idx].push(s);
+    });
+    for(let i=0;i<count;i++){
+        if(!out[i].length){
+            const nearest = sentences[Math.min(sentences.length - 1, Math.floor(i * sentences.length / count))];
+            out[i].push(nearest || "");
+        }
+    }
+    return out;
+}
+
+function phasePrompt(phase, title, narration, lang){
+    const languageHint = lang === "de"
+        ? "German success story documentary"
+        : "Turkish success story documentary";
+
+    const phaseHint = {
+        "Hook":"powerful emotional opening, curiosity, dramatic moment",
+        "Başlangıç":"humble beginnings, realistic historical setting",
+        "Mücadele":"hardship, rejection, financial struggle, perseverance",
+        "Reddedilmeler":"multiple setbacks, rejection, determination",
+        "Dönüm Noktası":"turning point, opportunity, decisive moment",
+        "İlk Başarı":"first breakthrough, realistic celebration",
+        "Büyüme":"business growth, progress, increasing success",
+        "Büyük Sonuç":"major achievement, recognizable success, inspiring",
+        "Gerçek Ders":"thoughtful reflective scene, lessons from experience",
+        "Kapanış":"cinematic inspiring ending, hopeful atmosphere"
+    }[phase] || "cinematic documentary scene";
+
+    return [
+        "Cinematic documentary scene for a real success story.",
+        "Subject/story: " + title + ".",
+        "Phase: " + phase + " — " + phaseHint + ".",
+        "Narration context: " + narration,
+        languageHint + ", realistic people, realistic environment,",
+        "natural lighting, cinematic composition, photorealistic,",
+        "high detail, documentary photography, no text, no logos, no watermark."
+    ].join(" ");
+}
+
+function generateGeldStory(showLog=true){
+
+    const story = document.getElementById("story").value.trim();
+    const title = document.getElementById("filmName").value.trim() || "GeldStory";
+    const lang = document.getElementById("storyLanguage").value;
+    const count = Number(document.getElementById("sceneCount").value) || 10;
+
+    if(!story){
+        alert("Önce hikâye metnini yaz.");
+        return;
+    }
+
+    TOTAL_SCENES = count;
+
+    const sentences = splitStoryIntoSentences(story);
+    const groups = distributeSentences(sentences, count);
+
+    scenes = groups.map((group, i) => {
+        const narration = group.join(" ");
+        const phase = geldStoryPhases[i] || ("Sahne " + (i+1));
+        const motions = ["zoomIn","panLeft","float","zoomIn","panRight","zoomOut"];
+        const motion = motions[i % motions.length];
+
+        return {
+            title: (i+1) + ". " + phase,
+            duration: i === 0 ? 7 : 8,
+            motion,
+            transition: "fade",
+            image: null,
+            audio: null,
+            narration,
+            prompt: phasePrompt(phase, title, narration, lang)
+        };
+    });
+
+    renderSceneEditor();
+    drawPlaceholder();
+
+    if(showLog){
+        log("✨ GeldStory oluşturuldu.");
+        log("📝 " + scenes.length + " sahne hazırlandı.");
+        log("🎬 Yapı: giriş → mücadele → dönüm noktası → başarı → ders.");
+    }
+}
+
+function applyVideoFormat(){
+
+    const format = document.getElementById("videoFormat").value;
+    const status = document.getElementById("formatStatus");
+
+    if(format === "9:16"){
+        canvas.width = 720;
+        canvas.height = 1280;
+        status.textContent = "Format: 9:16 — 720×1280";
+    }else if(format === "1:1"){
+        canvas.width = 1080;
+        canvas.height = 1080;
+        status.textContent = "Format: 1:1 — 1080×1080";
+    }else{
+        canvas.width = 1280;
+        canvas.height = 720;
+        status.textContent = "Format: 16:9 — 1280×720";
+    }
+
+    drawPlaceholder();
+}
 
 /* =========================================================
    SCENE EDITOR
@@ -845,7 +1016,7 @@ function waitForAudioReady(audio){
 function drawPlaceholder(){
 
     ctx.fillStyle="#05070b";
-    ctx.fillRect(0,0,1280,720);
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
     ctx.fillStyle="#64748b";
     ctx.font="bold 34px Arial";
@@ -853,16 +1024,16 @@ function drawPlaceholder(){
 
     ctx.fillText(
         "MINA FILM STUDIO V4.2",
-        640,
-        320
+        canvas.width/2,
+        canvas.height/2-25
     );
 
     ctx.font="20px Arial";
 
     ctx.fillText(
         "Sahne görsellerini yükleyerek başlayabilirsin",
-        640,
-        365
+        canvas.width/2,
+        canvas.height/2+20
     );
 
 }
@@ -924,7 +1095,7 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
     ctx.clearRect(0,0,1280,720);
 
     ctx.fillStyle="#000";
-    ctx.fillRect(0,0,1280,720);
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
     if(img){
 
@@ -932,16 +1103,16 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
         const ih=img.naturalHeight || img.height;
 
         const scale=Math.max(
-            1280/iw,
-            720/ih
+            canvas.width/iw,
+            canvas.height/ih
         );
 
         const baseW=iw*scale;
         const baseH=ih*scale;
 
         let zoom=1;
-        let x=(1280-baseW)/2;
-        let y=(720-baseH)/2;
+        let x=(canvas.width-baseW)/2;
+        let y=(canvas.height-baseH)/2;
 
         if(scene.motion==="zoomIn"){
 
@@ -982,8 +1153,8 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
         const drawW=baseW*zoom;
         const drawH=baseH*zoom;
 
-        const centerX=640;
-        const centerY=360;
+        const centerX=canvas.width/2;
+        const centerY=canvas.height/2;
 
         let dx=centerX+(x+baseW/2-centerX)*zoom-baseW*zoom/2;
         let dy=centerY+(y+baseH/2-centerY)*zoom-baseH*zoom/2;
@@ -1001,7 +1172,7 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
     else{
 
         ctx.fillStyle="#111827";
-        ctx.fillRect(0,0,1280,720);
+        ctx.fillRect(0,0,canvas.width,canvas.height);
 
         ctx.fillStyle="#64748b";
         ctx.font="bold 30px Arial";
@@ -1019,34 +1190,34 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
     /* VIGNETTE */
 
     const grad=ctx.createRadialGradient(
-        640,360,150,
-        640,360,700
+        canvas.width/2,canvas.height/2,Math.min(canvas.width,canvas.height)*0.2,
+        canvas.width/2,canvas.height/2,Math.max(canvas.width,canvas.height)*0.9
     );
 
     grad.addColorStop(0,"rgba(0,0,0,0)");
     grad.addColorStop(1,"rgba(0,0,0,.65)");
 
     ctx.fillStyle=grad;
-    ctx.fillRect(0,0,1280,720);
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
 
     /* TOP CINEMATIC BAR */
 
     ctx.fillStyle="rgba(0,0,0,.85)";
-    ctx.fillRect(0,0,1280,42);
+    ctx.fillRect(0,0,canvas.width,42);
 
 
     /* BOTTOM BAR */
 
     ctx.fillStyle="rgba(0,0,0,.85)";
-    ctx.fillRect(0,678,1280,42);
+    ctx.fillRect(0,canvas.height-42,canvas.width,42);
 
 
     /* SUBTITLE */
 
     if(subtitle){
 
-        const maxWidth=1050;
+        const maxWidth=Math.min(1050, canvas.width*0.82);
 
         ctx.font="bold 30px Arial";
         ctx.textAlign="center";
@@ -1080,7 +1251,7 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
         const lineHeight=38;
 
         const startY=
-            640-
+            canvas.height-80-
             (lines.length-1)*lineHeight;
 
         lines.forEach((text,i)=>{
@@ -1090,9 +1261,9 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
             ctx.fillStyle="rgba(0,0,0,.75)";
 
             ctx.fillRect(
-                120,
+                canvas.width*0.08,
                 yy-30,
-                1040,
+                canvas.width*0.84,
                 42
             );
 
@@ -1100,7 +1271,7 @@ function drawScene(scene,img,progress,subtitle,transitionAmount){
 
             ctx.fillText(
                 text,
-                640,
+                canvas.width/2,
                 yy
             );
 
@@ -1927,7 +2098,7 @@ async function renderVideo(){
             safeFileName(
                 filmName
             )+
-            "-Mina-V4.2.webm";
+            "-Mina-GeldStory-V5.0.webm";
 
 
         document.getElementById(
@@ -2072,7 +2243,7 @@ function saveProject(){
     try{
 
         const data={
-            version:"V4.2",
+            version:"V5.0",
             filmName:
                 document.getElementById(
                     "filmName"
@@ -2088,7 +2259,7 @@ function saveProject(){
 
 
         localStorage.setItem(
-            "minaFilmStudioV42",
+            "minaVideoStudioV50",
             JSON.stringify(data)
         );
 
@@ -2128,9 +2299,8 @@ function loadProject(){
     try{
 
         const raw=
-            localStorage.getItem(
-                "minaFilmStudioV42"
-            );
+            localStorage.getItem("minaVideoStudioV50") ||
+            localStorage.getItem("minaFilmStudioV42");
 
         if(!raw){
 
@@ -2213,16 +2383,19 @@ function resetProject(){
     document.getElementById(
         "filmName"
     ).value=
-        "Das Haus am Waldrand";
+        "Colonel Sanders – Vom Scheitern zum Erfolg";
 
 
     document.getElementById(
         "story"
     ).value=
-        "Um 23:47 Uhr erreicht Anna ein verlassenes Haus am Waldrand. Im oberen Fenster brennt plötzlich Licht. Sie hört Schritte. Die Tür öffnet sich von selbst. Dann erscheint ein Schatten.";
+        "Harland Sanders hatte kein leichtes Leben. Er verlor früh seinen Vater und musste als Kind arbeiten. Im Laufe seines Lebens wechselte er viele Berufe und erlebte mehrere Rückschläge. Erst im hohen Alter begann sein größter Erfolg. Er entwickelte sein berühmtes Hühnchenrezept und begann, Restaurants sein Konzept anzubieten. Viele lehnten ihn ab. Trotzdem gab er nicht auf. Schließlich wurde aus seinem Rezept eine weltbekannte Marke. Seine Geschichte zeigt, dass ein später Start nicht das Ende bedeutet.";
 
-
-    renderSceneEditor();
+    document.getElementById("sceneCount").value="10";
+    document.getElementById("storyLanguage").value="de";
+    document.getElementById("videoFormat").value="16:9";
+    applyVideoFormat();
+    generateGeldStory(false);
 
     drawPlaceholder();
 
