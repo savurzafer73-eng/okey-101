@@ -2,44 +2,39 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mina Video AI V9</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mina Video AI V10</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at top,#18233d 0,#080b13 45%,#05060a 100%);
+    radial-gradient(circle at top,#18233d 0,#080b12 45%,#030407 100%);
     color:#fff;
-    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 header{
-    padding:22px 18px;
-    text-align:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(5,8,15,.8);
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
+    background:rgba(5,8,15,.92);
     backdrop-filter:blur(12px);
+    border-bottom:1px solid #20283a;
+    padding:20px;
+    text-align:center;
 }
 
 header h1{
     margin:0;
     font-size:30px;
-    letter-spacing:.5px;
 }
 
 header p{
-    margin:7px 0 0;
-    color:#aab4c8;
-    font-size:14px;
+    color:#9ca8bd;
+    margin:8px 0 0;
 }
 
 .container{
@@ -48,8 +43,8 @@ header p{
 }
 
 .card{
-    background:rgba(15,20,32,.88);
-    border:1px solid rgba(255,255,255,.09);
+    background:rgba(14,19,31,.9);
+    border:1px solid #252e41;
     border-radius:18px;
     padding:20px;
     margin-bottom:18px;
@@ -57,8 +52,33 @@ header p{
 }
 
 .card h2{
-    margin:0 0 16px;
+    margin:0 0 15px;
     font-size:19px;
+}
+
+textarea,
+input,
+select{
+    width:100%;
+    background:#080c14;
+    color:#fff;
+    border:1px solid #303a50;
+    border-radius:11px;
+    padding:12px;
+    outline:none;
+    font-size:14px;
+}
+
+textarea:focus,
+input:focus,
+select:focus{
+    border-color:#6675ff;
+}
+
+textarea{
+    min-height:280px;
+    resize:vertical;
+    line-height:1.6;
 }
 
 .grid{
@@ -74,50 +94,26 @@ header p{
 }
 
 .field label{
-    color:#aeb8cc;
+    color:#9da9bd;
     font-size:12px;
-}
-
-input,select,textarea{
-    width:100%;
-    background:#0a0e18;
-    border:1px solid #2a3346;
-    border-radius:11px;
-    color:#fff;
-    padding:12px;
-    outline:none;
-    font-size:14px;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#657cff;
-    box-shadow:0 0 0 2px rgba(101,124,255,.12);
-}
-
-textarea{
-    min-height:270px;
-    resize:vertical;
-    line-height:1.6;
 }
 
 .buttons{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
-    margin-top:14px;
+    gap:9px;
+    margin-top:13px;
 }
 
 button{
     border:0;
-    border-radius:11px;
-    padding:12px 17px;
-    cursor:pointer;
+    border-radius:10px;
+    padding:11px 15px;
     color:#fff;
-    background:#273149;
+    background:#29334b;
+    cursor:pointer;
     font-weight:bold;
-    transition:.18s;
+    transition:.15s;
 }
 
 button:hover{
@@ -125,35 +121,36 @@ button:hover{
     filter:brightness(1.12);
 }
 
-button.primary{
-    background:linear-gradient(135deg,#5865f2,#7b61ff);
+.primary{
+    background:linear-gradient(135deg,#5865f2,#805cff);
 }
 
-button.green{
-    background:linear-gradient(135deg,#087f5b,#13a87d);
+.green{
+    background:linear-gradient(135deg,#087d59,#11a579);
 }
 
-button.red{
-    background:#7d2934;
+.orange{
+    background:#955b18;
 }
 
-button.orange{
-    background:#9b5b14;
+.red{
+    background:#782b36;
 }
 
-button.small{
-    padding:8px 11px;
+.small{
+    padding:8px 10px;
     font-size:12px;
 }
 
 .status{
-    margin-top:14px;
+    background:#080d16;
+    border:1px solid #20293b;
     padding:12px;
     border-radius:10px;
-    background:#0a0f19;
-    color:#b9c5d9;
-    font-size:13px;
+    margin-top:13px;
+    color:#b6c1d4;
     white-space:pre-wrap;
+    line-height:1.5;
 }
 
 .scenes{
@@ -163,81 +160,51 @@ button.small{
 }
 
 .scene{
-    overflow:hidden;
-    background:#0a0f19;
-    border:1px solid #273149;
+    background:#090e17;
+    border:1px solid #29334a;
     border-radius:16px;
+    overflow:hidden;
 }
 
-.scene-top{
-    padding:14px;
+.scene-head{
     display:flex;
     justify-content:space-between;
     gap:10px;
-    align-items:center;
-    border-bottom:1px solid #20283a;
+    padding:14px;
+    border-bottom:1px solid #20293b;
 }
 
 .scene-number{
+    color:#92a0ff;
     font-weight:bold;
-    color:#8ea0ff;
 }
 
 .scene-duration{
+    color:#8995a9;
     font-size:12px;
-    color:#9da9bd;
 }
 
-.scene-body{
+.scene-content{
     padding:14px;
 }
 
 .scene-text{
-    color:#d8deea;
-    font-size:14px;
+    color:#d5dbe7;
     line-height:1.55;
-    margin-bottom:12px;
+    font-size:14px;
+    margin-bottom:14px;
+}
+
+.prompt-title{
+    color:#8f9bb0;
+    font-size:11px;
+    margin-bottom:6px;
 }
 
 .prompt{
-    min-height:145px;
+    min-height:180px;
     font-size:12px;
     line-height:1.5;
-}
-
-.image-box{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#05070c;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    position:relative;
-}
-
-.image-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.placeholder{
-    text-align:center;
-    color:#69758c;
-    padding:20px;
-}
-
-.loading{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.65);
-    font-weight:bold;
-    z-index:2;
 }
 
 .scene-actions{
@@ -247,40 +214,46 @@ button.small{
     margin-top:10px;
 }
 
-.progress{
-    height:9px;
+.badge{
+    background:#19213a;
+    color:#a5b0ff;
     border-radius:20px;
-    background:#0a0e17;
+    padding:5px 9px;
+    font-size:11px;
+}
+
+.empty{
+    padding:45px;
+    text-align:center;
+    color:#68758c;
+    border:1px dashed #29334a;
+    border-radius:14px;
+}
+
+.help{
+    color:#7f8ca3;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:8px;
+}
+
+.progress{
+    height:8px;
+    background:#070a10;
+    border-radius:20px;
     overflow:hidden;
     margin-top:12px;
 }
 
 .progress-bar{
-    width:0%;
     height:100%;
-    background:linear-gradient(90deg,#5865f2,#a16cff);
-    transition:.25s;
-}
-
-.badge{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:20px;
-    background:#18213a;
-    color:#9eaaff;
-    font-size:11px;
-    margin-left:5px;
+    width:0;
+    background:linear-gradient(90deg,#5965f2,#a35cff);
+    transition:.2s;
 }
 
 .hidden{
-    display:none!important;
-}
-
-.help{
-    color:#8995aa;
-    font-size:12px;
-    line-height:1.5;
-    margin-top:8px;
+    display:none;
 }
 
 @media(max-width:850px){
@@ -312,517 +285,282 @@ button.small{
 <body>
 
 <header>
-    <h1>🎬 Mina Video AI V9</h1>
-    <p>Hikâye → Sahne → Sinematik Prompt → FLUX 1 Görsel</p>
+    <h1>🎬 Mina Video AI V10</h1>
+    <p>Hikâye → Sahne → Z-Image Prompt → Görsel → Video</p>
 </header>
 
 <div class="container">
 
-    <!-- API -->
-    <section class="card">
+<!-- =====================================================
+     STORY
+===================================================== -->
 
-        <h2>🔐 Pollinations API</h2>
+<section class="card">
 
-        <div class="grid">
+<h2>📖 1. Hikâyeni Gir</h2>
 
-            <div class="field" style="grid-column:span 2;">
-                <label>API Key</label>
-                <input
-                    id="apiKey"
-                    type="password"
-                    placeholder="Pollinations API anahtarını buraya gir">
-            </div>
+<textarea
+id="story"
+placeholder="Uzun hikâyeni buraya yapıştır...
 
-            <div class="field">
-                <label>Model</label>
-                <select id="model">
-                    <option value="flux" selected>FLUX 1 ⭐</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Görsel oranı</label>
-                <select id="ratio">
-                    <option value="16:9" selected>16:9 YouTube</option>
-                    <option value="9:16">9:16 Shorts</option>
-                    <option value="1:1">1:1 Kare</option>
-                </select>
-            </div>
-
-        </div>
-
-        <div class="buttons">
-            <button class="green" onclick="saveKey()">💾 Anahtarı Kaydet</button>
-            <button class="red" onclick="clearKey()">🗑 Anahtarı Sil</button>
-            <button onclick="testAPI()">🧪 FLUX 1 Test Et</button>
-        </div>
-
-        <div class="help">
-            ⚠️ Anahtar tarayıcının localStorage alanında saklanabilir.
-            Herkese açık GitHub Pages sitesine gizli/secret API key koymak güvenlik açısından uygun değildir.
-        </div>
-
-        <div id="apiStatus" class="status">
-            API durumu: Henüz test edilmedi.
-        </div>
-
-    </section>
-
-
-    <!-- STORY -->
-    <section class="card">
-
-        <h2>📖 Hikâyen</h2>
-
-        <textarea
-            id="story"
-            placeholder="Hikâyeni buraya yapıştır...
-
-Örnek:
+Örneğin:
 
 Stell dir vor, du bist 65 Jahre alt.
 Du hast dein Geschäft verloren.
 Du hast kaum noch Geld.
-Aber du gibst nicht auf...
+Doch du gibst nicht auf...
 
-Mina hikâyeyi otomatik olarak analiz edip sahnelere ayıracaktır."></textarea>
+Mina hikâyeyi otomatik olarak sahnelere bölecek."
+></textarea>
 
-        <div class="buttons">
+<div class="buttons">
 
-            <button class="primary" onclick="splitStory()">
-                ✂️ Hikâyeyi Sahnelere Böl
-            </button>
+<button class="primary" onclick="splitStory()">
+✂️ Hikâyeyi Sahnelere Böl
+</button>
 
-            <button onclick="pasteStory()">
-                📋 Panodan Al
-            </button>
+<button onclick="pasteStory()">
+📋 Panodan Al
+</button>
 
-            <button onclick="document.getElementById('fileInput').click()">
-                📄 TXT Yükle
-            </button>
+<button onclick="document.getElementById('txtFile').click()">
+📄 TXT Yükle
+</button>
 
-            <button onclick="loadExample()">
-                ✨ Örnek Hikâye
-            </button>
+<button onclick="exampleStory()">
+✨ Örnek Hikâye
+</button>
 
-            <input
-                id="fileInput"
-                type="file"
-                accept=".txt,text/plain"
-                class="hidden"
-                onchange="loadTXT(event)">
+<input
+id="txtFile"
+type="file"
+accept=".txt,text/plain"
+class="hidden"
+onchange="loadTXT(event)"
+>
 
-        </div>
+</div>
 
-        <div id="storyStatus" class="status">
-            Hikâyeni yapıştır ve "Hikâyeyi Sahnelere Böl" butonuna bas.
-        </div>
+<div id="storyStatus" class="status">
+Hikâyeni gir ve sahnelere böl.
+</div>
 
-    </section>
-
-
-    <!-- SETTINGS -->
-    <section class="card">
-
-        <h2>🎨 Görsel Ayarları</h2>
-
-        <div class="grid">
-
-            <div class="field">
-                <label>Görsel stili</label>
-
-                <select id="style">
-                    <option value="cinematic realistic">Cinematic Realistic</option>
-                    <option value="documentary cinematic">Documentary Cinematic</option>
-                    <option value="dark cinematic">Dark Cinematic</option>
-                    <option value="dramatic movie still">Dramatic Movie Still</option>
-                    <option value="historical cinematic">Historical Cinematic</option>
-                    <option value="photorealistic">Photorealistic</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Sahne süresi</label>
-
-                <select id="duration">
-                    <option value="5">5 saniye</option>
-                    <option value="7" selected>7 saniye</option>
-                    <option value="10">10 saniye</option>
-                    <option value="12">12 saniye</option>
-                    <option value="15">15 saniye</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Detay seviyesi</label>
-
-                <select id="detail">
-                    <option value="highly detailed">Çok detaylı</option>
-                    <option value="extremely detailed" selected>Ultra detaylı</option>
-                    <option value="masterpiece quality">Masterpiece</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Film görünümü</label>
-
-                <select id="film">
-                    <option value="35mm film look" selected>35mm Film</option>
-                    <option value="anamorphic cinema">Anamorphic</option>
-                    <option value="modern cinema">Modern Cinema</option>
-                    <option value="vintage film">Vintage Film</option>
-                </select>
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 
-    <!-- ACTIONS -->
-    <section class="card">
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
 
-        <h2>🚀 Video Görsel Üretimi</h2>
+<section class="card">
 
-        <div class="buttons">
+<h2>🎨 2. Z-Image Görsel Ayarları</h2>
 
-            <button class="primary" onclick="generateAllImages()">
-                🎬 TÜM SAHNELERİ OLUŞTUR
-            </button>
+<div class="grid">
 
-            <button class="orange" onclick="regeneratePrompts()">
-                🔄 Promptları Yenile
-            </button>
+<div class="field">
+<label>Model</label>
+<select id="model">
+<option value="z-image" selected>Z-Image</option>
+</select>
+</div>
 
-            <button onclick="downloadPrompts()">
-                📥 Promptları TXT İndir
-            </button>
+<div class="field">
+<label>Video oranı</label>
+<select id="ratio">
+<option value="16:9" selected>16:9 YouTube</option>
+<option value="9:16">9:16 Shorts</option>
+<option value="1:1">1:1 Kare</option>
+</select>
+</div>
 
-        </div>
+<div class="field">
+<label>Görsel stil</label>
+<select id="style">
+<option value="cinematic photorealistic">Cinematic Photorealistic</option>
+<option value="documentary cinematic">Documentary Cinematic</option>
+<option value="dark cinematic">Dark Cinematic</option>
+<option value="dramatic movie still">Dramatic Movie Still</option>
+<option value="historical cinematic">Historical Cinematic</option>
+<option value="realistic documentary">Realistic Documentary</option>
+</select>
+</div>
 
-        <div id="globalStatus" class="status">
-            Hazır.
-        </div>
+<div class="field">
+<label>Film görünümü</label>
+<select id="film">
+<option value="35mm film look" selected>35mm Film</option>
+<option value="anamorphic cinema">Anamorphic</option>
+<option value="modern cinema">Modern Cinema</option>
+<option value="vintage film">Vintage Film</option>
+</select>
+</div>
 
-        <div class="progress">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
+<div class="field">
+<label>Sahne süresi</label>
+<select id="duration">
+<option value="5">5 saniye</option>
+<option value="7" selected>7 saniye</option>
+<option value="10">10 saniye</option>
+<option value="12">12 saniye</option>
+<option value="15">15 saniye</option>
+</select>
+</div>
 
-    </section>
+<div class="field">
+<label>Kamera</label>
+<select id="camera">
+<option value="cinematic wide shot" selected>Wide Shot</option>
+<option value="medium cinematic shot">Medium Shot</option>
+<option value="close-up cinematic portrait">Close-Up</option>
+<option value="dramatic low angle">Low Angle</option>
+<option value="dramatic high angle">High Angle</option>
+<option value="over the shoulder cinematic shot">Over Shoulder</option>
+</select>
+</div>
+
+<div class="field">
+<label>Işık</label>
+<select id="lighting">
+<option value="dramatic cinematic lighting" selected>Dramatic</option>
+<option value="warm golden hour lighting">Golden Hour</option>
+<option value="cold blue cinematic lighting">Cold Blue</option>
+<option value="moody low key lighting">Moody</option>
+<option value="soft natural lighting">Natural</option>
+</select>
+</div>
+
+<div class="field">
+<label>Detay</label>
+<select id="detail">
+<option value="highly detailed" selected>Highly Detailed</option>
+<option value="extremely detailed">Extremely Detailed</option>
+<option value="masterpiece quality">Masterpiece</option>
+</select>
+</div>
+
+</div>
+
+<div class="help">
+Z-Image için İngilizce sinematik prompt hazırlanır. Böylece görsel üretirken kamera, ışık, ortam, karakter ve duygu daha ayrıntılı tanımlanır.
+</div>
+
+</section>
 
 
-    <!-- SCENES -->
-    <section class="card">
+<!-- =====================================================
+     CHARACTER CONSISTENCY
+===================================================== -->
 
-        <h2>
-            🎞️ Sahneler
-            <span id="sceneCount" class="badge">0</span>
-        </h2>
+<section class="card">
 
-        <div id="scenes" class="scenes">
+<h2>👤 3. Karakter Sürekliliği</h2>
 
-            <div class="placeholder">
-                Henüz sahne oluşturulmadı.
-            </div>
+<div class="field">
 
-        </div>
+<label>Ana karakter açıklaması — isteğe bağlı</label>
 
-    </section>
+<input
+id="character"
+placeholder="Örn: Harland Sanders, 65 yaşında, beyaz saçlı, beyaz bıyıklı, beyaz takım elbiseli yaşlı Amerikalı erkek"
+>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="applyCharacter()">
+👤 Karakteri Tüm Sahnelerde Kullan
+</button>
+
+</div>
+
+<div class="help">
+Buraya karakteri bir kez yazarsan Mina bütün sahne promptlarına aynı karakter tanımını ekler.
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
+
+<section class="card">
+
+<h2>🚀 4. Sahne Üretimi</h2>
+
+<div class="buttons">
+
+<button class="primary" onclick="regeneratePrompts()">
+🔄 Promptları Yenile
+</button>
+
+<button class="green" onclick="copyAllPrompts()">
+📋 Tüm Promptları Kopyala
+</button>
+
+<button onclick="downloadPrompts()">
+📥 TXT İndir
+</button>
+
+<button class="orange" onclick="openForvideo()">
+🖼️ Z-Image'ı Aç
+</button>
+
+</div>
+
+<div id="globalStatus" class="status">
+Hazır.
+</div>
+
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SCENES
+===================================================== -->
+
+<section class="card">
+
+<h2>
+🎞️ 5. Sahne Listesi
+<span id="sceneCount" class="badge">0</span>
+</h2>
+
+<div id="scenes" class="scenes">
+
+<div class="empty">
+Henüz sahne oluşturulmadı.
+</div>
+
+</div>
+
+</section>
 
 </div>
 
 
 <script>
 
-/* =========================================================
-   MINA VIDEO AI V9
-   ========================================================= */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-const API_BASE = "https://gen.pollinations.ai";
+let scenes=[];
 
-let scenes = [];
 
+/* =====================================================
+   STORY EXAMPLE
+===================================================== */
 
-/* =========================================================
-   LOCAL STORAGE
-   ========================================================= */
+function exampleStory(){
 
-window.addEventListener("load", () => {
-
-    const saved = localStorage.getItem("mina_pollinations_key");
-
-    if(saved){
-        document.getElementById("apiKey").value = saved;
-    }
-
-});
-
-
-function saveKey(){
-
-    const key = document.getElementById("apiKey").value.trim();
-
-    if(!key){
-
-        setAPIStatus(
-            "❌ API anahtarı boş.",
-            true
-        );
-
-        return;
-    }
-
-    localStorage.setItem(
-        "mina_pollinations_key",
-        key
-    );
-
-    setAPIStatus(
-        "✅ API anahtarı kaydedildi.",
-        false
-    );
-}
-
-
-function clearKey(){
-
-    localStorage.removeItem(
-        "mina_pollinations_key"
-    );
-
-    document.getElementById("apiKey").value = "";
-
-    setAPIStatus(
-        "🗑 API anahtarı silindi.",
-        false
-    );
-}
-
-
-function getKey(){
-
-    return document
-        .getElementById("apiKey")
-        .value
-        .trim();
-
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function setAPIStatus(text,error=false){
-
-    const el =
-        document.getElementById("apiStatus");
-
-    el.textContent = text;
-
-    el.style.color =
-        error ? "#ff8d9b" : "#b9c5d9";
-}
-
-
-function setStoryStatus(text){
-
-    document.getElementById(
-        "storyStatus"
-    ).textContent = text;
-
-}
-
-
-function setGlobalStatus(text){
-
-    document.getElementById(
-        "globalStatus"
-    ).textContent = text;
-
-}
-
-
-/* =========================================================
-   API TEST
-   ========================================================= */
-
-async function testAPI(){
-
-    const key = getKey();
-
-    if(!key){
-
-        setAPIStatus(
-            "❌ Önce API anahtarını gir.",
-            true
-        );
-
-        return;
-    }
-
-    setAPIStatus(
-        "⏳ FLUX 1 bağlantısı test ediliyor..."
-    );
-
-    try{
-
-        const url =
-            API_BASE +
-            "/image/" +
-            encodeURIComponent(
-                "cinematic realistic portrait of a mysterious man, dramatic lighting, 35mm film"
-            ) +
-            "?model=flux" +
-            "&width=768" +
-            "&height=432" +
-            "&nologo=true" +
-            "&safe=true" +
-            "&seed=123456";
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method:"GET",
-                    headers:{
-                        "Authorization":
-                            "Bearer " + key
-                    }
-                }
-            );
-
-        if(!response.ok){
-
-            const errorText =
-                await response.text();
-
-            let readable =
-                errorText;
-
-            try{
-
-                const json =
-                    JSON.parse(errorText);
-
-                if(
-                    json.error &&
-                    json.error.message
-                ){
-
-                    readable =
-                        json.error.message;
-                }
-
-            }catch(e){}
-
-            throw new Error(
-                "HTTP " +
-                response.status +
-                " — " +
-                readable
-            );
-        }
-
-        setAPIStatus(
-            "✅ FLUX 1 bağlantısı başarılı! Görsel üretim API'si çalışıyor."
-        );
-
-    }catch(error){
-
-        setAPIStatus(
-            "❌ FLUX 1 testi başarısız:\n" +
-            error.message +
-            "\n\nEğer 'model flux is not allowed' görüyorsan API anahtarında FLUX erişimini açmalısın.",
-            true
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   PASTE
-   ========================================================= */
-
-async function pasteStory(){
-
-    try{
-
-        const text =
-            await navigator.clipboard.readText();
-
-        if(!text){
-
-            setStoryStatus(
-                "❌ Panoda metin bulunamadı."
-            );
-
-            return;
-        }
-
-        document.getElementById(
-            "story"
-        ).value = text;
-
-        setStoryStatus(
-            "✅ Hikâye panodan alındı."
-        );
-
-    }catch(error){
-
-        setStoryStatus(
-            "⚠️ Tarayıcı panoya erişim izni vermedi. Ctrl+V ile yapıştırabilirsin."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   TXT LOAD
-   ========================================================= */
-
-function loadTXT(event){
-
-    const file =
-        event.target.files[0];
-
-    if(!file) return;
-
-    const reader =
-        new FileReader();
-
-    reader.onload = function(e){
-
-        document.getElementById(
-            "story"
-        ).value = e.target.result;
-
-        setStoryStatus(
-            "✅ TXT dosyası yüklendi: " +
-            file.name
-        );
-
-    };
-
-    reader.readAsText(
-        file,
-        "UTF-8"
-    );
-
-}
-
-
-/* =========================================================
-   EXAMPLE
-   ========================================================= */
-
-function loadExample(){
-
-    const example = `
+const text=`
 Stell dir vor, du bist 65 Jahre alt.
 
 Du hast dein Geschäft verloren.
@@ -832,8 +570,6 @@ Du hast kaum noch Geld.
 Viele Menschen glauben, dass dein Leben vorbei ist.
 
 Doch du gibst nicht auf.
-
-Du gehst weiter.
 
 Du hast eine Idee.
 
@@ -851,7 +587,7 @@ Doch irgendwann sagte jemand Ja.
 
 Aus diesem kleinen Ja entstand eine weltbekannte Marke.
 
-Die Geschichte zeigt uns etwas Wichtiges.
+Seine Geschichte zeigt uns etwas Wichtiges.
 
 Es ist niemals zu spät, neu anzufangen.
 
@@ -860,1172 +596,801 @@ Manchmal ist ein Ende nicht das Ende.
 Manchmal ist es der Anfang eines neuen Kapitels.
 `.trim();
 
-    document.getElementById(
-        "story"
-    ).value = example;
+document.getElementById("story").value=text;
 
-    setStoryStatus(
-        "✅ Örnek hikâye yüklendi."
-    );
+setStoryStatus("✅ Örnek hikâye yüklendi.");
 
 }
 
 
-/* =========================================================
-   STORY SPLITTER
-   ========================================================= */
+/* =====================================================
+   STORY STATUS
+===================================================== */
+
+function setStoryStatus(text){
+document.getElementById("storyStatus").textContent=text;
+}
+
+function setGlobalStatus(text){
+document.getElementById("globalStatus").textContent=text;
+}
+
+
+/* =====================================================
+   PASTE
+===================================================== */
+
+async function pasteStory(){
+
+try{
+
+const text=await navigator.clipboard.readText();
+
+if(!text){
+setStoryStatus("❌ Panoda metin yok.");
+return;
+}
+
+document.getElementById("story").value=text;
+
+setStoryStatus("✅ Hikâye panodan alındı.");
+
+}catch(e){
+
+setStoryStatus(
+"⚠️ Tarayıcı pano izni vermedi. Ctrl+V kullanabilirsin."
+);
+
+}
+
+}
+
+
+/* =====================================================
+   TXT
+===================================================== */
+
+function loadTXT(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("story").value=e.target.result;
+
+setStoryStatus(
+"✅ TXT dosyası yüklendi: "+file.name
+);
+
+};
+
+reader.readAsText(file,"UTF-8");
+
+}
+
+
+/* =====================================================
+   SPLIT STORY
+===================================================== */
 
 function splitStory(){
 
-    const text =
-        document
-        .getElementById("story")
-        .value
-        .trim();
+const text=document
+.getElementById("story")
+.value
+.trim();
 
-    if(!text){
+if(!text){
 
-        setStoryStatus(
-            "❌ Önce hikâyeyi yapıştır."
-        );
+setStoryStatus(
+"❌ Önce hikâyeyi gir."
+);
 
-        return;
-    }
-
-    const duration =
-        Number(
-            document.getElementById(
-                "duration"
-            ).value
-        );
-
-    /*
-      Önce paragraf bazında böl.
-      Eğer çok uzun paragraflar varsa
-      cümlelere ayır.
-    */
-
-    let paragraphs =
-        text
-        .split(/\n\s*\n/)
-        .map(x=>x.trim())
-        .filter(Boolean);
-
-    let pieces = [];
-
-    for(const paragraph of paragraphs){
-
-        if(paragraph.length <= 360){
-
-            pieces.push(paragraph);
-
-        }else{
-
-            const sentences =
-                paragraph.match(
-                    /[^.!?]+[.!?]+/g
-                ) || [paragraph];
-
-            let current = "";
-
-            for(const sentence of sentences){
-
-                const s =
-                    sentence.trim();
-
-                if(
-                    current.length +
-                    s.length +
-                    1 <= 300
-                ){
-
-                    current +=
-                        (current ? " " : "") +
-                        s;
-
-                }else{
-
-                    if(current)
-                        pieces.push(current);
-
-                    current = s;
-                }
-            }
-
-            if(current)
-                pieces.push(current);
-        }
-
-    }
-
-    /*
-      Tek paragraf halinde gelen hikâyeler
-    */
-
-    if(pieces.length === 1){
-
-        const sentences =
-            text.match(
-                /[^.!?]+[.!?]+/g
-            ) || [text];
-
-        pieces = [];
-
-        let current = "";
-
-        for(const sentence of sentences){
-
-            const s =
-                sentence.trim();
-
-            if(
-                current.length +
-                s.length +
-                1 <= 280
-            ){
-
-                current +=
-                    (current ? " " : "") +
-                    s;
-
-            }else{
-
-                if(current)
-                    pieces.push(current);
-
-                current = s;
-            }
-
-        }
-
-        if(current)
-            pieces.push(current);
-    }
-
-
-    scenes =
-        pieces.map(
-            (text,index)=>({
-
-                id:index+1,
-
-                text:text,
-
-                duration:duration,
-
-                prompt:makePrompt(
-                    text,
-                    index+1
-                ),
-
-                image:null,
-
-                loading:false,
-
-                error:null
-
-            })
-        );
-
-
-    renderScenes();
-
-    setStoryStatus(
-        "✅ Hikâye analiz edildi. " +
-        scenes.length +
-        " sahne oluşturuldu."
-    );
-
-    setGlobalStatus(
-        "🎬 " +
-        scenes.length +
-        " sahne hazır. Her sahne için sinematik prompt otomatik oluşturuldu."
-    );
+return;
 
 }
 
 
-/* =========================================================
-   PROMPT ENGINE
-   ========================================================= */
+/*
+Paragrafları ayır.
+*/
 
-function makePrompt(text,index){
+let paragraphs=text
+.split(/\n\s*\n/)
+.map(x=>x.trim())
+.filter(Boolean);
 
-    const style =
-        document.getElementById(
-            "style"
-        ).value;
 
-    const detail =
-        document.getElementById(
-            "detail"
-        ).value;
+/*
+Paragraf yoksa cümlelere ayır.
+*/
 
-    const film =
-        document.getElementById(
-            "film"
-        ).value;
+if(paragraphs.length===1){
 
-    /*
-      Hikâyeyi görsel anlatıma dönüştür.
-    */
+paragraphs=text
+.match(/[^.!?]+[.!?]+/g)
+||[text];
 
-    let visualText =
-        text
-        .replace(/\s+/g," ")
-        .trim();
+paragraphs=paragraphs
+.map(x=>x.trim())
+.filter(Boolean);
 
-    /*
-      Görsel promptu İngilizce tutuyoruz.
-      FLUX modellerinde sinematik görsel
-      üretimi için daha uygun.
-    */
+}
 
-    return `
+
+/*
+Çok uzun parçaları böl.
+*/
+
+let finalParts=[];
+
+paragraphs.forEach(part=>{
+
+if(part.length<=320){
+
+finalParts.push(part);
+
+return;
+
+}
+
+const sentences=
+part.match(/[^.!?]+[.!?]+/g)
+||[part];
+
+let current="";
+
+sentences.forEach(sentence=>{
+
+sentence=sentence.trim();
+
+if(
+current.length+
+sentence.length+
+1<=300
+){
+
+current+=
+(current?" ":"")+
+sentence;
+
+}else{
+
+if(current)
+finalParts.push(current);
+
+current=sentence;
+
+}
+
+});
+
+if(current)
+finalParts.push(current);
+
+});
+
+
+/*
+Sahneleri oluştur.
+*/
+
+const duration=
+document.getElementById("duration").value;
+
+scenes=finalParts.map(
+(text,index)=>({
+
+id:index+1,
+
+text:text,
+
+duration:duration,
+
+prompt:buildPrompt(
+text,
+index+1
+),
+
+image:null
+
+})
+);
+
+
+renderScenes();
+
+setStoryStatus(
+"✅ Hikâye analiz edildi. "+
+scenes.length+
+" sahne oluşturuldu."
+);
+
+setGlobalStatus(
+"🎬 "+
+scenes.length+
+" sahne hazır."
+);
+
+}
+
+
+/* =====================================================
+   BUILD PROMPT
+===================================================== */
+
+function buildPrompt(text,index){
+
+const style=
+document.getElementById("style").value;
+
+const film=
+document.getElementById("film").value;
+
+const camera=
+document.getElementById("camera").value;
+
+const lighting=
+document.getElementById("lighting").value;
+
+const detail=
+document.getElementById("detail").value;
+
+const character=
+document.getElementById("character")
+.value
+.trim();
+
+
+let characterText="";
+
+if(character){
+
+characterText=
+"Main character continuity: "+
+character+
+". ";
+
+}
+
+
+return `
 ${style}, ${film}, ${detail},
-cinematic movie still for scene ${index},
-visual storytelling,
-a realistic dramatic composition based on this story moment:
+cinematic scene ${index},
+${camera},
+${lighting},
 
-"${visualText}"
+${characterText}
 
-authentic human expressions,
-natural body proportions,
+Create a powerful visual representation of this exact story moment:
+
+"${text}"
+
+Authentic human emotion,
+natural facial expression,
+realistic anatomy,
 realistic environment,
+historically appropriate details when needed,
+accurate clothing,
+cinematic composition,
 strong foreground and background separation,
-dramatic cinematic lighting,
-volumetric light,
-subtle atmospheric depth,
-realistic skin texture,
-detailed clothing,
+natural perspective,
+volumetric atmosphere,
+realistic shadows,
+subtle depth of field,
 professional cinematography,
-shallow depth of field,
-natural shadows,
+photorealistic details,
+emotionally powerful storytelling,
+movie still,
 high dynamic range,
-photorealistic,
-emotionally powerful,
-storytelling composition,
-no text,
-no subtitles,
-no watermark,
-no logo
-`.replace(/\n+/g," ").trim();
+
+NO text,
+NO subtitles,
+NO captions,
+NO logo,
+NO watermark,
+NO distorted hands,
+NO extra fingers,
+NO deformed faces.
+`
+.replace(/\n+/g," ")
+.replace(/\s+/g," ")
+.trim();
 
 }
 
 
-/* =========================================================
-   REGENERATE PROMPTS
-   ========================================================= */
-
-function regeneratePrompts(){
-
-    if(!scenes.length){
-
-        setGlobalStatus(
-            "❌ Önce hikâyeyi sahnelere böl."
-        );
-
-        return;
-    }
-
-    scenes =
-        scenes.map(
-            (scene,index)=>({
-
-                ...scene,
-
-                prompt:
-                    makePrompt(
-                        scene.text,
-                        index+1
-                    )
-
-            })
-        );
-
-    renderScenes();
-
-    setGlobalStatus(
-        "🔄 Tüm sinematik promptlar yenilendi."
-    );
-
-}
-
-
-/* =========================================================
-   RATIO
-   ========================================================= */
-
-function getDimensions(){
-
-    const ratio =
-        document.getElementById(
-            "ratio"
-        ).value;
-
-    if(ratio === "9:16"){
-
-        return {
-            width:768,
-            height:1365
-        };
-
-    }
-
-    if(ratio === "1:1"){
-
-        return {
-            width:1024,
-            height:1024
-        };
-
-    }
-
-    return {
-        width:1024,
-        height:576
-    };
-
-}
-
-
-/* =========================================================
-   IMAGE URL
-   ========================================================= */
-
-function buildImageURL(prompt,sceneIndex){
-
-    const dimensions =
-        getDimensions();
-
-    const seed =
-        100000 +
-        sceneIndex * 7919 +
-        Math.floor(
-            Math.random()*500000
-        );
-
-    const params =
-        new URLSearchParams({
-
-            model:"flux",
-
-            width:String(
-                dimensions.width
-            ),
-
-            height:String(
-                dimensions.height
-            ),
-
-            seed:String(seed),
-
-            nologo:"true",
-
-            safe:"true"
-
-        });
-
-    return (
-        API_BASE +
-        "/image/" +
-        encodeURIComponent(prompt) +
-        "?" +
-        params.toString()
-    );
-
-}
-
-
-/* =========================================================
-   GENERATE ONE IMAGE
-   ========================================================= */
-
-async function generateImage(index){
-
-    const scene =
-        scenes[index];
-
-    if(!scene)
-        return;
-
-    const key =
-        getKey();
-
-    if(!key){
-
-        scene.error =
-            "API anahtarı girilmedi.";
-
-        renderScenes();
-
-        setGlobalStatus(
-            "❌ API anahtarı gerekli."
-        );
-
-        return;
-    }
-
-
-    scene.loading = true;
-    scene.error = null;
-
-    renderScenes();
-
-
-    try{
-
-        const url =
-            buildImageURL(
-                scene.prompt,
-                scene.id
-            );
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method:"GET",
-
-                    headers:{
-                        "Authorization":
-                            "Bearer " + key
-                    }
-                }
-            );
-
-
-        if(!response.ok){
-
-            const errorText =
-                await response.text();
-
-            let message =
-                errorText;
-
-            try{
-
-                const json =
-                    JSON.parse(errorText);
-
-                if(
-                    json.error &&
-                    json.error.message
-                ){
-
-                    message =
-                        json.error.message;
-                }
-
-            }catch(e){}
-
-            throw new Error(
-                "HTTP " +
-                response.status +
-                ": " +
-                message
-            );
-        }
-
-
-        const blob =
-            await response.blob();
-
-        if(!blob.size){
-
-            throw new Error(
-                "Sunucu boş görsel döndürdü."
-            );
-
-        }
-
-        const imageURL =
-            URL.createObjectURL(blob);
-
-        scene.image =
-            imageURL;
-
-        scene.error = null;
-
-
-    }catch(error){
-
-        console.error(
-            "FLUX ERROR:",
-            error
-        );
-
-        scene.error =
-            error.message;
-
-    }finally{
-
-        scene.loading = false;
-
-        renderScenes();
-
-    }
-
-}
-
-
-/* =========================================================
-   GENERATE ALL
-   ========================================================= */
-
-async function generateAllImages(){
-
-    if(!scenes.length){
-
-        setGlobalStatus(
-            "❌ Önce hikâyeyi sahnelere böl."
-        );
-
-        return;
-    }
-
-    const key =
-        getKey();
-
-    if(!key){
-
-        setGlobalStatus(
-            "❌ Önce Pollinations API anahtarını gir."
-        );
-
-        return;
-    }
-
-
-    setGlobalStatus(
-        "🚀 " +
-        scenes.length +
-        " sahne sırayla oluşturuluyor..."
-    );
-
-
-    for(
-        let i=0;
-        i<scenes.length;
-        i++
-    ){
-
-        const percent =
-            Math.round(
-                (i / scenes.length) * 100
-            );
-
-        document.getElementById(
-            "progressBar"
-        ).style.width =
-            percent + "%";
-
-
-        setGlobalStatus(
-            "🎬 Sahne " +
-            (i+1) +
-            " / " +
-            scenes.length +
-            " oluşturuluyor..."
-        );
-
-
-        await generateImage(i);
-
-
-        /*
-          API'ye aşırı hızlı istek
-          göndermemek için kısa bekleme.
-        */
-
-        await sleep(700);
-
-    }
-
-
-    document.getElementById(
-        "progressBar"
-    ).style.width = "100%";
-
-
-    const failed =
-        scenes.filter(
-            s=>s.error
-        ).length;
-
-
-    if(failed){
-
-        setGlobalStatus(
-            "⚠️ İşlem tamamlandı. " +
-            failed +
-            " sahnede hata oluştu. Hata mesajlarını sahne kartlarında görebilirsin."
-        );
-
-    }else{
-
-        setGlobalStatus(
-            "✅ TÜM SAHNELERİN GÖRSELLERİ OLUŞTURULDU!"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   SLEEP
-   ========================================================= */
-
-function sleep(ms){
-
-    return new Promise(
-        resolve=>setTimeout(
-            resolve,
-            ms
-        )
-    );
-
-}
-
-
-/* =========================================================
-   COPY PROMPT
-   ========================================================= */
-
-async function copyPrompt(index){
-
-    const prompt =
-        scenes[index].prompt;
-
-    try{
-
-        await navigator.clipboard.writeText(
-            prompt
-        );
-
-        setGlobalStatus(
-            "✅ Sahne " +
-            (index+1) +
-            " promptu kopyalandı."
-        );
-
-    }catch(e){
-
-        alert(
-            "Prompt kopyalanamadı. Manuel olarak seçip kopyalayabilirsin."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   DOWNLOAD PROMPTS
-   ========================================================= */
-
-function downloadPrompts(){
-
-    if(!scenes.length){
-
-        setGlobalStatus(
-            "❌ Önce sahne oluştur."
-        );
-
-        return;
-    }
-
-
-    let output =
-        "MINA VIDEO AI V9 - CINEMATIC PROMPTS\n";
-
-    output +=
-        "====================================\n\n";
-
-
-    scenes.forEach(scene=>{
-
-        output +=
-            "SCENE " +
-            scene.id +
-            "\n";
-
-        output +=
-            "Duration: " +
-            scene.duration +
-            " seconds\n\n";
-
-        output +=
-            "STORY:\n" +
-            scene.text +
-            "\n\n";
-
-        output +=
-            "PROMPT:\n" +
-            scene.prompt +
-            "\n\n";
-
-        output +=
-            "------------------------------------\n\n";
-
-    });
-
-
-    const blob =
-        new Blob(
-            [output],
-            {
-                type:"text/plain;charset=utf-8"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const a =
-        document.createElement("a");
-
-    a.href = url;
-
-    a.download =
-        "mina-video-ai-prompts.txt";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-
-    setGlobalStatus(
-        "📥 Prompt dosyası indirildi."
-    );
-
-}
-
-
-/* =========================================================
-   DOWNLOAD IMAGE
-   ========================================================= */
-
-function openImage(index){
-
-    const scene =
-        scenes[index];
-
-    if(!scene.image){
-
-        setGlobalStatus(
-            "❌ Önce bu sahnenin görselini oluştur."
-        );
-
-        return;
-    }
-
-    window.open(
-        scene.image,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================================
-   RENDER SCENES
-   ========================================================= */
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderScenes(){
 
-    const container =
-        document.getElementById(
-            "scenes"
-        );
+const container=
+document.getElementById("scenes");
 
-    const count =
-        document.getElementById(
-            "sceneCount"
-        );
+document.getElementById("sceneCount")
+.textContent=scenes.length;
 
+if(!scenes.length){
 
-    count.textContent =
-        scenes.length;
+container.innerHTML=
+`
+<div class="empty">
+Henüz sahne oluşturulmadı.
+</div>
+`;
 
+return;
 
-    if(!scenes.length){
+}
 
-        container.innerHTML =
-            `<div class="placeholder">
-                Henüz sahne oluşturulmadı.
-            </div>`;
+container.innerHTML="";
 
-        return;
-    }
+scenes.forEach((scene,index)=>{
 
+const card=
+document.createElement("div");
 
-    container.innerHTML = "";
+card.className="scene";
 
+card.innerHTML=`
 
-    scenes.forEach(
-        (scene,index)=>{
+<div class="scene-head">
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+<div class="scene-number">
+🎞️ SAHNE ${scene.id}
+</div>
 
-            card.className =
-                "scene";
+<div class="scene-duration">
+${scene.duration} saniye
+</div>
 
+</div>
 
-            let imageHTML = "";
 
+<div class="scene-content">
 
-            if(scene.image){
+<div class="scene-text">
+${escapeHTML(scene.text)}
+</div>
 
-                imageHTML =
-                    `
-                    <img
-                        src="${scene.image}"
-                        alt="Sahne ${scene.id}">
-                    `;
 
-            }else{
+<div class="prompt-title">
+🎨 Z-IMAGE SİNEMATİK PROMPT
+</div>
 
-                imageHTML =
-                    `
-                    <div class="placeholder">
-                        🎬<br><br>
-                        Bu sahnenin görseli henüz oluşturulmadı.
-                    </div>
-                    `;
+<textarea
+class="prompt"
+oninput="updatePrompt(${index},this.value)"
+>${escapeHTML(scene.prompt)}</textarea>
 
-            }
 
+<div class="scene-actions">
 
-            let loadingHTML = "";
+<button
+class="primary small"
+onclick="copyPrompt(${index})">
+📋 Promptu Kopyala
+</button>
 
-            if(scene.loading){
+<button
+class="green small"
+onclick="openForvideo()">
+🖼️ Z-Image'ı Aç
+</button>
 
-                loadingHTML =
-                    `
-                    <div class="loading">
-                        ⏳ FLUX 1 görsel oluşturuyor...
-                    </div>
-                    `;
+<button
+class="small"
+onclick="copyAndOpen(${index})">
+⚡ Kopyala + Z-Image
+</button>
 
-            }
+</div>
 
+</div>
 
-            let errorHTML = "";
+`;
 
-            if(scene.error){
+container.appendChild(card);
 
-                errorHTML =
-                    `
-                    <div
-                        style="
-                        margin-top:10px;
-                        padding:10px;
-                        border-radius:9px;
-                        background:#35151b;
-                        color:#ff9ba7;
-                        font-size:12px;
-                        white-space:pre-wrap;
-                        ">
-                        ❌ ${escapeHTML(
-                            scene.error
-                        )}
-                    </div>
-                    `;
-
-            }
-
-
-            card.innerHTML = `
-
-                <div class="scene-top">
-
-                    <div class="scene-number">
-                        🎞️ SAHNE ${scene.id}
-                    </div>
-
-                    <div class="scene-duration">
-                        ${scene.duration} saniye
-                    </div>
-
-                </div>
-
-
-                <div class="image-box">
-
-                    ${imageHTML}
-
-                    ${loadingHTML}
-
-                </div>
-
-
-                <div class="scene-body">
-
-                    <div class="scene-text">
-                        ${escapeHTML(
-                            scene.text
-                        )}
-                    </div>
-
-
-                    <label
-                        style="
-                        display:block;
-                        color:#8f9bb0;
-                        font-size:11px;
-                        margin-bottom:6px;">
-                        🎨 SİNEMATİK PROMPT
-                    </label>
-
-
-                    <textarea
-                        class="prompt"
-                        id="prompt-${index}"
-                        onchange="updatePrompt(${index},this.value)"
-                    >${escapeHTML(
-                        scene.prompt
-                    )}</textarea>
-
-
-                    ${errorHTML}
-
-
-                    <div class="scene-actions">
-
-                        <button
-                            class="primary small"
-                            onclick="generateImage(${index})">
-                            🎨 Görsel Oluştur
-                        </button>
-
-
-                        <button
-                            class="small"
-                            onclick="copyPrompt(${index})">
-                            📋 Prompt Kopyala
-                        </button>
-
-
-                        ${
-                            scene.image
-                            ?
-                            `
-                            <button
-                                class="green small"
-                                onclick="openImage(${index})">
-                                🔎 Görseli Aç
-                            </button>
-                            `
-                            :
-                            ""
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                card
-            );
-
-        }
-    );
+});
 
 }
 
 
-/* =========================================================
+/* =====================================================
    UPDATE PROMPT
-   ========================================================= */
+===================================================== */
 
 function updatePrompt(index,value){
 
-    if(scenes[index]){
-
-        scenes[index].prompt =
-            value;
-
-    }
+if(scenes[index])
+scenes[index].prompt=value;
 
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+/* =====================================================
+   COPY ONE
+===================================================== */
+
+async function copyPrompt(index){
+
+if(!scenes[index])return;
+
+try{
+
+await navigator.clipboard.writeText(
+scenes[index].prompt
+);
+
+setGlobalStatus(
+"✅ Sahne "+
+scenes[index].id+
+" promptu kopyalandı."
+);
+
+}catch(e){
+
+setGlobalStatus(
+"⚠️ Kopyalama başarısız."
+);
+
+}
+
+}
+
+
+/* =====================================================
+   COPY + OPEN
+===================================================== */
+
+async function copyAndOpen(index){
+
+await copyPrompt(index);
+
+setTimeout(
+openForvideo,
+300
+);
+
+}
+
+
+/* =====================================================
+   COPY ALL
+===================================================== */
+
+async function copyAllPrompts(){
+
+if(!scenes.length){
+
+setGlobalStatus(
+"❌ Önce sahneleri oluştur."
+);
+
+return;
+
+}
+
+let text="";
+
+scenes.forEach(scene=>{
+
+text+=
+"===== SAHNE "+
+scene.id+
+" =====\n\n";
+
+text+=
+scene.prompt+
+"\n\n";
+
+});
+
+try{
+
+await navigator.clipboard.writeText(text);
+
+setGlobalStatus(
+"✅ "+scenes.length+
+" sahnenin promptu kopyalandı."
+);
+
+}catch(e){
+
+setGlobalStatus(
+"⚠️ Tüm promptlar kopyalanamadı."
+);
+
+}
+
+}
+
+
+/* =====================================================
+   APPLY CHARACTER
+===================================================== */
+
+function applyCharacter(){
+
+if(!scenes.length){
+
+setGlobalStatus(
+"❌ Önce hikâyeyi sahnelere böl."
+);
+
+return;
+
+}
+
+scenes=scenes.map(
+(scene,index)=>({
+
+...scene,
+
+prompt:buildPrompt(
+scene.text,
+index+1
+)
+
+})
+);
+
+renderScenes();
+
+setGlobalStatus(
+"👤 Karakter bilgisi tüm sahnelere uygulandı."
+);
+
+}
+
+
+/* =====================================================
+   REGENERATE
+===================================================== */
+
+function regeneratePrompts(){
+
+if(!scenes.length){
+
+setGlobalStatus(
+"❌ Önce hikâyeyi sahnelere böl."
+);
+
+return;
+
+}
+
+scenes=scenes.map(
+(scene,index)=>({
+
+...scene,
+
+prompt:buildPrompt(
+scene.text,
+index+1
+)
+
+})
+);
+
+renderScenes();
+
+setGlobalStatus(
+"🔄 Tüm Z-Image promptları yenilendi."
+);
+
+}
+
+
+/* =====================================================
+   DOWNLOAD
+===================================================== */
+
+function downloadPrompts(){
+
+if(!scenes.length){
+
+setGlobalStatus(
+"❌ Önce sahneleri oluştur."
+);
+
+return;
+
+}
+
+let output=
+"MINA VIDEO AI V10\n"+
+"Z-IMAGE CINEMATIC PROMPTS\n"+
+"=========================\n\n";
+
+scenes.forEach(scene=>{
+
+output+=
+"SCENE "+
+scene.id+
+"\n\n";
+
+output+=
+"STORY:\n"+
+scene.text+
+"\n\n";
+
+output+=
+"PROMPT:\n"+
+scene.prompt+
+"\n\n";
+
+output+=
+"--------------------------------\n\n";
+
+});
+
+const blob=
+new Blob(
+[output],
+{
+type:"text/plain;charset=utf-8"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"mina-v10-z-image-prompts.txt";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+setGlobalStatus(
+"📥 Prompt TXT dosyası indirildi."
+);
+
+}
+
+
+/* =====================================================
+   FORVIDEO
+===================================================== */
+
+function openForvideo(){
+
+window.open(
+"https://forvideo.ai/z-image",
+"_blank"
+);
+
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
 
 function escapeHTML(value){
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+return String(value)
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================================================
-   DRAG & DROP TXT
-   ========================================================= */
+/* =====================================================
+   DRAG DROP
+===================================================== */
 
-const storyBox =
-    document.getElementById(
-        "story"
-    );
-
+const storyBox=
+document.getElementById("story");
 
 storyBox.addEventListener(
-    "dragover",
-    function(e){
-
-        e.preventDefault();
-
-    }
+"dragover",
+e=>e.preventDefault()
 );
-
 
 storyBox.addEventListener(
-    "drop",
-    function(e){
+"drop",
+function(e){
 
-        e.preventDefault();
+e.preventDefault();
 
-        const file =
-            e.dataTransfer.files[0];
+const file=
+e.dataTransfer.files[0];
 
-        if(
-            file &&
-            file.name
-            .toLowerCase()
-            .endsWith(".txt")
-        ){
+if(!file)return;
 
-            const reader =
-                new FileReader();
+if(
+!file.name
+.toLowerCase()
+.endsWith(".txt")
+){
 
-            reader.onload =
-                function(event){
+setStoryStatus(
+"❌ Sadece TXT dosyası kabul edilir."
+);
 
-                    storyBox.value =
-                        event.target.result;
+return;
 
-                    setStoryStatus(
-                        "✅ TXT dosyası sürüklenerek yüklendi."
-                    );
+}
 
-                };
+const reader=
+new FileReader();
 
-            reader.readAsText(
-                file,
-                "UTF-8"
-            );
+reader.onload=
+function(event){
 
-        }
+storyBox.value=
+event.target.result;
 
-    }
+setStoryStatus(
+"✅ TXT sürüklenerek yüklendi."
+);
+
+};
+
+reader.readAsText(
+file,
+"UTF-8"
 );
 
 
-/* =========================================================
-   CTRL+V ROBUST PASTE
-   ========================================================= */
+/* =====================================================
+   END
+===================================================== */
+
+});
+
+
+/* =====================================================
+   PASTE DETECTION
+===================================================== */
 
 storyBox.addEventListener(
-    "paste",
-    function(e){
+"paste",
+function(){
 
-        const clipboardData =
-            e.clipboardData ||
-            window.clipboardData;
+setTimeout(
+function(){
 
-        if(!clipboardData)
-            return;
+if(storyBox.value.trim()){
 
-        const text =
-            clipboardData.getData(
-                "text/plain"
-            );
-
-        if(text){
-
-            setTimeout(
-                function(){
-
-                    setStoryStatus(
-                        "✅ Hikâye yapıştırıldı. Şimdi sahnelere bölebilirsin."
-                    );
-
-                },
-                50
-            );
-
-        }
-
-    }
+setStoryStatus(
+"✅ Hikâye yapıştırıldı."
 );
 
+}
 
-/* =========================================================
-   RATIO CHANGE
-   ========================================================= */
-
-document
-.getElementById("ratio")
-.addEventListener(
-    "change",
-    function(){
-
-        const ratio =
-            this.value;
-
-        document
-        .querySelectorAll(
-            ".image-box"
-        )
-        .forEach(
-            box=>{
-
-                if(ratio === "9:16"){
-
-                    box.style.aspectRatio =
-                        "9/16";
-
-                }else if(
-                    ratio === "1:1"
-                ){
-
-                    box.style.aspectRatio =
-                        "1/1";
-
-                }else{
-
-                    box.style.aspectRatio =
-                        "16/9";
-
-                }
-
-            }
-        );
-
-    }
+},
+100
 );
 
+});
 
-/* =========================================================
+
+/* =====================================================
    INITIAL
-   ========================================================= */
+===================================================== */
 
 renderScenes();
 
