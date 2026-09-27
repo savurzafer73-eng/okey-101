@@ -1,229 +1,2785 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mina Video AI V31.2 — GeldStory Professional Documentary Director</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mina Video AI V41.2 — GeldStory Studio</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0b0d10;color:#eee;font:14px Arial,sans-serif}
-header{padding:16px 20px;background:linear-gradient(90deg,#11151b,#1a1d22);border-bottom:1px solid #333}
-h1{margin:0;font-size:20px;color:#ffd54a}.sub{color:#aaa;margin-top:5px}
-.wrap{display:grid;grid-template-columns:390px 1fr;min-height:calc(100vh - 72px)}
-aside{padding:14px;border-right:1px solid #2b2f35;background:#101318;overflow:auto}.main{padding:14px;overflow:auto}
-.card{background:#171b21;border:1px solid #303640;border-radius:12px;padding:12px;margin-bottom:12px}
-label{display:block;color:#bbb;margin:9px 0 5px}textarea,input,select,button{font:inherit}
-textarea,input,select{width:100%;background:#0d1014;color:#eee;border:1px solid #3b424d;border-radius:8px;padding:9px}
-textarea{min-height:180px;resize:vertical}
-button{background:#252b34;color:#fff;border:1px solid #4a5360;border-radius:8px;padding:9px 12px;cursor:pointer}
-button:hover{background:#323a46}.primary{background:#b8860b;border-color:#d6a928;color:#111;font-weight:bold}.danger{background:#6d2525}.row{display:flex;gap:7px;flex-wrap:wrap}.row>*{flex:1}
-.small{font-size:12px;color:#999}.ok{color:#8ee28e}.warn{color:#ffd36b}.err{color:#ff8d8d}
-.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat div{background:#12161c;border:1px solid #2e3540;border-radius:10px;padding:9px;text-align:center}.stat b{display:block;color:#ffd54a;font-size:18px}
-#preview{width:100%;max-height:58vh;background:#050607;border:1px solid #333;border-radius:10px;display:block}
-.scene{border:1px solid #353c46;background:#14181e;border-radius:12px;margin:12px 0;overflow:hidden}
-.sceneHead{padding:10px 12px;background:#1b2027;display:flex;justify-content:space-between;gap:10px;align-items:center}.sceneBody{padding:10px}
-.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#080a0d;border-radius:8px}
-.badge{padding:3px 7px;border-radius:20px;background:#252c35;color:#bbb;font-size:11px}.gold{color:#ffd54a}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.candidates{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}.candidate{cursor:pointer;border:2px solid transparent;border-radius:8px;overflow:hidden;background:#0c0e11}.candidate.selected{border-color:#ffd54a}.candidate img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.candidate span{display:block;padding:5px;font-size:11px;color:#bbb}
-.progress{height:8px;background:#262c33;border-radius:9px;overflow:hidden}.bar{height:100%;width:0;background:#ffd54a}
-@media(max-width:900px){.wrap{grid-template-columns:1fr}aside{border-right:0}.stat{grid-template-columns:repeat(2,1fr)}}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#090b10;
+  color:#f2f4f8;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+header{
+  padding:18px;
+  text-align:center;
+  background:linear-gradient(135deg,#111827,#05070b);
+  border-bottom:1px solid #252b36;
+}
+
+header h1{
+  margin:0;
+  font-size:25px;
+}
+
+header p{
+  margin:7px 0 0;
+  color:#9ca3af;
+  font-size:13px;
+}
+
+.container{
+  width:min(1250px,96%);
+  margin:20px auto;
+}
+
+.panel{
+  background:#11151d;
+  border:1px solid #252b36;
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+h2{
+  margin:0 0 13px;
+  font-size:18px;
+}
+
+label{
+  display:block;
+  margin:10px 0 6px;
+  font-size:13px;
+  color:#b7c0cc;
+}
+
+textarea,
+input,
+select{
+  width:100%;
+  background:#090c12;
+  color:#fff;
+  border:1px solid #303744;
+  border-radius:9px;
+  padding:11px;
+  outline:none;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+}
+
+textarea:focus,
+input:focus,
+select:focus{
+  border-color:#6b7280;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:14px;
+}
+
+button{
+  border:0;
+  border-radius:9px;
+  padding:11px 14px;
+  cursor:pointer;
+  background:#252b36;
+  color:#fff;
+  font-weight:bold;
+}
+
+button:hover{
+  filter:brightness(1.18);
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.primary{
+  background:#2563eb;
+}
+
+.green{
+  background:#16803c;
+}
+
+.orange{
+  background:#a85d00;
+}
+
+.red{
+  background:#9b2226;
+}
+
+.status{
+  margin-top:12px;
+  padding:11px;
+  border-radius:9px;
+  background:#090c12;
+  color:#aeb7c4;
+  min-height:40px;
+  white-space:pre-wrap;
+}
+
+.scene{
+  border:1px solid #2b323e;
+  border-radius:13px;
+  padding:13px;
+  margin-top:12px;
+  background:#0c1017;
+}
+
+.sceneHead{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.sceneTitle{
+  font-weight:bold;
+  font-size:15px;
+}
+
+.badge{
+  font-size:11px;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#222936;
+  color:#cdd5df;
+}
+
+.sceneGrid{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:13px;
+}
+
+.preview{
+  width:100%;
+  aspect-ratio:16/9;
+  background:#05070a;
+  border-radius:10px;
+  border:1px solid #2b323e;
+  object-fit:cover;
+}
+
+.scene textarea{
+  min-height:145px;
+}
+
+.small{
+  font-size:11px;
+  color:#8e98a7;
+  line-height:1.5;
+}
+
+.file{
+  margin-top:7px;
+}
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#202631;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progressBar{
+  width:0%;
+  height:100%;
+  background:#3b82f6;
+  transition:.2s;
+}
+
+#videoPreview{
+  width:100%;
+  max-height:650px;
+  background:#000;
+  border-radius:12px;
+  margin-top:10px;
+}
+
+.download{
+  display:inline-block;
+  margin-top:12px;
+  padding:12px 16px;
+  border-radius:9px;
+  background:#16803c;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.logoPreview{
+  max-width:150px;
+  max-height:70px;
+  display:none;
+  margin-top:8px;
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .sceneGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:500px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
+
 <body>
-<header><h1>🎬 Mina Video AI V31.2 — GeldStory Professional Documentary Director</h1><div class="sub">Sinematik belgesel görselleri • karakter tutarlılığı • ses zamanlaması • profesyonel altyazı • geçişler</div></header>
-<div class="wrap">
-<aside>
-<div class="card">
-<label>Hikâye</label><textarea id="story" placeholder="Almanca hikâyeni buraya yapıştır..."></textarea>
-<div class="row"><div><label>Sahne sayısı</label><input id="count" type="number" min="1" max="100" value="10"></div><div><label>Dil</label><select id="lang"><option>Deutsch</option><option>Türkçe</option><option>English</option></select></div></div>
-<div class="row"><div><label>Format</label><select id="format"><option value="16:9">16:9 YouTube</option><option value="9:16">9:16 Shorts</option><option value="1:1">1:1</option></select></div><div><label>Hikâye tipi</label><select id="stype"><option>Gerçek başarı hikâyesi</option><option>Belgesel</option><option>Girişimcilik</option><option>Finans</option></select></div></div>
-<div class="row" style="margin-top:10px"><button class="primary" onclick="analyze()">🧠 Hikâyeyi analiz et</button><button onclick="demo()">Örnek hikâye</button></div>
+
+<header>
+  <h1>🎬 Mina Video AI V41.2</h1>
+  <p>GeldStory Studio — Metinsiz Sinematik Görsel + Gerçek Ses + Altyazı + WebM</p>
+</header>
+
+<div class="container">
+
+  <div class="panel">
+
+    <h2>📝 Hikaye</h2>
+
+    <textarea id="story" placeholder="Almanca hikayeni buraya yapıştır...
+
+Örnek:
+Er war ein einfacher Verkäufer. Niemand glaubte an seine Idee. Doch eines Tages traf er eine Entscheidung, die sein Leben für immer verändern sollte..."></textarea>
+
+    <div class="grid">
+
+      <div>
+        <label>Sahne Sayısı</label>
+        <select id="sceneCount">
+          <option value="6">6 Sahne</option>
+          <option value="8" selected>8 Sahne</option>
+          <option value="10">10 Sahne</option>
+          <option value="12">12 Sahne</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Video Formatı</label>
+        <select id="format">
+          <option value="16:9">16:9 YouTube</option>
+          <option value="9:16">9:16 Shorts</option>
+          <option value="1:1">1:1 Kare</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Dil</label>
+        <select id="language">
+          <option value="de-DE" selected>Deutsch</option>
+          <option value="tr-TR">Türkçe</option>
+          <option value="en-US">English</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Konuşma Hızı</label>
+        <select id="rate">
+          <option value="0.8">0.8</option>
+          <option value="0.9">0.9</option>
+          <option value="1" selected>1.0</option>
+          <option value="1.1">1.1</option>
+          <option value="1.2">1.2</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="controls">
+
+      <button class="primary" id="createScenesBtn">
+        🧩 SAHNELERİ OLUŞTUR
+      </button>
+
+      <button id="generateImagesBtn">
+        🖼️ TÜM GÖRSELLERİ ÜRET
+      </button>
+
+      <button class="orange" id="prepareAudioBtn">
+        🎙️ SES YAKALAMAYI HAZIRLA
+      </button>
+
+      <button class="green" id="recordAllBtn">
+        ▶ TÜMÜNÜ SESLENDİR + KAYDET
+      </button>
+
+      <button class="red" id="stopBtn">
+        ⏹ DURDUR
+      </button>
+
+      <button class="primary" id="renderBtn">
+        🎬 VİDEOYA DÖNÜŞTÜR
+      </button>
+
+    </div>
+
+    <label>GeldStory Logo (isteğe bağlı)</label>
+    <input class="file" id="logoInput" type="file" accept="image/*">
+    <img id="logoPreview" class="logoPreview">
+
+    <div class="status" id="status">
+      Hazır.
+    </div>
+
+    <div class="progress">
+      <div class="progressBar" id="progressBar"></div>
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h2>🎞️ Sahneler</h2>
+    <div id="scenes"></div>
+  </div>
+
+  <div class="panel">
+
+    <h2>🎥 Video Önizleme</h2>
+
+    <video id="videoPreview" controls></video>
+
+    <div id="downloadArea"></div>
+
+  </div>
+
 </div>
-<div class="card">
-<b class="gold">🎨 Professional Visual Director</b>
-<label>Görsel kalite</label><select id="quality">
-<option value="pro">PRO — sinematik belgesel</option><option value="ultra">ULTRA — maksimum detay</option><option value="historical">HISTORICAL — dönem doğruluğu</option>
-</select>
-<label>Görsel aday sayısı</label><select id="candN"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option></select>
-<div class="small">3 aday üretildiğinde en uygun kompozisyonu sen tek tıkla seçebilirsin. Tarayıcı, görüntünün “güzelliğini” güvenilir biçimde puanlayamaz; sahte bir otomatik kalite skoru kullanmıyoruz.</div>
-</div>
-<div class="card">
-<b class="gold">🎙️ Voice Director</b>
-<label>Ses seviyesi <span id="vv">100%</span></label><input id="voiceVol" type="range" min="0" max="1" step=".05" value="1" oninput="vv.textContent=Math.round(this.value*100)+'%'">
-<label>Müzik seviyesi <span id="mv">18%</span></label><input id="musicVol" type="range" min="0" max=".5" step=".01" value=".18" oninput="mv.textContent=Math.round(this.value*100)+'%'">
-<label>Arka plan müziği</label><input id="musicFile" type="file" accept="audio/*">
-</div>
-<div class="card">
-<b class="gold">💬 Professional Subtitles</b>
-<label>Konum</label><select id="subPos"><option value="bottom">Alt</option><option value="middle">Orta</option><option value="top">Üst</option></select>
-<label>Boyut <span id="sv">34</span> px</label><input id="subSize" type="range" min="22" max="54" value="34" oninput="sv.textContent=this.value">
-<label>Stil</label><select id="subStyle"><option value="cinematic">Cinematic</option><option value="box">Box</option><option value="clean">Clean</option></select>
-</div>
-<div class="card">
-<b class="gold">🎞️ Scene Transitions</b>
-<select id="transition"><option value="fade">Soft Fade</option><option value="cross">Cross Fade</option><option value="flash">Light Flash</option></select>
-<label>Geçiş süresi <span id="tv">0.6</span> sn</label><input id="transDur" type="range" min=".2" max="1.2" step=".1" value=".6" oninput="tv.textContent=this.value">
-</div>
-<div class="card">
-<b class="gold">🏷️ GeldStory Logo</b><input id="logoFile" type="file" accept="image/*">
-<div class="small">Logo yüklenmezse metin logo kullanılır.</div>
-</div>
-<div class="card">
-<div class="row"><button onclick="saveProject()">💾 Kaydet</button><button onclick="loadProject()">📂 Yükle</button></div>
-<div class="row" style="margin-top:7px"><button onclick="exportProject()">JSON dışa aktar</button><button onclick="document.getElementById('jsonIn').click()">JSON içe aktar</button></div>
-<input id="jsonIn" type="file" accept=".json" style="display:none" onchange="importProject(event)">
-</div>
-</aside>
-<main class="main">
-<div class="stat"><div><b id="sc">0</b>Sahne</div><div><b id="ac">0</b>Sesli</div><div><b id="dur">0:00</b>Toplam</div><div><b id="pc">0%</b>Hazır</div></div>
-<div class="card">
-<div class="row"><button class="primary" onclick="renderVideo()">🎬 WEBM OLUŞTUR</button><button onclick="previewSelected()">▶ Önizle</button><button class="danger" onclick="clearAll()">Temizle</button></div>
-<div id="status" class="small" style="margin:8px 0">Hazır.</div><div class="progress"><div id="bar" class="bar"></div></div>
-</div>
-<div class="card"><canvas id="preview" width="1280" height="720"></canvas></div>
-<div id="scenes"></div>
-</main>
-</div>
+
 <script>
-const $=id=>document.getElementById(id);
-let scenes=[], musicData=null, logoData=null, audioCtx=null, musicBuffer=null, projectVersion=312;
 
-function demo(){ $("story").value=`Howard Schultz wuchs in einfachen Verhältnissen in Brooklyn auf. Nach der Schule studierte er und begann seine Karriere im Vertrieb. Jahre später entdeckte er in Seattle eine kleine Kaffeefirma namens Starbucks. Er erkannte darin mehr als nur Kaffee: Er sah einen Ort, an dem Menschen zusammenkommen konnten. Seine Idee stieß zunächst auf Widerstand. Trotzdem gründete er Il Giornale und suchte Investoren. Schließlich erhielt er Unterstützung und übernahm Starbucks. Mit einer klaren Vision baute er das Unternehmen weiter aus. Das Wachstum brachte neue Chancen, aber auch neue Herausforderungen. Seine Geschichte zeigt, wie aus einer kleinen Beobachtung eine große unternehmerische Idee werden kann.`;}
+"use strict";
 
-function splitSentences(t){return (t.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[]).map(x=>x.trim()).filter(Boolean);}
-function stage(i,n){let p=i/(Math.max(1,n-1)); if(p<.12)return"HOOK"; if(p<.25)return"HINTERGRUND"; if(p<.4)return"PROBLEM"; if(p<.55)return"ENTSCHEIDUNG"; if(p<.68)return"WIDERSTAND"; if(p<.82)return"WENDEPUNKT"; if(p<.93)return"ERFOLG"; return"FAZIT";}
-function detectPerson(t){let m=t.match(/(?:Howard Schultz|Steve Jobs|Elon Musk|Bill Gates|Jeff Bezos|Colonel Sanders|Walt Disney|Oprah Winfrey|Sara Blakely)/i);return m?m[0]:"die Hauptperson der Geschichte";}
-function ageStage(t){if(/kind|child|jugend|school|schule|teen/i.test(t))return"entsprechendes Jugendalter"; if(/student|universit|college/i.test(t))return"junger Erwachsener"; if(/älter|senior|im alter|decades later/i.test(t))return"reiferes Erwachsenenalter"; return"passendes Alter zur erzählten Zeit";}
-function locationHint(t){if(/Brooklyn|New York/i.test(t))return"New York City, authentische urbane Umgebung"; if(/Seattle/i.test(t))return"Seattle, Washington, authentische Kaffeehaus-Atmosphäre"; if(/Berlin/i.test(t))return"Berlin, Deutschland"; if(/München|Munich/i.test(t))return"München, Deutschland"; if(/London/i.test(t))return"London, England"; return"authentischer Ort passend zur Geschichte";}
-function director(i,n,txt,person){let st=stage(i,n);let shots=["wide establishing shot","medium cinematic portrait","over-the-shoulder shot","close-up with shallow depth of field","tracking-style composition","low-angle documentary shot"];let cams=["slow push-in","slow pull-out","gentle pan left to right","gentle pan right to left","subtle parallax","slow cinematic tilt"];let lights=["warm practical lighting","soft natural window light","dramatic side light","golden-hour light","cool documentary daylight","moody cinematic contrast"];let atm=["determined","intimate","tense","hopeful","reflective","ambitious"];return {stage:st,shot:shots[i%shots.length],camera:cams[i%cams.length],light:lights[i%lights.length],atmo:atm[i%atm.length],age:ageStage(txt),loc:locationHint(txt),person};}
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-function professionalPrompt(s){
-const q=$("quality").value;
-const quality=q==="ultra"?"ultra-detailed, extremely realistic skin texture, natural pores, realistic hands, precise facial anatomy, high dynamic range, crisp 4K documentary photography":
-q==="historical"?"historically authentic period details, accurate clothing, architecture, vehicles and objects for the narrated era, realistic archival-documentary atmosphere":
-"premium cinematic documentary photography, photorealistic, highly detailed, natural skin texture, realistic hands and faces, crisp professional image quality";
-return `${quality}, ${s.person}, ${s.age}, ${s.loc}, ${s.action}. ${s.shot}, ${s.camera}, ${s.light}, ${s.atmo} atmosphere, authentic environment, believable human expressions, natural body proportions, realistic materials, subtle film grain, 35mm cinema lens, shallow depth of field where appropriate, strong foreground-background separation, cinematic composition, documentary realism, no fantasy, no illustration, no cartoon, no anime, no plastic skin, no distorted hands, no extra fingers, no duplicated people, no text, no watermark.`;
+var scenes = [];
+
+var captureStream = null;
+var mediaRecorder = null;
+var recordedChunks = [];
+
+var videoBlob = null;
+var videoURL = null;
+
+var logoImage = null;
+
+var stopRequested = false;
+
+var currentAudio = null;
+
+
+/* =========================================================
+   ELEMENTLER
+========================================================= */
+
+var storyEl = document.getElementById("story");
+var sceneCountEl = document.getElementById("sceneCount");
+var formatEl = document.getElementById("format");
+var languageEl = document.getElementById("language");
+var rateEl = document.getElementById("rate");
+
+var scenesEl = document.getElementById("scenes");
+var statusEl = document.getElementById("status");
+var progressBar = document.getElementById("progressBar");
+
+var createScenesBtn = document.getElementById("createScenesBtn");
+var generateImagesBtn = document.getElementById("generateImagesBtn");
+var prepareAudioBtn = document.getElementById("prepareAudioBtn");
+var recordAllBtn = document.getElementById("recordAllBtn");
+var stopBtn = document.getElementById("stopBtn");
+var renderBtn = document.getElementById("renderBtn");
+
+var logoInput = document.getElementById("logoInput");
+var logoPreview = document.getElementById("logoPreview");
+
+var videoPreview = document.getElementById("videoPreview");
+var downloadArea = document.getElementById("downloadArea");
+
+
+/* =========================================================
+   DURUM
+========================================================= */
+
+function setStatus(text){
+  statusEl.textContent = text;
 }
-function actionFor(txt,st){return `${st} chapter: ${txt}`;}
 
-async function analyze(){
-let text=$("story").value.trim(); if(!text){alert("Önce hikâyeyi gir.");return;}
-let n=Math.max(1,Math.min(100,+$("count").value||10)), sent=splitSentences(text);
-if(!sent.length){alert("Hikâyede cümle bulunamadı.");return;}
-scenes=[];
-for(let i=0;i<n;i++){
-let a=Math.floor(i*sent.length/n), b=Math.max(a+1,Math.floor((i+1)*sent.length/n));
-let chunk=sent.slice(a,b).join(" "); if(!chunk) chunk=sent[i%sent.length];
-let d=director(i,n,chunk,detectPerson(text));
-let s={id:i+1,text:chunk,chapter:d.stage,person:d.person,age:d.age,loc:d.loc,shot:d.shot,camera:d.camera,light:d.light,atmo:d.atmo,action:actionFor(chunk,d.stage),prompt:"",imageData:null,candidates:[],audioData:null,audioDuration:0,motion:d.camera,subtitleOverride:""};
-s.prompt=professionalPrompt(s);scenes.push(s);
+function setProgress(value){
+  value = Math.max(0,Math.min(100,value));
+  progressBar.style.width = value + "%";
 }
-renderScenes();updateStats();
-}
-function renderScenes(){
-$("scenes").innerHTML=scenes.map((s,i)=>`
-<div class="scene" id="scene${i}">
-<div class="sceneHead"><b>SCENE ${i+1}</b><span class="badge">${s.chapter}</span><span class="badge">${s.shot}</span><span class="badge">${s.audioDuration?s.audioDuration.toFixed(1)+" sn":"Ses yok"}</span></div>
-<div class="sceneBody">
-<div class="grid2">
-<div><img id="img${i}" class="thumb" src="${s.imageData||placeholder(i)}"><div id="cand${i}" class="candidates"></div></div>
-<div>
-<label>Sahne metni</label><textarea id="txt${i}" style="min-height:110px" onchange="scenes[${i}].text=this.value">${esc(s.text)}</textarea>
-<label>Profesyonel görsel promptu</label><textarea id="pr${i}" style="min-height:150px" onchange="scenes[${i}].prompt=this.value">${esc(s.prompt)}</textarea>
-<div class="row"><button onclick="genImage(${i})">✨ Kaliteli görsel üret</button><button onclick="document.getElementById('up${i}').click()">🖼 Görsel yükle</button><input id="up${i}" type="file" accept="image/*" style="display:none" onchange="uploadImage(event,${i})"></div>
-<label>Seslendirme</label><input id="au${i}" type="file" accept="audio/*" onchange="uploadAudio(event,${i})">
-<div class="small" id="ast${i}">${s.audioDuration?`Ses hazır • ${s.audioDuration.toFixed(2)} sn`:"Ses yüklenmedi — varsayılan 5 sn"}</div>
-<label>Altyazı (boşsa sahne metni)</label><textarea id="sub${i}" style="min-height:65px" onchange="scenes[${i}].subtitleOverride=this.value">${esc(s.subtitleOverride)}</textarea>
-</div></div></div></div>`).join("");
-}
-function esc(x){return (x||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function placeholder(i){return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><rect width="100%" height="100%" fill="#11151b"/><text x="50%" y="50%" fill="#777" font-size="42" text-anchor="middle">SCENE ${i+1} — Görsel bekleniyor</text></svg>`);}
 
-async function genImage(i){
-let s=scenes[i];s.prompt=$("pr"+i).value;
-let count=+$("candN").value||3, box=$("cand"+i);box.innerHTML="";s.candidates=[];
-for(let k=0;k<count;k++){
-let seed=Math.floor(Math.random()*999999999);
-let url="https://image.pollinations.ai/prompt/"+encodeURIComponent(s.prompt)+"?width=1280&height=720&nologo=true&seed="+seed;
-let img=new Image();img.crossOrigin="anonymous";img.onload=()=>{
-s.candidates.push({url,seed});
-let d=document.createElement("div");d.className="candidate";d.innerHTML=`<img src="${url}"><span>Aday ${s.candidates.length} • seçmek için tıkla</span>`;
-d.onclick=()=>selectCandidate(i,url,d);
-box.appendChild(d);
-if(!s.imageData){selectCandidate(i,url,d);}
-};img.onerror=()=>{};
-img.src=url;
-}
-}
-function selectCandidate(i,url,el){
-scenes[i].imageData=url;$("img"+i).src=url;
-document.querySelectorAll("#cand"+i+" .candidate").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");
-}
-function uploadImage(e,i){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{scenes[i].imageData=r.result;$("img"+i).src=r.result};r.readAsDataURL(f);}
-async function uploadAudio(e,i){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=async()=>{scenes[i].audioData=r.result;try{let ac=new AudioContext();let buf=await ac.decodeAudioData(r.result.slice(0));scenes[i].audioDuration=buf.duration;await ac.close();}catch(err){scenes[i].audioDuration=0}$("ast"+i).textContent=scenes[i].audioDuration?`Ses hazır • ${scenes[i].audioDuration.toFixed(2)} sn`:"Ses okunamadı";updateStats();};r.readAsArrayBuffer(f);}
 
-$("musicFile").addEventListener("change",e=>{let f=e.target.files[0];if(!f){musicData=null;return}let r=new FileReader();r.onload=()=>musicData=r.result;r.readAsArrayBuffer(f);});
-$("logoFile").addEventListener("change",e=>{let f=e.target.files[0];if(!f){logoData=null;return}let r=new FileReader();r.onload=()=>logoData=r.result;r.readAsDataURL(f);});
+/* =========================================================
+   HİKAYEYİ SAHNELERE BÖL
+========================================================= */
 
-function updateStats(){let total=scenes.reduce((a,s)=>a+(s.audioDuration||5),0), aud=scenes.filter(s=>s.audioData).length, ready=scenes.length?Math.round(scenes.filter(s=>s.imageData).length/scenes.length*100):0;$("sc").textContent=scenes.length;$("ac").textContent=aud;$("dur").textContent=fmt(total);$("pc").textContent=ready+"%";}
-function fmt(sec){sec=Math.round(sec||0);return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");}
+function splitStory(text,count){
 
-function loadImage(src){return new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=src;});}
-function drawCover(ctx,img,w,h,alpha=1,scale=1,ox=0,oy=0){ctx.save();ctx.globalAlpha=alpha;let ir=img.width/img.height, cr=w/h, dw,dh;if(ir>cr){dh=h*scale;dw=dh*ir}else{dw=w*scale;dh=dw/ir}ctx.drawImage(img,(w-dw)/2+ox,(h-dh)/2+oy,dw,dh);ctx.restore();}
-function splitForSub(text){return splitSentences(text).filter(Boolean);}
-function subtitleAt(s,t,dur){let arr=splitForSub(s.subtitleOverride||s.text);if(!arr.length)return"";let weights=arr.map(x=>Math.max(1,x.length)),sum=weights.reduce((a,b)=>a+b,0),acc=0;for(let j=0;j<arr.length;j++){let span=dur*weights[j]/sum;if(t>=acc&&t<acc+span)return arr[j];acc+=span}return arr[arr.length-1];}
-function drawSubtitle(ctx,text,w,h){if(!text)return;let size=+$("subSize").value, style=$("subStyle").value,pos=$("subPos").value;ctx.save();ctx.font=`700 ${size}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";let max=w*.78, words=text.split(/\s+/),lines=[],line="";for(let word of words){let test=line?line+" "+word:word;if(ctx.measureText(test).width>max&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);let lh=size*1.25,total=lines.length*lh;let y=pos==="top"?h*.16:pos==="middle"?h*.5:h*.84;let top=y-total/2;let pad=14, maxw=Math.max(...lines.map(x=>ctx.measureText(x).width))+pad*2;if(style!=="clean"){ctx.fillStyle=style==="box"?"rgba(0,0,0,.78)":"rgba(0,0,0,.52)";ctx.fillRect((w-maxw)/2,top-pad/2,maxw,total+pad)}for(let j=0;j<lines.length;j++){ctx.fillStyle="#fff";ctx.strokeStyle="rgba(0,0,0,.9)";ctx.lineWidth=5;ctx.strokeText(lines[j],w/2,top+j*lh+lh/2);ctx.fillText(lines[j],w/2,top+j*lh+lh/2)}ctx.restore();}
-function drawLogo(ctx,w){ctx.save();ctx.font="800 25px Arial";ctx.textAlign="right";ctx.fillStyle="#fff";ctx.fillText("Geld",w-88,34);ctx.fillStyle="#ffd54a";ctx.fillText("Story",w-20,34);ctx.restore();}
-function motionOffset(type,p,w,h){let x=0,y=0,sc=1;if(type.includes("push")||type.includes("Zoom In"))sc=1+.06*p;else if(type.includes("pull")||type.includes("Zoom Out"))sc=1.06-.06*p;else sc=1.03;if(type.includes("left"))x=-w*.025*p;if(type.includes("right"))x=w*.025*p;if(type.includes("tilt"))y=-h*.02*p;return{x,y,sc};}
+  text = String(text || "")
+    .replace(/\r/g," ")
+    .replace(/\n+/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+
+  if(!text){
+    return [];
+  }
+
+  var sentences = text
+    .split(/(?<=[.!?])\s+/)
+    .map(function(x){
+      return x.trim();
+    })
+    .filter(Boolean);
+
+  if(sentences.length === 0){
+    sentences = [text];
+  }
+
+  var result = [];
+
+  for(var i=0;i<count;i++){
+
+    var start = Math.floor(i * sentences.length / count);
+    var end = Math.floor((i+1) * sentences.length / count);
+
+    if(end <= start){
+      end = Math.min(start + 1,sentences.length);
+    }
+
+    var part = sentences.slice(start,end).join(" ");
+
+    if(!part){
+      part = sentences[Math.min(i,sentences.length-1)] || text;
+    }
+
+    result.push(part);
+  }
+
+  return result;
+}
+
+
+/* =========================================================
+   GÜÇLÜ METİNSİZ GÖRSEL PROMPT
+========================================================= */
+
+function createPrompt(text,index){
+
+  var prompt =
+
+    "Cinematic photorealistic documentary scene for a German business success story. " +
+
+    "Ultra realistic photography, natural human expressions, realistic skin texture, " +
+
+    "professional cinematic lighting, realistic environment, documentary photography, " +
+
+    "35mm cinematic lens, shallow depth of field, realistic shadows, " +
+
+    "subtle film grain, premium streaming documentary quality, " +
+
+    "high detail, realistic colors, professional composition. " +
+
+    "Scene " + (index + 1) + ". " +
+
+    "Main subject must remain visually consistent between scenes. " +
+
+    "The same person should have consistent facial features, hairstyle, age, clothing style " +
+    "and physical appearance throughout the story. " +
+
+    "IMPORTANT IMAGE RULE: " +
+
+    "ABSOLUTELY NO TEXT IN THE IMAGE. " +
+    "NO SUBTITLES. " +
+    "NO CAPTIONS. " +
+    "NO HEADLINES. " +
+    "NO WRITTEN WORDS. " +
+    "NO LETTERS. " +
+    "NO NUMBERS. " +
+    "NO TYPOGRAPHY. " +
+    "NO TEXT OVERLAYS. " +
+    "NO LOWER THIRDS. " +
+    "NO LOGOS. " +
+    "NO WATERMARKS. " +
+    "NO UI ELEMENTS. " +
+    "NO READABLE SIGNS. " +
+    "NO READABLE DOCUMENTS. " +
+    "NO NEWSPAPER TEXT. " +
+    "NO SCREEN TEXT. " +
+    "NO POSTER TEXT. " +
+    "NO LABELS. " +
+    "NO CAPTIONS EMBEDDED INTO THE IMAGE. " +
+
+    "If the scene contains a computer, phone, newspaper, book, " +
+    "document, shop sign, billboard, packaging or screen, " +
+    "all writing must be completely absent, unreadable, blurred " +
+    "or shown from an angle where no text can be recognized. " +
+
+    "Do not create fake readable writing. " +
+    "Do not place words anywhere in the image. " +
+
+    "The image must be a clean cinematic visual only. " +
+
+    "Subtitles will be added separately during video rendering. " +
+
+    "No distorted hands, no extra fingers, no deformed faces, " +
+    "no duplicated people, no artificial-looking objects, " +
+    "no cartoon style, no illustration, no CGI appearance. " +
+
+    "Realistic documentary photography only. " +
+
+    "Story context: " + text;
+
+  return prompt;
+}
+
+
+/* =========================================================
+   SAHNE DOM OLUŞTUR
+========================================================= */
+
+function createSceneCard(scene,index){
+
+  var box = document.createElement("div");
+  box.className = "scene";
+  box.dataset.index = index;
+
+  var head = document.createElement("div");
+  head.className = "sceneHead";
+
+  var title = document.createElement("div");
+  title.className = "sceneTitle";
+  title.textContent = "SAHNE " + (index+1);
+
+  var badge = document.createElement("div");
+  badge.className = "badge";
+  badge.id = "badge-" + index;
+  badge.textContent = "Hazır değil";
+
+  head.appendChild(title);
+  head.appendChild(badge);
+
+  var grid = document.createElement("div");
+  grid.className = "sceneGrid";
+
+  var left = document.createElement("div");
+
+  var img = document.createElement("img");
+  img.className = "preview";
+  img.id = "img-" + index;
+  img.alt = "Sahne " + (index+1);
+
+  left.appendChild(img);
+
+  var imageFile = document.createElement("input");
+  imageFile.type = "file";
+  imageFile.accept = "image/*";
+  imageFile.className = "file";
+
+  imageFile.addEventListener("change",function(){
+
+    var file = imageFile.files && imageFile.files[0];
+
+    if(!file) return;
+
+    var url = URL.createObjectURL(file);
+
+    scene.imageBlob = file;
+    scene.imageURL = url;
+
+    img.src = url;
+
+    badge.textContent = "Görsel hazır";
+
+  });
+
+  left.appendChild(imageFile);
+
+  var right = document.createElement("div");
+
+  var storyLabel = document.createElement("label");
+  storyLabel.textContent = "Sahne Metni";
+  right.appendChild(storyLabel);
+
+  var storyText = document.createElement("textarea");
+  storyText.value = scene.text;
+
+  storyText.addEventListener("input",function(){
+    scene.text = storyText.value;
+  });
+
+  right.appendChild(storyText);
+
+  var promptLabel = document.createElement("label");
+  promptLabel.textContent = "🎨 Görsel Prompt";
+  right.appendChild(promptLabel);
+
+  var promptText = document.createElement("textarea");
+  promptText.value = scene.prompt;
+
+  promptText.addEventListener("input",function(){
+    scene.prompt = promptText.value;
+  });
+
+  right.appendChild(promptText);
+
+  var imageButtons = document.createElement("div");
+  imageButtons.className = "controls";
+
+  var generateButton = document.createElement("button");
+  generateButton.className = "primary";
+  generateButton.textContent = "🖼️ Görsel Üret";
+
+  generateButton.addEventListener("click",async function(){
+
+    await generateImage(scene,index);
+
+  });
+
+  imageButtons.appendChild(generateButton);
+
+  var audioButtons = document.createElement("div");
+  audioButtons.className = "controls";
+
+  var speakButton = document.createElement("button");
+  speakButton.textContent = "🔊 Sadece Seslendir";
+
+  speakButton.addEventListener("click",function(){
+    speakOnly(scene);
+  });
+
+  var recordButton = document.createElement("button");
+  recordButton.className = "green";
+  recordButton.textContent = "🎙️ Seslendir + Kaydet";
+
+  recordButton.addEventListener("click",async function(){
+    stopRequested = false;
+    await recordScene(scene,index);
+  });
+
+  var playButton = document.createElement("button");
+  playButton.textContent = "▶ Dinle";
+
+  playButton.addEventListener("click",function(){
+
+    if(!scene.audioURL){
+      setStatus("Bu sahnede kayıtlı ses yok.");
+      return;
+    }
+
+    if(currentAudio){
+      try{currentAudio.pause();}catch(e){}
+    }
+
+    currentAudio = new Audio(scene.audioURL);
+    currentAudio.play();
+
+  });
+
+  var stopAudioButton = document.createElement("button");
+  stopAudioButton.className = "red";
+  stopAudioButton.textContent = "⏹ Durdur";
+
+  stopAudioButton.addEventListener("click",function(){
+
+    speechSynthesis.cancel();
+
+    if(currentAudio){
+      try{
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }catch(e){}
+    }
+
+  });
+
+  audioButtons.appendChild(speakButton);
+  audioButtons.appendChild(recordButton);
+  audioButtons.appendChild(playButton);
+  audioButtons.appendChild(stopAudioButton);
+
+  right.appendChild(imageButtons);
+  right.appendChild(audioButtons);
+
+  var audioFile = document.createElement("input");
+  audioFile.type = "file";
+  audioFile.accept = "audio/*";
+  audioFile.className = "file";
+
+  audioFile.addEventListener("change",async function(){
+
+    var file = audioFile.files && audioFile.files[0];
+
+    if(!file) return;
+
+    try{
+
+      await loadAudioFile(scene,file,index);
+
+    }catch(error){
+
+      setStatus("Ses yükleme hatası: " + error.message);
+
+    }
+
+  });
+
+  right.appendChild(audioFile);
+
+  var info = document.createElement("div");
+  info.className = "small";
+  info.id = "info-" + index;
+  info.textContent = "Ses: yok";
+
+  right.appendChild(info);
+
+  grid.appendChild(left);
+  grid.appendChild(right);
+
+  box.appendChild(head);
+  box.appendChild(grid);
+
+  return box;
+}
+
+
+/* =========================================================
+   SAHNELERİ OLUŞTUR
+========================================================= */
+
+function createScenes(){
+
+  try{
+
+    var story = storyEl.value.trim();
+
+    if(!story){
+      setStatus("Önce hikayeyi yaz veya yapıştır.");
+      return;
+    }
+
+    var count = parseInt(sceneCountEl.value,10);
+
+    var parts = splitStory(story,count);
+
+    if(!parts.length){
+      setStatus("Hikaye bölünemedi.");
+      return;
+    }
+
+    scenes = [];
+
+    scenesEl.innerHTML = "";
+
+    for(var i=0;i<count;i++){
+
+      var text = parts[i] || "";
+
+      var scene = {
+
+        index:i,
+
+        text:text,
+
+        prompt:createPrompt(text,i),
+
+        imageBlob:null,
+
+        imageURL:"",
+
+        audioBlob:null,
+
+        audioURL:"",
+
+        audioDuration:0
+
+      };
+
+      scenes.push(scene);
+
+      var card = createSceneCard(scene,i);
+
+      scenesEl.appendChild(card);
+
+    }
+
+    setStatus(
+      count +
+      " sahne oluşturuldu.\n" +
+      "Görsel promptları otomatik hazırlandı.\n" +
+      "Promptlarda özellikle metin, altyazı, logo ve watermark engellendi."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setStatus(
+      "❌ SAHNE OLUŞTURMA HATASI: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   POLLINATIONS GÖRSEL
+========================================================= */
+
+async function generateImage(scene,index){
+
+  try{
+
+    setStatus(
+      "🎨 Sahne " +
+      (index+1) +
+      " görseli üretiliyor..."
+    );
+
+    var encodedPrompt =
+      encodeURIComponent(scene.prompt);
+
+    var seed =
+      Math.floor(Math.random()*99999999);
+
+    var url =
+      "https://image.pollinations.ai/prompt/" +
+      encodedPrompt +
+      "?width=1280" +
+      "&height=720" +
+      "&nologo=true" +
+      "&seed=" + seed;
+
+    var response = await fetch(url);
+
+    if(!response.ok){
+      throw new Error(
+        "Görsel sunucusu HTTP " +
+        response.status
+      );
+    }
+
+    var blob = await response.blob();
+
+    if(!blob || !blob.size){
+      throw new Error("Boş görsel döndü.");
+    }
+
+    var imageURL =
+      URL.createObjectURL(blob);
+
+    scene.imageBlob = blob;
+    scene.imageURL = imageURL;
+
+    var img =
+      document.getElementById("img-"+index);
+
+    if(img){
+      img.src = imageURL;
+    }
+
+    var badge =
+      document.getElementById("badge-"+index);
+
+    if(badge){
+      badge.textContent = "Görsel hazır";
+    }
+
+    setStatus(
+      "✅ Sahne " +
+      (index+1) +
+      " görseli hazır."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setStatus(
+      "❌ Sahne " +
+      (index+1) +
+      " görsel hatası: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TÜM GÖRSELLER
+========================================================= */
+
+async function generateAllImages(){
+
+  if(!scenes.length){
+
+    setStatus(
+      "Önce SAHNELERİ OLUŞTUR."
+    );
+
+    return;
+  }
+
+  setProgress(0);
+
+  for(var i=0;i<scenes.length;i++){
+
+    if(stopRequested){
+      break;
+    }
+
+    await generateImage(scenes[i],i);
+
+    setProgress(
+      ((i+1)/scenes.length)*100
+    );
+
+    await wait(700);
+
+  }
+
+  if(stopRequested){
+
+    setStatus("Görsel üretimi durduruldu.");
+
+  }else{
+
+    setStatus(
+      "🎉 Tüm sahne görselleri hazır."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BEKLE
+========================================================= */
+
+function wait(ms){
+
+  return new Promise(function(resolve){
+
+    setTimeout(resolve,ms);
+
+  });
+
+}
+
+
+/* =========================================================
+   SADECE SESLENDİR
+========================================================= */
+
+function speakOnly(scene){
+
+  speechSynthesis.cancel();
+
+  var utterance =
+    new SpeechSynthesisUtterance(
+      scene.text
+    );
+
+  utterance.lang =
+    languageEl.value;
+
+  utterance.rate =
+    parseFloat(rateEl.value);
+
+  utterance.pitch = 1;
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* =========================================================
+   SES YAKALAMA HAZIRLA
+========================================================= */
+
+async function prepareAudio(){
+
+  try{
+
+    speechSynthesis.cancel();
+
+    if(!navigator.mediaDevices ||
+       !navigator.mediaDevices.getDisplayMedia){
+
+      throw new Error(
+        "Chrome bu ses yakalama özelliğini desteklemiyor."
+      );
+
+    }
+
+    setStatus(
+      "📺 Ekran/ses yakalama penceresi açılıyor.\n\n" +
+      "Chrome penceresinde:\n" +
+      "1. Sekme seç.\n" +
+      "2. Ses paylaşımını aç.\n" +
+      "3. Paylaş'a bas.\n\n" +
+      "Sonra TÜMÜNÜ SESLENDİR + KAYDET butonuna bas."
+    );
+
+    captureStream =
+      await navigator.mediaDevices.getDisplayMedia({
+        video:true,
+        audio:true
+      });
+
+    var audioTracks =
+      captureStream.getAudioTracks();
+
+    if(!audioTracks.length){
+
+      captureStream.getTracks()
+        .forEach(function(track){
+          try{track.stop();}catch(e){}
+        });
+
+      captureStream = null;
+
+      throw new Error(
+        "Ses yakalanamadı. Chrome penceresinde 'Sekme sesi' veya 'Sistem sesi' seçili olmalı."
+      );
+
+    }
+
+    setStatus(
+      "✅ SES YAKALAMAYA HAZIR.\n" +
+      "Şimdi TÜMÜNÜ SESLENDİR + KAYDET butonuna bas."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setStatus(
+      "❌ Ses yakalama hazırlanamadı: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ARRAYBUFFER
+========================================================= */
+
+function blobToArrayBuffer(blob){
+
+  return new Promise(function(resolve,reject){
+
+    var reader =
+      new FileReader();
+
+    reader.onload =
+      function(){
+
+        resolve(
+          reader.result
+        );
+
+      };
+
+    reader.onerror =
+      function(){
+
+        reject(
+          reader.error ||
+          new Error("Dosya okunamadı.")
+        );
+
+      };
+
+    reader.readAsArrayBuffer(blob);
+
+  });
+
+}
+
+
+/* =========================================================
+   GERÇEK SES SÜRESİ
+========================================================= */
+
+async function getAudioDuration(blob){
+
+  var AC =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if(!AC){
+
+    throw new Error(
+      "AudioContext desteklenmiyor."
+    );
+
+  }
+
+  var ctx = new AC();
+
+  try{
+
+    var arrayBuffer =
+      await blobToArrayBuffer(blob);
+
+    var decoded =
+      await new Promise(
+        function(resolve,reject){
+
+          ctx.decodeAudioData(
+
+            arrayBuffer.slice(0),
+
+            function(buffer){
+
+              resolve(buffer);
+
+            },
+
+            function(error){
+
+              reject(
+                error ||
+                new Error(
+                  "Ses çözümlenemedi."
+                )
+              );
+
+            }
+
+          );
+
+        }
+      );
+
+    var duration =
+      Number(decoded.duration);
+
+    if(!isFinite(duration) ||
+       duration <= 0){
+
+      throw new Error(
+        "Gerçek ses süresi okunamadı."
+      );
+
+    }
+
+    return duration;
+
+  }finally{
+
+    try{
+      await ctx.close();
+    }catch(e){}
+
+  }
+
+}
+
+
+/* =========================================================
+   SAHNE SES KAYDI
+========================================================= */
+
+async function recordScene(scene,index){
+
+  if(!captureStream){
+
+    setStatus(
+      "Önce SES YAKALAMAYI HAZIRLA butonuna bas."
+    );
+
+    return;
+
+  }
+
+  var audioTracks =
+    captureStream.getAudioTracks();
+
+  if(!audioTracks.length){
+
+    setStatus(
+      "Ses kanalı bulunamadı."
+    );
+
+    return;
+
+  }
+
+  try{
+
+    stopRequested = false;
+
+    speechSynthesis.cancel();
+
+    recordedChunks = [];
+
+    var audioStream =
+      new MediaStream(
+        audioTracks
+      );
+
+    var options = {};
+
+    if(MediaRecorder.isTypeSupported(
+      "audio/webm;codecs=opus"
+    )){
+
+      options.mimeType =
+        "audio/webm;codecs=opus";
+
+    }else if(MediaRecorder.isTypeSupported(
+      "audio/webm"
+    )){
+
+      options.mimeType =
+        "audio/webm";
+
+    }
+
+    mediaRecorder =
+      new MediaRecorder(
+        audioStream,
+        options
+      );
+
+    mediaRecorder.ondataavailable =
+      function(event){
+
+        if(event.data &&
+           event.data.size > 0){
+
+          recordedChunks.push(
+            event.data
+          );
+
+        }
+
+      };
+
+    var recorderStopped =
+      new Promise(
+        function(resolve){
+
+          mediaRecorder.onstop =
+            function(){
+
+              resolve();
+
+            };
+
+        }
+      );
+
+    mediaRecorder.start(200);
+
+    var utterance =
+      new SpeechSynthesisUtterance(
+        scene.text
+      );
+
+    utterance.lang =
+      languageEl.value;
+
+    utterance.rate =
+      parseFloat(rateEl.value);
+
+    utterance.pitch = 1;
+
+    utterance.onend =
+      function(){
+
+        setTimeout(
+          function(){
+
+            if(mediaRecorder &&
+               mediaRecorder.state !== "inactive"){
+
+              mediaRecorder.stop();
+
+            }
+
+          },
+          250
+        );
+
+      };
+
+    utterance.onerror =
+      function(){
+
+        if(mediaRecorder &&
+           mediaRecorder.state !== "inactive"){
+
+          mediaRecorder.stop();
+
+        }
+
+      };
+
+    speechSynthesis.speak(
+      utterance
+    );
+
+    await recorderStopped;
+
+    if(stopRequested){
+
+      return;
+
+    }
+
+    var blob =
+      new Blob(
+        recordedChunks,
+        {
+          type:
+            options.mimeType ||
+            "audio/webm"
+        }
+      );
+
+    if(!blob.size){
+
+      throw new Error(
+        "Ses kaydı boş."
+      );
+
+    }
+
+    var duration =
+      await getAudioDuration(blob);
+
+    scene.audioBlob = blob;
+
+    scene.audioURL =
+      URL.createObjectURL(blob);
+
+    scene.audioDuration =
+      duration;
+
+    updateAudioInfo(
+      scene,
+      index
+    );
+
+    setStatus(
+      "✅ Sahne " +
+      (index+1) +
+      " ses kaydı tamamlandı. " +
+      formatTime(duration)
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setStatus(
+      "❌ Sahne " +
+      (index+1) +
+      " ses kayıt hatası: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TÜM SESLER
+========================================================= */
+
+async function recordAll(){
+
+  if(!scenes.length){
+
+    setStatus(
+      "Önce sahneleri oluştur."
+    );
+
+    return;
+
+  }
+
+  if(!captureStream){
+
+    setStatus(
+      "Önce SES YAKALAMAYI HAZIRLA butonuna bas."
+    );
+
+    return;
+
+  }
+
+  stopRequested = false;
+
+  setProgress(0);
+
+  for(var i=0;i<scenes.length;i++){
+
+    if(stopRequested){
+
+      break;
+
+    }
+
+    setStatus(
+      "🎙️ Sahne " +
+      (i+1) +
+      "/" +
+      scenes.length +
+      " seslendiriliyor..."
+    );
+
+    await recordScene(
+      scenes[i],
+      i
+    );
+
+    if(stopRequested){
+      break;
+    }
+
+    setProgress(
+      ((i+1)/scenes.length)*100
+    );
+
+    await wait(300);
+
+  }
+
+  if(stopRequested){
+
+    setStatus(
+      "⏹ Seslendirme durduruldu."
+    );
+
+  }else{
+
+    setStatus(
+      "🎉 TÜM SAHNELER SESLENDİRİLDİ VE KAYDEDİLDİ."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SES DOSYASI YÜKLE
+========================================================= */
+
+async function loadAudioFile(scene,file,index){
+
+  var duration =
+    await getAudioDuration(file);
+
+  scene.audioBlob = file;
+
+  scene.audioURL =
+    URL.createObjectURL(file);
+
+  scene.audioDuration =
+    duration;
+
+  updateAudioInfo(
+    scene,
+    index
+  );
+
+  setStatus(
+    "✅ Sahne " +
+    (index+1) +
+    " ses dosyası yüklendi. " +
+    formatTime(duration)
+  );
+
+}
+
+
+/* =========================================================
+   AUDIO BİLGİ
+========================================================= */
+
+function updateAudioInfo(scene,index){
+
+  var info =
+    document.getElementById(
+      "info-"+index
+    );
+
+  var badge =
+    document.getElementById(
+      "badge-"+index
+    );
+
+  if(info){
+
+    if(scene.audioDuration){
+
+      info.textContent =
+        "🎙️ Gerçek ses süresi: " +
+        formatTime(
+          scene.audioDuration
+        );
+
+    }else{
+
+      info.textContent =
+        "Ses: yok";
+
+    }
+
+  }
+
+  if(badge){
+
+    if(scene.audioDuration){
+
+      badge.textContent =
+        "Ses " +
+        formatTime(
+          scene.audioDuration
+        );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   FORMAT ZAMAN
+========================================================= */
+
+function formatTime(seconds){
+
+  if(!isFinite(seconds)){
+    return "0.00 sn";
+  }
+
+  if(seconds < 60){
+
+    return seconds.toFixed(2) +
+      " sn";
+
+  }
+
+  var minutes =
+    Math.floor(seconds/60);
+
+  var sec =
+    seconds - minutes*60;
+
+  return minutes +
+    ":" +
+    String(
+      Math.floor(sec)
+    ).padStart(2,"0");
+
+}
+
+
+/* =========================================================
+   AUDIO SÜRESİNİ GARANTİLE
+========================================================= */
+
+async function ensureAudioDuration(scene){
+
+  if(scene.audioBlob){
+
+    if(!isFinite(scene.audioDuration) ||
+       scene.audioDuration <= 0){
+
+      scene.audioDuration =
+        await getAudioDuration(
+          scene.audioBlob
+        );
+
+    }
+
+    return scene.audioDuration;
+
+  }
+
+  throw new Error(
+    "Bu sahnede ses bulunmuyor."
+  );
+
+}
+
+
+/* =========================================================
+   RESİM YÜKLEME
+========================================================= */
+
+function loadImage(url){
+
+  return new Promise(
+    function(resolve,reject){
+
+      var img =
+        new Image();
+
+      img.onload =
+        function(){
+          resolve(img);
+        };
+
+      img.onerror =
+        function(){
+
+          reject(
+            new Error(
+              "Görsel yüklenemedi."
+            )
+          );
+
+        };
+
+      img.crossOrigin =
+        "anonymous";
+
+      img.src = url;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   GÖRSELİ CANVAS'A ÇİZ
+========================================================= */
+
+function drawCover(
+  ctx,
+  img,
+  canvasW,
+  canvasH,
+  progress,
+  motion
+){
+
+  var iw = img.naturalWidth || img.width;
+  var ih = img.naturalHeight || img.height;
+
+  if(!iw || !ih){
+    return;
+  }
+
+  var imageRatio =
+    iw / ih;
+
+  var canvasRatio =
+    canvasW / canvasH;
+
+  var baseScale;
+
+  if(imageRatio > canvasRatio){
+
+    baseScale =
+      canvasH / ih;
+
+  }else{
+
+    baseScale =
+      canvasW / iw;
+
+  }
+
+  var zoom;
+
+  if(motion === 0){
+
+    zoom =
+      1.02 +
+      progress * 0.045;
+
+  }else if(motion === 1){
+
+    zoom =
+      1.07 -
+      progress * 0.045;
+
+  }else{
+
+    zoom =
+      1.035 +
+      Math.sin(
+        progress*Math.PI*2
+      ) * 0.025;
+
+  }
+
+  var scale =
+    baseScale * zoom;
+
+  var dw =
+    iw * scale;
+
+  var dh =
+    ih * scale;
+
+  var maxX =
+    Math.max(
+      0,
+      dw-canvasW
+    );
+
+  var maxY =
+    Math.max(
+      0,
+      dh-canvasH
+    );
+
+  var x;
+  var y;
+
+  if(motion === 0){
+
+    x =
+      -maxX * progress;
+
+    y =
+      -maxY * (
+        0.25 +
+        progress*0.5
+      );
+
+  }else if(motion === 1){
+
+    x =
+      -maxX * (
+        1-progress
+      );
+
+    y =
+      -maxY * (
+        0.7 -
+        progress*0.45
+      );
+
+  }else{
+
+    x =
+      -maxX * 0.5;
+
+    y =
+      -maxY * 0.5;
+
+  }
+
+  ctx.drawImage(
+    img,
+    x,
+    y,
+    dw,
+    dh
+  );
+
+}
+
+
+/* =========================================================
+   ALTYAZI
+========================================================= */
+
+function wrapText(
+  ctx,
+  text,
+  maxWidth
+){
+
+  var words =
+    text.split(/\s+/);
+
+  var lines = [];
+  var line = "";
+
+  for(var i=0;i<words.length;i++){
+
+    var test =
+      line
+      ? line + " " + words[i]
+      : words[i];
+
+    if(
+      ctx.measureText(test).width >
+      maxWidth &&
+      line
+    ){
+
+      lines.push(line);
+
+      line = words[i];
+
+    }else{
+
+      line = test;
+
+    }
+
+  }
+
+  if(line){
+    lines.push(line);
+  }
+
+  return lines;
+
+}
+
+
+function drawSubtitle(
+  ctx,
+  text,
+  canvasW,
+  canvasH
+){
+
+  if(!text){
+    return;
+  }
+
+  var fontSize =
+    Math.max(
+      22,
+      Math.floor(canvasW * 0.027)
+    );
+
+  ctx.font =
+    "bold " +
+    fontSize +
+    "px Arial";
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "middle";
+
+  var maxWidth =
+    canvasW * 0.82;
+
+  var lines =
+    wrapText(
+      ctx,
+      text,
+      maxWidth
+    );
+
+  var lineHeight =
+    fontSize * 1.25;
+
+  var padding =
+    fontSize * 0.55;
+
+  var totalHeight =
+    lines.length *
+    lineHeight;
+
+  var boxHeight =
+    totalHeight +
+    padding*2;
+
+  var boxY =
+    canvasH -
+    boxHeight -
+    canvasH*0.055;
+
+  ctx.save();
+
+  ctx.fillStyle =
+    "rgba(0,0,0,.70)";
+
+  roundRect(
+    ctx,
+    canvasW*0.06,
+    boxY,
+    canvasW*0.88,
+    boxHeight,
+    14
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  for(var i=0;i<lines.length;i++){
+
+    var y =
+      boxY +
+      padding +
+      lineHeight*i +
+      lineHeight/2;
+
+    ctx.fillText(
+      lines[i],
+      canvasW/2,
+      y
+    );
+
+  }
+
+  ctx.restore();
+
+}
+
+
+function roundRect(
+  ctx,
+  x,
+  y,
+  width,
+  height,
+  radius
+){
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    x+radius,
+    y
+  );
+
+  ctx.lineTo(
+    x+width-radius,
+    y
+  );
+
+  ctx.quadraticCurveTo(
+    x+width,
+    y,
+    x+width,
+    y+radius
+  );
+
+  ctx.lineTo(
+    x+width,
+    y+height-radius
+  );
+
+  ctx.quadraticCurveTo(
+    x+width,
+    y+height,
+    x+width-radius,
+    y+height
+  );
+
+  ctx.lineTo(
+    x+radius,
+    y+height
+  );
+
+  ctx.quadraticCurveTo(
+    x,
+    y+height,
+    x,
+    y+height-radius
+  );
+
+  ctx.lineTo(
+    x,
+    y+radius
+  );
+
+  ctx.quadraticCurveTo(
+    x,
+    y,
+    x+radius,
+    y
+  );
+
+  ctx.closePath();
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+logoInput.addEventListener(
+  "change",
+  function(){
+
+    var file =
+      logoInput.files &&
+      logoInput.files[0];
+
+    if(!file){
+      return;
+    }
+
+    var url =
+      URL.createObjectURL(file);
+
+    logoPreview.src = url;
+
+    logoPreview.style.display =
+      "block";
+
+    loadImage(url)
+      .then(function(img){
+
+        logoImage = img;
+
+        setStatus(
+          "✅ Logo hazır."
+        );
+
+      })
+      .catch(function(){
+
+        logoImage = null;
+
+        setStatus(
+          "Logo yüklenemedi."
+        );
+
+      });
+
+  }
+);
+
+
+/* =========================================================
+   LOGO ÇİZ
+========================================================= */
+
+function drawLogo(
+  ctx,
+  canvasW,
+  canvasH
+){
+
+  if(!logoImage){
+    return;
+  }
+
+  var maxW =
+    canvasW * 0.13;
+
+  var maxH =
+    canvasH * 0.12;
+
+  var iw =
+    logoImage.naturalWidth ||
+    logoImage.width;
+
+  var ih =
+    logoImage.naturalHeight ||
+    logoImage.height;
+
+  var scale =
+    Math.min(
+      maxW/iw,
+      maxH/ih
+    );
+
+  var w =
+    iw*scale;
+
+  var h =
+    ih*scale;
+
+  var x =
+    canvasW-w-
+    canvasW*0.035;
+
+  var y =
+    canvasH*0.035;
+
+  ctx.save();
+
+  ctx.globalAlpha =
+    0.9;
+
+  ctx.drawImage(
+    logoImage,
+    x,
+    y,
+    w,
+    h
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   AUDIO BUFFER
+========================================================= */
+
+async function decodeAudioBlob(
+  blob,
+  audioContext
+){
+
+  var arrayBuffer =
+    await blobToArrayBuffer(
+      blob
+    );
+
+  return await new Promise(
+    function(resolve,reject){
+
+      audioContext.decodeAudioData(
+
+        arrayBuffer.slice(0),
+
+        function(buffer){
+          resolve(buffer);
+        },
+
+        function(error){
+          reject(
+            error ||
+            new Error(
+              "Audio decode hatası."
+            )
+          );
+        }
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   VIDEO RENDER
+========================================================= */
 
 async function renderVideo(){
-if(!scenes.length){alert("Önce hikâyeyi analiz et.");return}
-$("status").textContent="Hazırlanıyor...";$("bar").style.width="0%";
-const canvas=$("preview"),ctx=canvas.getContext("2d"),fmtv=$("format").value;
-canvas.width=fmtv==="16:9"?1280:fmtv==="9:16"?720:900;canvas.height=fmtv==="16:9"?720:fmtv==="9:16"?1280:900;
-let W=canvas.width,H=canvas.height;
-let videoStream=canvas.captureStream(30), ac=new AudioContext(), dest=ac.createMediaStreamDestination();
-let finalStream=new MediaStream([...videoStream.getVideoTracks(),...dest.stream.getAudioTracks()]);
-let mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")?"video/webm;codecs=vp9,opus":MediaRecorder.isTypeSupported("video/webm;codecs=vp8,opus")?"video/webm;codecs=vp8,opus":"video/webm";
-let chunks=[],rec=new MediaRecorder(finalStream,{mimeType:mime});rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
-let done=new Promise(resolve=>rec.onstop=resolve);rec.start(1000);
 
-let musicSrc=null,musicGain=ac.createGain();musicGain.gain.value=+$("musicVol").value;musicGain.connect(dest);
-if(musicData){try{musicBuffer=await ac.decodeAudioData(musicData.slice(0));musicSrc=ac.createBufferSource();musicSrc.buffer=musicBuffer;musicSrc.loop=true;musicSrc.connect(musicGain);musicSrc.start()}catch(e){}}
-let prevImg=null,trans=+$("transDur").value, type=$("transition").value, voiceGain=ac.createGain();voiceGain.gain.value=+$("voiceVol").value;voiceGain.connect(dest);
-try{
-for(let i=0;i<scenes.length;i++){
-let s=scenes[i],dur=s.audioDuration||5, img;
-try{img=await loadImage(s.imageData||placeholder(i))}catch(e){img=await loadImage(placeholder(i))}
-let src=null;
-if(s.audioData){try{let buf=await ac.decodeAudioData(s.audioData.slice(0));src=ac.createBufferSource();src.buffer=buf;src.connect(voiceGain);src.start()}catch(e){}}
-if(musicSrc)musicGain.gain.setTargetAtTime(+$("musicVol").value*(src?0.22:1),ac.currentTime,.05);
-let start=performance.now(), end=start+dur*1000;
-while(performance.now()<end){
-let t=(performance.now()-start)/1000,p=Math.min(1,t/dur),rem=dur-t;
-ctx.clearRect(0,0,W,H);let o=motionOffset(s.motion||"",p,W,H);
-if(prevImg&&type==="cross"&&t<trans){let a=t/trans;drawCover(ctx,prevImg,W,H,1-a,1);drawCover(ctx,img,W,H,a,o.sc,o.x,o.y)}else drawCover(ctx,img,W,H,1,o.sc,o.x,o.y);
-if(type==="fade"&&t<trans){ctx.fillStyle=`rgba(0,0,0,${1-t/trans})`;ctx.fillRect(0,0,W,H)}
-if(type==="fade"&&rem<trans){ctx.fillStyle=`rgba(0,0,0,${1-(rem/trans)})`;ctx.fillRect(0,0,W,H)}
-if(type==="flash"&&t<trans){ctx.fillStyle=`rgba(255,255,255,${(1-t/trans)*.55})`;ctx.fillRect(0,0,W,H)}
-drawSubtitle(ctx,subtitleAt(s,t,dur),W,H);drawLogo(ctx,W);
-$("status").textContent=`Sahne ${i+1}/${scenes.length} • ${fmt(t)} / ${fmt(dur)}`;$("bar").style.width=((i+p)/scenes.length*100).toFixed(1)+"%";
-await new Promise(r=>requestAnimationFrame(r));
-}
-prevImg=img;if(src)try{src.stop()}catch(e){}if(musicSrc)musicGain.gain.setTargetAtTime(+$("musicVol").value,ac.currentTime,.08);
-}
-}catch(err){$("status").innerHTML='<span class="err">Render hatası: '+esc(err.message||err)+'</span>'}
-if(rec.state!=="inactive")rec.stop();if(musicSrc)try{musicSrc.stop()}catch(e){}await done;await ac.close();let blob=new Blob(chunks,{type:"video/webm"}),url=URL.createObjectURL(blob);let a=document.createElement("a");a.href=url;a.download="GeldStory_V31.2.webm";a.textContent="⬇ WEBM videoyu indir";a.style.display="inline-block";a.style.marginTop="10px";a.style.color="#ffd54a";$("status").innerHTML="✅ Video hazır — "+(blob.size/1024/1024).toFixed(1)+" MB<br>";$("status").appendChild(a);$("bar").style.width="100%";
+  if(!scenes.length){
+
+    setStatus(
+      "Önce sahneleri oluştur."
+    );
+
+    return;
+
+  }
+
+  stopRequested = false;
+
+  setProgress(0);
+
+  downloadArea.innerHTML = "";
+
+  if(videoURL){
+
+    try{
+      URL.revokeObjectURL(videoURL);
+    }catch(e){}
+
+    videoURL = null;
+
+  }
+
+  try{
+
+    setStatus(
+      "🎬 Video hazırlığı başlıyor..."
+    );
+
+    for(var check=0;
+        check<scenes.length;
+        check++){
+
+      if(!scenes[check].imageURL){
+
+        throw new Error(
+          "Sahne " +
+          (check+1) +
+          " görseli yok."
+        );
+
+      }
+
+      await ensureAudioDuration(
+        scenes[check]
+      );
+
+    }
+
+    var format =
+      formatEl.value;
+
+    var canvas =
+      document.createElement(
+        "canvas"
+      );
+
+    if(format === "9:16"){
+
+      canvas.width = 720;
+      canvas.height = 1280;
+
+    }else if(format === "1:1"){
+
+      canvas.width = 1080;
+      canvas.height = 1080;
+
+    }else{
+
+      canvas.width = 1280;
+      canvas.height = 720;
+
+    }
+
+    var ctx =
+      canvas.getContext(
+        "2d"
+      );
+
+    if(!ctx){
+
+      throw new Error(
+        "Canvas oluşturulamadı."
+      );
+
+    }
+
+    var videoCanvasStream =
+      canvas.captureStream(30);
+
+    var audioContext =
+      new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+
+    var destination =
+      audioContext.createMediaStreamDestination();
+
+    var finalTracks = [];
+
+    videoCanvasStream
+      .getVideoTracks()
+      .forEach(function(track){
+
+        finalTracks.push(track);
+
+      });
+
+    destination.stream
+      .getAudioTracks()
+      .forEach(function(track){
+
+        finalTracks.push(track);
+
+      });
+
+    var finalStream =
+      new MediaStream(
+        finalTracks
+      );
+
+    var mimeType =
+      "";
+
+    if(MediaRecorder.isTypeSupported(
+      "video/webm;codecs=vp9,opus"
+    )){
+
+      mimeType =
+        "video/webm;codecs=vp9,opus";
+
+    }else if(MediaRecorder.isTypeSupported(
+      "video/webm;codecs=vp8,opus"
+    )){
+
+      mimeType =
+        "video/webm;codecs=vp8,opus";
+
+    }else{
+
+      mimeType =
+        "video/webm";
+
+    }
+
+    var renderRecorder =
+      new MediaRecorder(
+        finalStream,
+        {
+          mimeType:mimeType
+        }
+      );
+
+    var chunks = [];
+
+    renderRecorder.ondataavailable =
+      function(event){
+
+        if(event.data &&
+           event.data.size){
+
+          chunks.push(
+            event.data
+          );
+
+        }
+
+      };
+
+    var recorderFinished =
+      new Promise(
+        function(resolve){
+
+          renderRecorder.onstop =
+            function(){
+
+              resolve();
+
+            };
+
+        }
+      );
+
+    renderRecorder.start(250);
+
+    var totalDuration = 0;
+
+    for(var d=0;d<scenes.length;d++){
+
+      totalDuration +=
+        scenes[d].audioDuration;
+
+    }
+
+    var elapsed = 0;
+
+    for(var i=0;i<scenes.length;i++){
+
+      if(stopRequested){
+        break;
+      }
+
+      var scene =
+        scenes[i];
+
+      setStatus(
+        "🎬 Sahne " +
+        (i+1) +
+        "/" +
+        scenes.length +
+        " render ediliyor...\n" +
+        "Süre: " +
+        formatTime(
+          scene.audioDuration
+        )
+      );
+
+      var img =
+        await loadImage(
+          scene.imageURL
+        );
+
+      var buffer =
+        await decodeAudioBlob(
+          scene.audioBlob,
+          audioContext
+        );
+
+      var source =
+        audioContext.createBufferSource();
+
+      source.buffer =
+        buffer;
+
+      source.connect(
+        destination
+      );
+
+      source.start(0);
+
+      var duration =
+        scene.audioDuration;
+
+      var startTime =
+        performance.now();
+
+      var motion =
+        i % 3;
+
+      while(true){
+
+        var now =
+          performance.now();
+
+        var elapsedScene =
+          (now-startTime)/1000;
+
+        var p =
+          Math.min(
+            1,
+            elapsedScene/duration
+          );
+
+        ctx.clearRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        ctx.fillStyle =
+          "#000";
+
+        ctx.fillRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        drawCover(
+          ctx,
+          img,
+          canvas.width,
+          canvas.height,
+          p,
+          motion
+        );
+
+        drawLogo(
+          ctx,
+          canvas.width,
+          canvas.height
+        );
+
+        drawSubtitle(
+          ctx,
+          scene.text,
+          canvas.width,
+          canvas.height
+        );
+
+        var overall =
+          (
+            elapsed +
+            Math.min(
+              elapsedScene,
+              duration
+            )
+          ) / totalDuration;
+
+        setProgress(
+          overall*100
+        );
+
+        if(
+          elapsedScene >= duration
+        ){
+
+          break;
+
+        }
+
+        await new Promise(
+          function(resolve){
+
+            requestAnimationFrame(
+              function(){
+                resolve();
+              }
+            );
+
+          }
+        );
+
+      }
+
+      elapsed += duration;
+
+      try{
+        source.stop();
+      }catch(e){}
+
+    }
+
+    if(stopRequested){
+
+      try{
+        renderRecorder.stop();
+      }catch(e){}
+
+    }else{
+
+      await wait(250);
+
+      try{
+        renderRecorder.stop();
+      }catch(e){}
+
+    }
+
+    await recorderFinished;
+
+    videoBlob =
+      new Blob(
+        chunks,
+        {
+          type:
+            mimeType ||
+            "video/webm"
+        }
+      );
+
+    if(!videoBlob.size){
+
+      throw new Error(
+        "Video dosyası boş oluştu."
+      );
+
+    }
+
+    videoURL =
+      URL.createObjectURL(
+        videoBlob
+      );
+
+    videoPreview.src =
+      videoURL;
+
+    var link =
+      document.createElement("a");
+
+    link.href =
+      videoURL;
+
+    link.download =
+      "GeldStory_V41_2.webm";
+
+    link.className =
+      "download";
+
+    link.textContent =
+      "⬇️ VİDEOYU İNDİR";
+
+    downloadArea.appendChild(
+      link
+    );
+
+    try{
+      videoCanvasStream
+        .getTracks()
+        .forEach(function(track){
+          track.stop();
+        });
+    }catch(e){}
+
+    try{
+      finalStream
+        .getTracks()
+        .forEach(function(track){
+          track.stop();
+        });
+    }catch(e){}
+
+    try{
+      await audioContext.close();
+    }catch(e){}
+
+    setProgress(100);
+
+    setStatus(
+      "🎉 VİDEO HAZIR!\n\n" +
+      "Sahne sayısı: " +
+      scenes.length +
+      "\n" +
+      "Toplam süre: " +
+      formatTime(totalDuration) +
+      "\n\n" +
+      "Görsellerdeki metinler kullanılmaz; " +
+      "altyazılar video sırasında ayrıca eklenmiştir."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setStatus(
+      "❌ VİDEO RENDER HATASI:\n" +
+      error.message
+    );
+
+  }
+
 }
 
-function previewSelected(){if(!scenes.length)return;let i=Math.max(0,Math.min(scenes.length-1,+prompt("Önizlemek istediğin sahne numarası:",1)-1));let s=scenes[i];$("preview").getContext("2d").drawImage(document.getElementById("img"+i),0,0,$("preview").width,$("preview").height);}
 
-function projectData(){return {version:projectVersion,story:$("story").value,count:$("count").value,lang:$("lang").value,format:$("format").value,stype:$("stype").value,quality:$("quality").value,candN:$("candN").value,voiceVol:$("voiceVol").value,musicVol:$("musicVol").value,subPos:$("subPos").value,subSize:$("subSize").value,subStyle:$("subStyle").value,transition:$("transition").value,transDur:$("transDur").value,scenes:scenes.map(s=>({...s,candidates:[]}))};}
-function saveProject(){try{localStorage.setItem("geldstory_v312",JSON.stringify(projectData()));alert("Proje kaydedildi.");}catch(e){alert("Kaydetme hatası: "+e.message)}}
-function loadProject(){try{let p=JSON.parse(localStorage.getItem("geldstory_v312"));if(!p){alert("Kayıt bulunamadı.");return}applyProject(p);alert("Proje yüklendi.");}catch(e){alert("Yükleme hatası: "+e.message)}}
-function applyProject(p){for(let k of ["story","count","lang","format","stype","quality","candN","voiceVol","musicVol","subPos","subSize","subStyle","transition","transDur"])if(p[k]!=null&&$(k))$(k).value=p[k];scenes=p.scenes||[];renderScenes();updateStats();}
-function exportProject(){let b=new Blob([JSON.stringify(projectData())],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="GeldStory_V31.2_Project.json";a.click();}
-function importProject(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{applyProject(JSON.parse(r.result))}catch(x){alert("JSON okunamadı.")}};r.readAsText(f);}
-function clearAll(){if(confirm("Tüm sahneler silinsin mi?")){scenes=[];$("scenes").innerHTML="";updateStats();}}
+/* =========================================================
+   DURDUR
+========================================================= */
+
+function stopEverything(){
+
+  stopRequested = true;
+
+  speechSynthesis.cancel();
+
+  if(currentAudio){
+
+    try{
+
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+
+    }catch(e){}
+
+  }
+
+  if(mediaRecorder &&
+     mediaRecorder.state !== "inactive"){
+
+    try{
+      mediaRecorder.stop();
+    }catch(e){}
+
+  }
+
+  setStatus(
+    "⏹ İşlem durduruluyor..."
+  );
+
+}
+
+
+/* =========================================================
+   BUTONLAR
+========================================================= */
+
+createScenesBtn.addEventListener(
+  "click",
+  function(){
+
+    stopRequested = false;
+
+    createScenes();
+
+  }
+);
+
+generateImagesBtn.addEventListener(
+  "click",
+  function(){
+
+    stopRequested = false;
+
+    generateAllImages();
+
+  }
+);
+
+prepareAudioBtn.addEventListener(
+  "click",
+  function(){
+
+    prepareAudio();
+
+  }
+);
+
+recordAllBtn.addEventListener(
+  "click",
+  function(){
+
+    recordAll();
+
+  }
+);
+
+stopBtn.addEventListener(
+  "click",
+  function(){
+
+    stopEverything();
+
+  }
+);
+
+renderBtn.addEventListener(
+  "click",
+  function(){
+
+    renderVideo();
+
+  }
+);
+
+
+/* =========================================================
+   BAŞLANGIÇ
+========================================================= */
+
+setStatus(
+  "Hazır.\n\n" +
+  "1️⃣ Hikayeni yapıştır.\n" +
+  "2️⃣ SAHNELERİ OLUŞTUR.\n" +
+  "3️⃣ GÖRSELLERİ ÜRET.\n" +
+  "4️⃣ SES YAKALAMAYI HAZIRLA.\n" +
+  "5️⃣ TÜMÜNÜ SESLENDİR + KAYDET.\n" +
+  "6️⃣ VİDEOYA DÖNÜŞTÜR."
+);
+
 </script>
+
 </body>
 </html>
