@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mina Video AI V48.8 — GeldStory Studio</title>
+<title>Mina Video AI V48.9 — GeldStory Studio</title>
 
 <style>
 *{box-sizing:border-box}
@@ -85,8 +85,14 @@ font-weight:bold;
 margin:4px
 }
 
-button:hover{filter:brightness(1.15)}
-button:disabled{opacity:.45;cursor:not-allowed}
+button:hover{
+filter:brightness(1.15)
+}
+
+button:disabled{
+opacity:.45;
+cursor:not-allowed
+}
 
 .primary{background:#5865f2}
 .success{background:#16865a}
@@ -184,14 +190,14 @@ line-height:1.45
 }
 
 .promptBox{
-min-height:230px;
+min-height:250px;
 resize:vertical;
 line-height:1.35;
 font-size:12px
 }
 
 .negativeBox{
-min-height:110px;
+min-height:130px;
 resize:vertical;
 font-size:12px
 }
@@ -285,6 +291,17 @@ font-size:12px;
 line-height:1.5
 }
 
+.pureVisual{
+padding:12px;
+border-radius:9px;
+background:#091c15;
+border:1px solid #17603e;
+color:#a8e8c9;
+font-size:12px;
+line-height:1.5;
+margin-top:10px
+}
+
 .fileLabel{
 display:inline-block;
 padding:9px 12px;
@@ -299,7 +316,9 @@ font-weight:bold
 display:none
 }
 
-.hidden{display:none!important}
+.hidden{
+display:none!important
+}
 
 .log{
 white-space:pre-wrap;
@@ -329,8 +348,8 @@ color:#8fb7ff
 <body>
 
 <header>
-<h1>🎬 Mina Video AI V48.8 — GeldStory Studio</h1>
-<p>Almanca gerçek hikâyeler • Z-Image uyumlu NO TEXT ENGINE • WAV • Render</p>
+<h1>🎬 Mina Video AI V48.9 — GeldStory Studio</h1>
+<p>Senaryo → Ses/Altyazı | Visual Director → Görsel | Z-Image → Temiz görüntü</p>
 </header>
 
 <div class="container">
@@ -362,16 +381,14 @@ placeholder="Almanca hikâyeni buraya yapıştır..."
 
 <div class="notice" style="margin-top:12px">
 
-<b>🎯 Otomatik sistem</b><br>
+<b>V48.9 YENİ GÖRSEL SİSTEMİ</b><br><br>
 
-Hikâye → sahneler → Visual Director →
-Z-Image uyumlu görsel promptu →
-<b>NO TEXT ENGINE</b> →
-WAV ses →
-WAV süresi kadar görsel →
-hareket →
-altyazı →
-WebM.
+Senaryo metni <b>GÖRSEL PROMPTUNA GİRMEZ.</b><br>
+Senaryo yalnızca seslendirme ve altyazı için kullanılır.<br><br>
+
+Z-Image'e yalnızca:
+<b>kişi + mekân + eylem + duygu + dönem + ışık + kamera + sinematik stil</b>
+gönderilir.
 
 </div>
 
@@ -386,71 +403,136 @@ WebM.
 
 <div>
 <label>FORMAT</label>
+
 <select id="format">
-<option value="16:9">16:9 YouTube</option>
-<option value="9:16">9:16 Shorts</option>
-<option value="1:1">1:1 Kare</option>
+
+<option value="16:9">
+16:9 YouTube
+</option>
+
+<option value="9:16">
+9:16 Shorts
+</option>
+
+<option value="1:1">
+1:1 Kare
+</option>
+
 </select>
 </div>
+
 
 <div>
 <label>FPS</label>
+
 <select id="fps">
-<option value="24">24 FPS</option>
-<option value="30">30 FPS</option>
+
+<option value="24">
+24 FPS
+</option>
+
+<option value="30">
+30 FPS
+</option>
+
 </select>
 </div>
+
 
 <div>
 <label>TTS SESİ</label>
+
 <select id="voice">
+
 <option value="de_DE-thorsten-medium">
 Deutsch — Thorsten Medium
 </option>
+
 <option value="de_DE-thorsten-high">
 Deutsch — Thorsten High
 </option>
+
 </select>
 </div>
+
 
 <div>
 <label>VARSAYILAN HAREKET</label>
+
 <select id="defaultMotion">
-<option value="zoomIn">Zoom In</option>
-<option value="zoomOut">Zoom Out</option>
-<option value="panLeft">Pan Left</option>
-<option value="panRight">Pan Right</option>
-<option value="panUp">Pan Up</option>
-<option value="panDown">Pan Down</option>
-<option value="kenBurns">Ken Burns</option>
-<option value="static">Static</option>
+
+<option value="zoomIn">
+Zoom In
+</option>
+
+<option value="zoomOut">
+Zoom Out
+</option>
+
+<option value="panLeft">
+Pan Left
+</option>
+
+<option value="panRight">
+Pan Right
+</option>
+
+<option value="panUp">
+Pan Up
+</option>
+
+<option value="panDown">
+Pan Down
+</option>
+
+<option value="kenBurns">
+Ken Burns
+</option>
+
+<option value="static">
+Static
+</option>
+
 </select>
 </div>
 
 </div>
 
+
 <div style="margin-top:10px">
 
-<button class="success" id="allVoiceBtn">
+<button
+class="success"
+id="allVoiceBtn"
+>
 🎙️ TÜM SAHNELERİ SESLENDİR & KAYDET
 </button>
 
-<button class="primary" id="renderBtn">
+<button
+class="primary"
+id="renderBtn"
+>
 🎥 VİDEOYU RENDER ET
 </button>
 
-<button id="previewBtn">
+<button
+id="previewBtn"
+>
 ▶️ ÖNİZLEME
 </button>
 
 </div>
 
+
 <div class="progressWrap">
+
 <div id="progressBar"></div>
+
 </div>
 
+
 <div id="status" class="status">
-Mina hazır.
+Mina V48.9 hazır.
 </div>
 
 </div>
@@ -458,55 +540,72 @@ Mina hazır.
 
 <div class="panel">
 
-<h2>🔒 Z-IMAGE NO TEXT ENGINE</h2>
+<h2>🧠 V48.9 — PURE VISUAL ENGINE</h2>
 
-<div class="noTextNotice">
+<div class="pureVisual">
 
-<b>AKTİF — V48.8</b><br><br>
-
-Mina artık yalnızca “NO TEXT” demiyor.
-
-Her prompt otomatik olarak şunları ister:
+<b>✅ SENARYO GÖRSEL PROMPTUNDAN TAMAMEN ÇIKARILDI</b>
 
 <br><br>
 
-<b>
-ZERO VISIBLE WRITING<br>
-NO SUBTITLES<br>
-NO CAPTIONS<br>
-NO LETTERS<br>
-NO WORDS<br>
-NO NUMBERS<br>
-NO TYPOGRAPHY<br>
-NO TITLES<br>
-NO LOGOS<br>
-NO WATERMARKS<br>
-NO READABLE SIGNS<br>
-NO TEXT ON PAPER<br>
-NO TEXT ON BOOKS<br>
-NO TEXT ON SCREENS<br>
-NO TEXT ON CLOTHING<br>
-NO TEXT ON WALLS<br>
-NO TEXT ON OBJECTS
-</b>
+Mina artık hikâyenin cümlesini Z-Image'e göndermiyor.
+
+Örneğin:
 
 <br><br>
 
-Ayrıca yazı bulunabilecek nesneler mümkün olduğunca
-<b>blank / empty / turned away / unreadable</b>
-olarak tarif edilir.
+❌ Eski sistem:<br>
+<code>
+Scene based on this narration moment:
+"Sie schrieb nachts an ihrer Geschichte."
+</code>
 
 <br><br>
 
-<b>Altyazı görselin içine oluşturulmaz.</b>
-Altyazı daha sonra Mina tarafından video katmanına eklenir.
+✅ Yeni sistem:<br>
+
+<code>
+Photorealistic cinematic documentary photograph
+of a woman in a modest 1990s apartment,
+sitting alone at a small table,
+focused and determined expression,
+warm night lighting,
+35mm documentary photography...
+</code>
+
+<br><br>
+
+Böylece Almanca senaryo metninin görselin içine
+yazı olarak dönüştürülmesi engellenmiş olur.
 
 </div>
 
-<div class="engine">
-<b>🎯 Z-Image için özel kural:</b><br>
-“writing on paper” yerine “holding a pen over a completely blank sheet of paper”
-gibi görsel tarifler kullanılır. Böylece modelin kâğıt üzerine otomatik yazı koyma ihtimali azaltılır.
+
+<div class="noTextNotice">
+
+<b>🔒 NO TEXT ENGINE</b><br><br>
+
+ZERO VISIBLE TEXT.<br>
+NO SUBTITLES.<br>
+NO CAPTIONS.<br>
+NO LETTERS.<br>
+NO WORDS.<br>
+NO NUMBERS.<br>
+NO TYPOGRAPHY.<br>
+NO TITLES.<br>
+NO LOGOS.<br>
+NO WATERMARKS.<br>
+NO SIGNS.<br>
+NO LABELS.<br>
+NO WRITING.<br>
+NO READABLE SYMBOLS.<br>
+NO TEXT ON CLOTHING.<br>
+NO TEXT ON OBJECTS.<br>
+NO TEXT ON WALLS.<br>
+NO TEXT ON SCREENS.<br>
+NO TEXT ON PAPER.<br>
+NO TEXT ON BOOKS.
+
 </div>
 
 </div>
@@ -520,11 +619,13 @@ gibi görsel tarifler kullanılır. Böylece modelin kâğıt üzerine otomatik 
 <h2>🎞️ Önizleme</h2>
 
 <div class="previewBox">
+
 <canvas
 id="previewCanvas"
 width="1280"
 height="720"
 ></canvas>
+
 </div>
 
 </div>
@@ -534,7 +635,10 @@ height="720"
 
 <h2>🎥 Oluşturulan Video</h2>
 
-<video id="resultVideo" controls></video>
+<video
+id="resultVideo"
+controls
+></video>
 
 <div
 id="downloadArea"
@@ -548,7 +652,10 @@ style="margin-top:10px"
 
 <h2>🛠️ Teknik Günlük</h2>
 
-<div id="log" class="log"></div>
+<div
+id="log"
+class="log"
+></div>
 
 </div>
 
@@ -560,9 +667,9 @@ style="margin-top:10px"
 "use strict";
 
 
-/* =========================================================
+/* =====================================================
 GLOBAL
-========================================================= */
+===================================================== */
 
 var scenes=[];
 var sceneCounter=1;
@@ -602,9 +709,9 @@ var downloadArea=
 document.getElementById("downloadArea");
 
 
-/* =========================================================
+/* =====================================================
 LOG
-========================================================= */
+===================================================== */
 
 function log(message){
 
@@ -624,7 +731,8 @@ console.log(message);
 
 function status(message){
 
-statusBox.textContent=message;
+statusBox.textContent=
+message;
 
 log(message);
 
@@ -648,9 +756,9 @@ value+"%";
 }
 
 
-/* =========================================================
+/* =====================================================
 CANVAS
-========================================================= */
+===================================================== */
 
 function updateCanvasSize(){
 
@@ -677,16 +785,9 @@ canvas.height=720;
 }
 
 
-document.getElementById("format")
-.addEventListener(
-"change",
-updateCanvasSize
-);
-
-
-/* =========================================================
+/* =====================================================
 SENTENCE SPLITTER
-========================================================= */
+===================================================== */
 
 function splitSentences(text){
 
@@ -707,7 +808,8 @@ text.match(
 /[^.!?…]+(?:[.!?…]+|$)/g
 );
 
-if(!matches)return[text];
+if(!matches)
+return[text];
 
 var result=[];
 
@@ -730,9 +832,9 @@ return result;
 }
 
 
-/* =========================================================
+/* =====================================================
 VISUAL DIRECTOR
-========================================================= */
+===================================================== */
 
 function analyzeScene(text){
 
@@ -741,53 +843,69 @@ String(text||"")
 .toLowerCase();
 
 
-var person="a person";
+var person="an adult person";
 
+
+/* KİŞİ */
 
 if(
 t.indexOf("mutter")>=0 ||
 t.indexOf("mother")>=0
 ){
 
-person="a mother";
+person="an adult woman";
 
 }
 
+if(
+t.indexOf("vater")>=0 ||
+t.indexOf("father")>=0
+){
+
+person="an adult man";
+
+}
 
 if(
 t.indexOf("mann")>=0 ||
-t.indexOf("vater")>=0 ||
-t.indexOf("unternehmer")>=0
+t.indexOf("unternehmer")>=0 ||
+t.indexOf("entrepreneur")>=0
 ){
 
-person="a man";
+person="an adult man";
 
 }
-
 
 if(
-t.indexOf("frau")>=0 ||
-t.indexOf("sie ")>=0
+t.indexOf("frau")>=0
 ){
 
-person="a woman";
+person="an adult woman";
 
 }
-
 
 if(
 t.indexOf("kind")>=0 ||
-t.indexOf("junge")>=0 ||
-t.indexOf("mädchen")>=0
+t.indexOf("junge")>=0
 ){
 
 person="a young person";
 
 }
 
+if(
+t.indexOf("mädchen")>=0
+){
+
+person="a young woman";
+
+}
+
+
+/* MEKÂN */
 
 var location=
-"an authentic everyday environment";
+"an authentic everyday interior";
 
 
 if(
@@ -800,9 +918,16 @@ location=
 
 }
 
+else if(
+t.indexOf("wohnung")>=0
+){
 
-if(
-t.indexOf("wohnung")>=0 ||
+location=
+"a modest apartment";
+
+}
+
+else if(
 t.indexOf("haus")>=0
 ){
 
@@ -811,53 +936,69 @@ location=
 
 }
 
-
-if(
+else if(
 t.indexOf("büro")>=0 ||
 t.indexOf("firma")>=0
 ){
 
 location=
-"a realistic office environment";
+"a realistic office";
 
 }
 
-
-if(
+else if(
 t.indexOf("restaurant")>=0
 ){
 
 location=
-"an authentic restaurant";
+"an authentic restaurant interior";
 
 }
 
+else if(
+t.indexOf("schule")>=0
+){
 
-if(
-t.indexOf("schule")>=0 ||
+location=
+"an authentic school environment";
+
+}
+
+else if(
 t.indexOf("universität")>=0
 ){
 
 location=
-"an authentic educational environment";
+"an authentic university environment";
+
+}
+
+else if(
+t.indexOf("straße")>=0
+){
+
+location=
+"an authentic urban street";
 
 }
 
 
+/* EYLEM */
+
 var action=
-"experiencing the moment described in the narration";
+"experiencing the moment naturally";
 
 
 /*
-IMPORTANT:
-
-Burada doğrudan
-"writing on paper"
-demiyoruz.
-
-Bunun yerine:
-"holding a pen over a completely blank sheet"
-kullanıyoruz.
+Burada özellikle:
+writing
+reading
+newspaper
+document
+letter
+screen data
+gibi yazı üreten eylemleri
+görsel promptuna koymuyoruz.
 */
 
 if(
@@ -868,81 +1009,134 @@ t.indexOf("geschrieben")>=0
 ){
 
 action=
-"holding a pen over a completely blank sheet of paper";
+"sitting quietly at a small table with focused body language";
 
 }
 
-
-if(
+else if(
 t.indexOf("arbeit")>=0 ||
 t.indexOf("arbeitete")>=0 ||
 t.indexOf("arbeiten")>=0
 ){
 
 action=
-"working with determination";
+"working with quiet determination";
 
 }
 
+else if(
+t.indexOf("ging")>=0 ||
+t.indexOf("gehen")>=0
+){
 
-if(
+action=
+"walking naturally through the environment";
+
+}
+
+else if(
 t.indexOf("weinte")>=0 ||
 t.indexOf("weinen")>=0
 ){
 
 action=
-"sitting quietly with visible emotion";
+"sitting quietly with subtle emotional expression";
 
 }
 
-
-if(
+else if(
 t.indexOf("telefon")>=0
 ){
 
 action=
-"using a telephone with a completely blank screen";
+"holding a simple unbranded phone with a completely dark blank screen";
 
 }
 
-
-var emotion=
-"Natural facial expression, subtle human emotion, believable body language";
-
-
-if(
-t.indexOf("angst")>=0 ||
-t.indexOf("ängst")>=0 ||
-t.indexOf("sorge")>=0
+else if(
+t.indexOf("sprach")>=0 ||
+t.indexOf("sprechen")>=0
 ){
 
-emotion=
-"Tired and worried expression, subtle emotional tension";
+action=
+"speaking naturally with expressive body language";
 
 }
 
-
-if(
-t.indexOf("hoffnung")>=0 ||
-t.indexOf("hoffnungsvoll")>=0
-){
-
-emotion=
-"Quietly hopeful expression, subtle optimism";
-
-}
-
-
-if(
+else if(
 t.indexOf("erfolg")>=0 ||
 t.indexOf("erfolgreich")>=0
 ){
 
-emotion=
-"Confident but natural expression, restrained sense of achievement";
+action=
+"standing with quiet confidence and restrained satisfaction";
 
 }
 
+
+/* DUYGU */
+
+var emotion=
+"natural facial expression, believable body language";
+
+
+if(
+t.indexOf("angst")>=0 ||
+t.indexOf("ängst")>=0
+){
+
+emotion=
+"subtle worried expression and restrained emotional tension";
+
+}
+
+else if(
+t.indexOf("sorge")>=0
+){
+
+emotion=
+"tired and worried expression";
+
+}
+
+else if(
+t.indexOf("hoffnung")>=0
+){
+
+emotion=
+"quietly hopeful expression";
+
+}
+
+else if(
+t.indexOf("traurig")>=0
+){
+
+emotion=
+"subtle sadness and thoughtful expression";
+
+}
+
+else if(
+t.indexOf("glücklich")>=0
+){
+
+emotion=
+"natural happiness and genuine emotional warmth";
+
+}
+
+else if(
+t.indexOf("erfolg")>=0
+){
+
+emotion=
+"quiet confidence and restrained sense of achievement";
+
+}
+
+
+/* DÖNEM */
 
 var period=
 "authentic contemporary details";
@@ -954,32 +1148,32 @@ t.indexOf("neunziger")>=0
 ){
 
 period=
-"authentic 1990s period details";
+"authentic 1990s visual details";
 
 }
 
-
-if(
+else if(
 t.indexOf("1980")>=0 ||
 t.indexOf("achtziger")>=0
 ){
 
 period=
-"authentic 1980s period details";
+"authentic 1980s visual details";
 
 }
 
-
-if(
+else if(
 t.indexOf("1970")>=0 ||
 t.indexOf("siebziger")>=0
 ){
 
 period=
-"authentic 1970s period details";
+"authentic 1970s visual details";
 
 }
 
+
+/* IŞIK */
 
 var lighting=
 "soft cinematic natural lighting";
@@ -991,7 +1185,50 @@ t.indexOf("nachts")>=0
 ){
 
 lighting=
-"soft warm practical light mixed with subtle night window light";
+"soft warm practical lighting mixed with subtle blue night light";
+
+}
+
+else if(
+t.indexOf("morgen")>=0
+){
+
+lighting=
+"soft early morning natural light";
+
+}
+
+else if(
+t.indexOf("sonne")>=0
+){
+
+lighting=
+"soft natural sunlight";
+
+}
+
+
+/* KAMERA */
+
+var camera=
+"cinematic medium shot";
+
+
+if(
+t.indexOf("gesicht")>=0
+){
+
+camera=
+"cinematic close-up portrait";
+
+}
+
+else if(
+t.indexOf("straße")>=0
+){
+
+camera=
+"cinematic wide establishing shot";
 
 }
 
@@ -1010,7 +1247,7 @@ period:period,
 
 lighting:lighting,
 
-camera:"cinematic medium shot",
+camera:camera,
 
 lens:"35mm documentary lens"
 
@@ -1019,21 +1256,15 @@ lens:"35mm documentary lens"
 }
 
 
-/* =========================================================
-🔒 NO TEXT ENGINE — MASTER BLOCK
-========================================================= */
+/* =====================================================
+NO TEXT BLOCK
+===================================================== */
 
 function createNoTextBlock(){
 
 return [
 
-"PURE VISUAL SCENE ONLY.",
-
-"DO NOT RENDER ANY WRITTEN CONTENT.",
-
-"ZERO VISIBLE WRITING.",
-
-"ABSOLUTELY NO TEXT IN THE IMAGE.",
+"ABSOLUTELY NO VISIBLE TEXT.",
 
 "NO SUBTITLES.",
 
@@ -1053,105 +1284,103 @@ return [
 
 "NO WATERMARKS.",
 
+"NO BRAND NAMES.",
+
 "NO WRITTEN LANGUAGE.",
 
-"NO READABLE SIGNS.",
+"NO SIGNS.",
 
 "NO LABELS.",
 
-"NO BRAND NAMES.",
+"NO HEADLINES.",
 
-"NO TEXT ON SCREENS.",
+"NO NEWSPAPER WRITING.",
 
-"NO TEXT ON PAPERS.",
+"NO BOOK WRITING.",
 
-"NO TEXT ON BOOKS.",
+"NO PAPER WRITING.",
 
-"NO TEXT ON NEWSPAPERS.",
+"NO SCREEN WRITING.",
 
-"NO TEXT ON MAGAZINES.",
+"NO CLOTHING WRITING.",
 
-"NO TEXT ON CLOTHING.",
+"NO WALL WRITING.",
 
-"NO TEXT ON WALLS.",
-
-"NO TEXT ON SIGNS.",
-
-"NO TEXT ON OBJECTS.",
-
-"NO TEXT ON PACKAGING.",
-
-"NO TEXT ON VEHICLES.",
+"NO OBJECT WRITING.",
 
 "NO READABLE SYMBOLS.",
 
-"IF A PAPER IS VISIBLE, IT MUST BE COMPLETELY BLANK.",
+"ALL VISIBLE SURFACES MUST BE BLANK.",
 
-"IF A BOOK IS VISIBLE, ITS COVER AND PAGES MUST CONTAIN NO WRITING.",
+"ALL SCREENS MUST BE COMPLETELY BLANK.",
 
-"IF A SCREEN IS VISIBLE, THE SCREEN MUST BE BLANK.",
+"ALL PAPER MUST BE COMPLETELY BLANK.",
 
-"IF A SIGN IS VISIBLE, IT MUST BE BLANK WITH NO LETTERS.",
+"ALL BOOK COVERS MUST BE PLAIN AND BLANK.",
 
-"IF CLOTHING IS VISIBLE, IT MUST HAVE NO PRINT OR WRITING.",
+"ALL CLOTHING MUST BE UNBRANDED.",
 
-"ALL VISIBLE SURFACES MUST BE FREE OF WRITTEN CONTENT.",
+"ALL SIGNS MUST BE ABSENT OR COMPLETELY BLANK.",
 
-"THE IMAGE MUST CONTAIN ONLY THE VISUAL SCENE.",
+"VISUAL IMAGE ONLY.",
 
-"SUBTITLES WILL BE ADDED SEPARATELY DURING VIDEO EDITING."
+"NO WRITING OF ANY KIND."
 
 ].join(" ");
 
 }
 
 
-/* =========================================================
-PROMPT CREATOR
-========================================================= */
+/* =====================================================
+V48.9 PURE VISUAL PROMPT
+===================================================== */
 
 function makePrompt(text){
+
+/*
+ÇOK ÖNEMLİ:
+
+text burada yalnızca analiz amacıyla kullanılıyor.
+
+RAW STORY TEXT PROMPTA EKLENMİYOR.
+
+Yani:
+
+"Scene based on..."
+yok.
+
+"Story:"
+yok.
+
+"narration:"
+yok.
+
+Almanca cümle yok.
+*/
 
 var a=
 analyzeScene(text);
 
 
-var cleanText=
-String(text||"")
-.replace(/"/g,"")
-.replace(/\s+/g," ")
-.trim();
-
-
 /*
-NO TEXT ENGINE:
-
-Başta + sahnenin ortasında + sonda.
+SADECE VISUAL ATTRIBUTES
 */
 
 var prompt=
 
-"PURE VISUAL SCENE ONLY. "+
-
-"Create a photorealistic cinematic documentary photograph. "+
-
-"Do not reproduce any written content from the narration. "+
-
-"Scene based on this narration moment: "+
-
-"\""+cleanText+"\". "+
+"Photorealistic cinematic documentary photograph. "+
 
 "Show "+
 
 a.person+
 
-" "+
-
-a.action+
-
 " in "+
 
 a.location+
+
+", "+
+
+a.action+
 
 ". "+
 
@@ -1165,7 +1394,7 @@ a.period+
 
 a.lighting+
 
-", "+
+". "+
 
 a.camera+
 
@@ -1179,9 +1408,9 @@ a.lens+
 
 "natural facial expression, "+
 
-"authentic clothing without any printed words, "+
+"authentic unbranded clothing, "+
 
-"realistic proportions, "+
+"realistic human proportions, "+
 
 "believable environment, "+
 
@@ -1189,23 +1418,13 @@ a.lens+
 
 "subtle film grain, "+
 
+"natural cinematic colors, "+
+
 "strong visual storytelling, "+
 
-"cinematic composition, "+
+"high detail, realistic photography. "+
 
-"high detail, "+
-
-"natural colors, "+
-
-"realistic photography. "+
-
-"IMPORTANT: "+
-
-createNoTextBlock()+
-
-" FINAL REQUIREMENT: "+
-
-"VISUAL IMAGE ONLY, NO WRITING OF ANY KIND.";
+createNoTextBlock();
 
 
 return prompt;
@@ -1213,9 +1432,9 @@ return prompt;
 }
 
 
-/* =========================================================
+/* =====================================================
 NEGATIVE PROMPT
-========================================================= */
+===================================================== */
 
 function createNegativePrompt(){
 
@@ -1223,9 +1442,11 @@ return [
 
 "text",
 
-"written text",
+"visible text",
 
-"visible writing",
+"writing",
+
+"handwriting",
 
 "subtitles",
 
@@ -1241,7 +1462,7 @@ return [
 
 "title",
 
-"headlines",
+"headline",
 
 "logo",
 
@@ -1249,19 +1470,19 @@ return [
 
 "watermark",
 
+"brand",
+
 "brand name",
 
 "sign",
 
-"readable sign",
-
 "label",
+
+"poster",
 
 "book text",
 
 "newspaper text",
-
-"magazine text",
 
 "paper text",
 
@@ -1275,37 +1496,29 @@ return [
 
 "wall text",
 
-"poster text",
-
-"packaging text",
-
-"vehicle text",
-
 "graffiti",
 
-"writing",
-
-"handwriting",
-
-"alphabet",
-
-"symbols that resemble writing"
+"readable symbols"
 
 ].join(", ");
 
 }
 
 
-/* =========================================================
+/* =====================================================
 CREATE SCENES
-========================================================= */
+===================================================== */
 
 function createScenes(){
 
-log("CREATE SCENES START");
+log(
+"CREATE SCENES START"
+);
+
 
 var text=
 story.value.trim();
+
 
 if(!text){
 
@@ -1367,6 +1580,11 @@ subtitle:textPart,
 
 subtitleEnabled:false,
 
+/*
+BURADA PROMPTA TEXT GÖNDERİLMİYOR.
+makePrompt sadece visual attributes üretiyor.
+*/
+
 prompt:
 makePrompt(textPart),
 
@@ -1406,15 +1624,16 @@ renderScenes();
 status(
 "✅ "+
 scenes.length+
-" sahne oluşturuldu. NO TEXT ENGINE aktif."
+" sahne oluşturuldu. "+
+"Senaryo görsel promptundan tamamen çıkarıldı."
 );
 
 }
 
 
-/* =========================================================
+/* =====================================================
 ADD SCENE
-========================================================= */
+===================================================== */
 
 function addScene(){
 
@@ -1461,14 +1680,16 @@ analyzeScene("")
 
 renderScenes();
 
-status("➕ Yeni sahne eklendi.");
+status(
+"➕ Yeni sahne eklendi."
+);
 
 }
 
 
-/* =========================================================
-RENDER SCENES
-========================================================= */
+/* =====================================================
+RENDER SCENES UI
+===================================================== */
 
 function renderScenes(){
 
@@ -1488,9 +1709,9 @@ renderOneScene(i);
 }
 
 
-/* =========================================================
-ONE SCENE UI
-========================================================= */
+/* =====================================================
+ONE SCENE
+===================================================== */
 
 function renderOneScene(index){
 
@@ -1515,19 +1736,23 @@ div.innerHTML=`
 <div>
 
 <span class="badge">
+
 ${
 scene.duration>0
 ?scene.duration.toFixed(2)+" sn"
 :"WAV bekleniyor"
 }
+
 </span>
 
 <span class="badge">
+
 ${
 scene.subtitleEnabled
 ?"Altyazı AÇIK"
 :"Altyazı KAPALI"
 }
+
 </span>
 
 </div>
@@ -1542,7 +1767,7 @@ scene.subtitleEnabled
 <div>
 
 <label>
-SAHNE METNİ
+🎙️ SAHNE SENARYOSU
 </label>
 
 <textarea
@@ -1556,7 +1781,7 @@ id="sceneText_${index}"
 <div>
 
 <label>
-ALTYAZI METNİ
+💬 ALTYAZI
 </label>
 
 <textarea
@@ -1594,13 +1819,21 @@ scene.subtitleEnabled
 <div>
 
 <label>
-🧠 Z-IMAGE GÖRSEL PROMPT
+🧠 Z-IMAGE PURE VISUAL PROMPT
 </label>
 
 <textarea
 class="promptBox"
 id="prompt_${index}"
 ></textarea>
+
+<div class="pureVisual">
+
+✅ <b>SENARYO BU KUTUYA GİRMİYOR.</b><br>
+
+Bu prompt yalnızca görsel özelliklerden oluşur.
+
+</div>
 
 </div>
 
@@ -1615,15 +1848,6 @@ id="prompt_${index}"
 class="negativeBox"
 id="negative_${index}"
 ></textarea>
-
-<div class="noTextNotice">
-
-🔒 <b>NO TEXT ENGINE AKTİF</b><br>
-
-Bu promptta yazı yasağı otomatik olarak bulunur.
-Prompt yenilendiğinde tekrar oluşturulur.
-
-</div>
 
 </div>
 
@@ -1647,7 +1871,7 @@ onclick="refreshPrompt(${index})"
 <button
 onclick="copyPrompt(${index})"
 >
-📋 PROMPT KOPYALA
+📋 Z-IMAGE PROMPT KOPYALA
 </button>
 
 <button
@@ -1687,7 +1911,7 @@ onchange="handleImageUpload(${index},this)"
 
 <button
 onclick="removeImage(${index})"
-class="danger small"
+class="danger"
 >
 🗑️ GÖRSELİ SİL
 </button>
@@ -1769,7 +1993,6 @@ onclick="generateSceneVoice(${index})"
 🎙️ BU SAHNEYİ SESLENDİR
 </button>
 
-
 <button
 onclick="downloadSceneAudio(${index})"
 >
@@ -1808,21 +2031,18 @@ scene.audioURL
 </span>
 
 <span class="badge">
-${
+🎙️ ${
 scene.duration>0
-?"🎙️ WAV: "+
-scene.duration.toFixed(2)+
-" sn"
-:"🎙️ WAV yok"
+?"WAV: "+scene.duration.toFixed(2)+" sn"
+:"WAV yok"
 }
 </span>
 
 <span class="badge">
-🖼️ Görsel:
-${
+🖼️ ${
 scene.image
-?"Hazır"
-:"Yüklenmedi"
+?"Görsel hazır"
+:"Görsel yok"
 }
 </span>
 
@@ -1875,9 +2095,9 @@ scene.motion;
 }
 
 
-/* =========================================================
-SYNC
-========================================================= */
+/* =====================================================
+SYNC SCENE
+===================================================== */
 
 function syncScene(index){
 
@@ -1909,11 +2129,16 @@ document.getElementById(
 if(textEl)
 scene.text=textEl.value;
 
+
 if(subtitleEl)
-scene.subtitle=subtitleEl.value;
+scene.subtitle=
+subtitleEl.value;
+
 
 if(promptEl)
-scene.prompt=promptEl.value;
+scene.prompt=
+promptEl.value;
+
 
 if(negativeEl)
 scene.negativePrompt=
@@ -1922,9 +2147,9 @@ negativeEl.value;
 }
 
 
-/* =========================================================
+/* =====================================================
 SUBTITLE
-========================================================= */
+===================================================== */
 
 function toggleSubtitle(index){
 
@@ -1949,9 +2174,9 @@ scenes[index].subtitleEnabled
 }
 
 
-/* =========================================================
+/* =====================================================
 MOTION
-========================================================= */
+===================================================== */
 
 function changeMotion(index,value){
 
@@ -1960,19 +2185,26 @@ scenes[index].motion=value;
 }
 
 
-/* =========================================================
+/* =====================================================
 REFRESH ANALYSIS
-========================================================= */
+===================================================== */
 
 function refreshAnalysis(index){
 
 syncScene(index);
+
 
 scenes[index].visualAnalysis=
 analyzeScene(
 scenes[index].text
 );
 
+
+/*
+RAW STORY TEXT YOK.
+Sadece görsel özellikler.
+*/
+
 scenes[index].prompt=
 makePrompt(
 scenes[index].text
@@ -1981,51 +2213,58 @@ scenes[index].text
 scenes[index].negativePrompt=
 createNegativePrompt();
 
+
 renderScenes();
+
 
 status(
 "🧠 Sahne "+
 (index+1)+
-" analizi ve NO TEXT promptu yenilendi."
+" Visual Director yenilendi."
 );
 
 }
 
 
-/* =========================================================
+/* =====================================================
 REFRESH PROMPT
-========================================================= */
+===================================================== */
 
 function refreshPrompt(index){
 
 syncScene(index);
 
+
 scenes[index].prompt=
 makePrompt(
 scenes[index].text
 );
 
+
 scenes[index].negativePrompt=
 createNegativePrompt();
 
+
 renderScenes();
+
 
 status(
 "🔄 Sahne "+
 (index+1)+
-" Z-Image promptu yenilendi. NO TEXT ENGINE tekrar eklendi."
+" PURE VISUAL promptu yenilendi."
 );
 
 }
 
 
-/* =========================================================
+/* =====================================================
 COPY
-========================================================= */
+===================================================== */
 
 async function copyPrompt(index){
 
 syncScene(index);
+
 
 try{
 
@@ -2033,13 +2272,13 @@ await navigator.clipboard.writeText(
 scenes[index].prompt
 );
 
+
 status(
-"📋 Sahne "+
-(index+1)+
-" prompt kopyalandı."
+"📋 Z-Image PURE VISUAL prompt kopyalandı."
 );
 
-}catch(e){
+
+}catch(error){
 
 alert(
 "Prompt kopyalanamadı."
@@ -2054,17 +2293,20 @@ async function copyNegative(index){
 
 syncScene(index);
 
+
 try{
 
 await navigator.clipboard.writeText(
 scenes[index].negativePrompt
 );
 
+
 status(
 "📋 Negative prompt kopyalandı."
 );
 
-}catch(e){
+
+}catch(error){
 
 alert(
 "Negative prompt kopyalanamadı."
@@ -2075,16 +2317,18 @@ alert(
 }
 
 
-/* =========================================================
-IMAGE
-========================================================= */
+/* =====================================================
+IMAGE UPLOAD
+===================================================== */
 
 function handleImageUpload(index,input){
 
 var file=
 input.files&&input.files[0];
 
-if(!file)return;
+
+if(!file)
+return;
 
 
 if(
@@ -2120,6 +2364,7 @@ scene.imageURL
 
 scene.image=file;
 
+
 scene.imageURL=
 URL.createObjectURL(file);
 
@@ -2128,11 +2373,13 @@ var img=
 new Image();
 
 
-img.onload=function(){
+img.onload=
+function(){
 
 scene.imageObject=img;
 
 renderScenes();
+
 
 status(
 "🖼️ Sahne "+
@@ -2148,6 +2395,10 @@ scene.imageURL;
 
 }
 
+
+/* =====================================================
+REMOVE IMAGE
+===================================================== */
 
 function removeImage(index){
 
@@ -2174,7 +2425,9 @@ scene.imageURL=null;
 
 scene.imageObject=null;
 
+
 renderScenes();
+
 
 status(
 "🗑️ Sahne "+
@@ -2185,9 +2438,9 @@ status(
 }
 
 
-/* =========================================================
+/* =====================================================
 DELETE SCENE
-========================================================= */
+===================================================== */
 
 function deleteScene(index){
 
@@ -2234,9 +2487,14 @@ scene.audioURL
 }
 
 
-scenes.splice(index,1);
+scenes.splice(
+index,
+1
+);
+
 
 renderScenes();
+
 
 status(
 "🗑️ Sahne silindi."
@@ -2245,9 +2503,9 @@ status(
 }
 
 
-/* =========================================================
-PIPER
-========================================================= */
+/* =====================================================
+PIPER LOAD
+===================================================== */
 
 async function loadTTS(){
 
@@ -2275,14 +2533,17 @@ status(
 
 return ttsModule;
 
+
 }catch(error){
 
 console.error(error);
+
 
 status(
 "❌ Piper TTS yüklenemedi: "+
 error.message
 );
+
 
 throw error;
 
@@ -2291,9 +2552,9 @@ throw error;
 }
 
 
-/* =========================================================
+/* =====================================================
 AUDIO DURATION
-========================================================= */
+===================================================== */
 
 function getAudioDuration(url){
 
@@ -2303,7 +2564,9 @@ function(resolve){
 var audio=
 document.createElement("audio");
 
-audio.preload="metadata";
+
+audio.preload=
+"metadata";
 
 
 audio.onloadedmetadata=
@@ -2311,6 +2574,7 @@ function(){
 
 var duration=
 audio.duration;
+
 
 resolve(
 Number.isFinite(duration)
@@ -2337,9 +2601,9 @@ audio.src=url;
 }
 
 
-/* =========================================================
-SINGLE TTS
-========================================================= */
+/* =====================================================
+GENERATE VOICE
+===================================================== */
 
 async function generateSceneVoice(index){
 
@@ -2357,6 +2621,7 @@ return;
 var scene=
 scenes[index];
 
+
 syncScene(index);
 
 
@@ -2373,8 +2638,10 @@ return;
 
 voiceBusy=true;
 
+
 scene.ttsState=
 "⏳ Ses oluşturuluyor...";
+
 
 renderScenes();
 
@@ -2428,6 +2695,7 @@ p.loaded*
 p.total
 );
 
+
 status(
 "🎙️ Model yükleniyor: "+
 percent+
@@ -2450,7 +2718,8 @@ message
 });
 
 
-ttsSessionVoice=voice;
+ttsSessionVoice=
+voice;
 
 }
 
@@ -2459,6 +2728,7 @@ scene.audio=
 await ttsSession.predict(
 scene.text.trim()
 );
+
 
 }else{
 
@@ -2535,11 +2805,14 @@ duration.toFixed(2)+
 
 console.error(error);
 
+
 scene.ttsState=
 "❌ Hata: "+
 error.message;
 
+
 renderScenes();
+
 
 status(
 "❌ Sahne "+
@@ -2547,6 +2820,7 @@ status(
 " TTS hatası: "+
 error.message
 );
+
 
 }finally{
 
@@ -2557,9 +2831,9 @@ voiceBusy=false;
 }
 
 
-/* =========================================================
-ALL TTS
-========================================================= */
+/* =====================================================
+ALL VOICES
+===================================================== */
 
 async function generateAllSceneVoices(){
 
@@ -2617,7 +2891,9 @@ scenes.length*
 
 voiceBusy=false;
 
+
 await generateSceneVoice(i);
+
 
 voiceBusy=true;
 
@@ -2640,10 +2916,12 @@ status(
 
 console.error(error);
 
+
 status(
 "❌ Toplu seslendirme durdu: "+
 error.message
 );
+
 
 }finally{
 
@@ -2654,9 +2932,9 @@ voiceBusy=false;
 }
 
 
-/* =========================================================
+/* =====================================================
 DOWNLOAD WAV
-========================================================= */
+===================================================== */
 
 function downloadSceneAudio(index){
 
@@ -2678,26 +2956,31 @@ return;
 var a=
 document.createElement("a");
 
+
 a.href=
 scene.audioURL;
+
 
 a.download=
 "GeldStory_Sahne_"+
 (index+1)+
 ".wav";
 
+
 document.body.appendChild(a);
 
+
 a.click();
+
 
 a.remove();
 
 }
 
 
-/* =========================================================
-IMAGE DRAW
-========================================================= */
+/* =====================================================
+DRAW IMAGE
+===================================================== */
 
 function drawImageCover(
 image,
@@ -2709,6 +2992,7 @@ if(!image){
 
 ctx.fillStyle="#050608";
 
+
 ctx.fillRect(
 0,
 0,
@@ -2716,18 +3000,23 @@ canvas.width,
 canvas.height
 );
 
+
 ctx.fillStyle="#777";
+
 
 ctx.textAlign="center";
 
+
 ctx.font=
 "bold 28px Arial";
+
 
 ctx.fillText(
 "GÖRSEL YÜKLENMEDİ",
 canvas.width/2,
 canvas.height/2
 );
+
 
 return;
 
@@ -2749,7 +3038,8 @@ image.naturalHeight||
 image.height;
 
 
-if(!iw||!ih)return;
+if(!iw||!ih)
+return;
 
 
 var scale=
@@ -2776,7 +3066,9 @@ zoom=
 0.06*
 progress;
 
-}else if(
+}
+
+else if(
 motion==="zoomOut"
 ){
 
@@ -2785,7 +3077,9 @@ zoom=
 0.06*
 progress;
 
-}else if(
+}
+
+else if(
 motion==="kenBurns"
 ){
 
@@ -2858,20 +3152,17 @@ dh
 }
 
 
-/* =========================================================
+/* =====================================================
 SUBTITLE
-========================================================= */
+===================================================== */
 
 function drawSubtitle(scene){
 
 if(
 !scene ||
 !scene.subtitleEnabled
-){
-
+)
 return;
-
-}
 
 
 var text=
@@ -2882,7 +3173,8 @@ scene.text||
 ).trim();
 
 
-if(!text)return;
+if(!text)
+return;
 
 
 var maxWidth=
@@ -2902,6 +3194,7 @@ ctx.font=
 "bold "+
 fontSize+
 "px Arial";
+
 
 ctx.textAlign="center";
 
@@ -2936,7 +3229,8 @@ maxWidth
 if(line)
 lines.push(line);
 
-line=words[i];
+line=
+words[i];
 
 }else{
 
@@ -2954,9 +3248,11 @@ lines.push(line);
 var lineHeight=
 fontSize*1.3;
 
+
 var totalHeight=
 lines.length*
 lineHeight;
+
 
 var centerY=
 canvas.height-
@@ -2970,10 +3266,13 @@ Math.max(
 fontSize*0.16
 );
 
+
 ctx.strokeStyle=
 "rgba(0,0,0,.9)";
 
-ctx.fillStyle="#fff";
+
+ctx.fillStyle=
+"#fff";
 
 
 for(
@@ -2994,6 +3293,7 @@ canvas.width/2,
 yy
 );
 
+
 ctx.fillText(
 lines[j],
 canvas.width/2,
@@ -3005,9 +3305,9 @@ yy
 }
 
 
-/* =========================================================
+/* =====================================================
 DRAW SCENE
-========================================================= */
+===================================================== */
 
 function drawScene(
 scene,
@@ -3029,24 +3329,14 @@ scene.motion
 );
 
 
-/*
-IMPORTANT:
-
-Buradaki yazı yalnızca Mina'nın
-ayrı altyazı katmanıdır.
-
-Görsel promptunun içine yazı
-oluşturulmaz.
-*/
-
 drawSubtitle(scene);
 
 }
 
 
-/* =========================================================
+/* =====================================================
 PREVIEW
-========================================================= */
+===================================================== */
 
 var previewTimer=null;
 
@@ -3081,12 +3371,15 @@ previewTimer
 
 function loop(now){
 
-if(index>=scenes.length)
+if(
+index>=scenes.length
+)
 return;
 
 
 var scene=
 scenes[index];
+
 
 var duration=
 scene.duration>0
@@ -3145,9 +3438,9 @@ status(
 }
 
 
-/* =========================================================
+/* =====================================================
 VALIDATE
-========================================================= */
+===================================================== */
 
 function validateScenesBeforeRender(){
 
@@ -3199,7 +3492,7 @@ alert(
 "Sahne "+
 (i+1)+
 " için görsel yok.\n\n"+
-"Her sahneye görsel yükle."
+"Her sahneye Z-Image'dan görsel oluşturup yükle."
 );
 
 return false;
@@ -3214,9 +3507,9 @@ return true;
 }
 
 
-/* =========================================================
+/* =====================================================
 RENDER VIDEO
-========================================================= */
+===================================================== */
 
 async function renderVideo(){
 
@@ -3431,8 +3724,8 @@ audioArrayBuffer
 
 
 /*
-WAV gerçek süresi.
-Görsel de tam aynı sürede oynar.
+WAV GERÇEK SÜRESİ =
+GÖRSEL GERÇEK SÜRESİ
 */
 
 scene.duration=
@@ -3442,8 +3735,10 @@ audioBuffer.duration;
 var source=
 audioCtx.createBufferSource();
 
+
 source.buffer=
 audioBuffer;
+
 
 source.connect(
 destination
@@ -3475,6 +3770,7 @@ while(running){
 
 var now=
 performance.now();
+
 
 var elapsed=
 (now-startTime)/1000;
@@ -3565,7 +3861,8 @@ var url=
 URL.createObjectURL(blob);
 
 
-resultVideo.src=url;
+resultVideo.src=
+url;
 
 
 downloadArea.innerHTML="";
@@ -3574,31 +3871,42 @@ downloadArea.innerHTML="";
 var download=
 document.createElement("a");
 
-download.href=url;
+
+download.href=
+url;
+
 
 download.download=
-"GeldStory_Mina_V48_8.webm";
+"GeldStory_Mina_V48_9.webm";
+
 
 download.textContent=
 "⬇️ WEBM VİDEOYU KAYDET";
 
+
 download.style.display=
 "inline-block";
+
 
 download.style.padding=
 "12px 16px";
 
+
 download.style.background=
 "#16865a";
+
 
 download.style.color=
 "#fff";
 
+
 download.style.borderRadius=
 "9px";
 
+
 download.style.textDecoration=
 "none";
+
 
 download.style.fontWeight=
 "bold";
@@ -3613,7 +3921,7 @@ setProgress(100);
 
 
 status(
-"✅ Render tamamlandı. Video hazır."
+"✅ V48.9 render tamamlandı."
 );
 
 
@@ -3621,15 +3929,18 @@ status(
 
 console.error(error);
 
+
 status(
 "❌ Render hatası: "+
 error.message
 );
 
+
 alert(
 "Render hatası:\n\n"+
 error.message
 );
+
 
 }finally{
 
@@ -3640,9 +3951,9 @@ renderBusy=false;
 }
 
 
-/* =========================================================
+/* =====================================================
 CLEAR
-========================================================= */
+===================================================== */
 
 function clearAll(){
 
@@ -3716,12 +4027,15 @@ resultVideo.removeAttribute(
 "src"
 );
 
+
 resultVideo.load();
 
 
 downloadArea.innerHTML="";
 
+
 setProgress(0);
+
 
 status(
 "🗑️ Mina temizlendi."
@@ -3730,9 +4044,9 @@ status(
 }
 
 
-/* =========================================================
+/* =====================================================
 EVENTS
-========================================================= */
+===================================================== */
 
 document.getElementById(
 "createBtn"
@@ -3788,7 +4102,8 @@ document.getElementById(
 "change",
 function(){
 
-var value=this.value;
+var value=
+this.value;
 
 
 for(
@@ -3808,14 +4123,16 @@ renderScenes();
 );
 
 
-/* =========================================================
+/* =====================================================
 INIT
-========================================================= */
+===================================================== */
 
 updateCanvasSize();
 
 
-ctx.fillStyle="#050608";
+ctx.fillStyle=
+"#050608";
+
 
 ctx.fillRect(
 0,
@@ -3825,34 +4142,43 @@ canvas.height
 );
 
 
-ctx.fillStyle="#777";
+ctx.fillStyle=
+"#777";
 
-ctx.textAlign="center";
+
+ctx.textAlign=
+"center";
+
 
 ctx.font=
 "bold 24px Arial";
 
+
 ctx.fillText(
-"Mina Video AI hazır",
+"Mina Video AI V48.9 hazır",
 canvas.width/2,
 canvas.height/2
 );
 
 
 log(
-"Mina Video AI V48.8 başlatıldı."
+"Mina Video AI V48.9 başlatıldı."
+);
+
+log(
+"🔒 PURE VISUAL ENGINE aktif."
+);
+
+log(
+"🚫 RAW STORY TEXT görsel promptuna gönderilmiyor."
+);
+
+log(
+"🚫 Almanca senaryo cümlesi Z-Image promptunda yok."
 );
 
 log(
 "🔒 NO TEXT ENGINE aktif."
-);
-
-log(
-"📝 Görsel promptlarında otomatik yazı yasağı aktif."
-);
-
-log(
-"📄 Kağıt/kitap/ekran/tabela gibi nesneler için blank kuralları aktif."
 );
 
 log(
