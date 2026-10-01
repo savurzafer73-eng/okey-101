@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mina Video AI V51.12.4 — GeldStory Studio</title>
+<title>Mina Video AI V51.12.6 — GeldStory Studio</title>
 
 <style>
 *{box-sizing:border-box}
@@ -475,7 +475,7 @@ canvas{
 <div class="app">
 
 <div class="header">
-<h1>🎬 Mina Video AI V51.12.4</h1>
+<h1>🎬 Mina Video AI V51.12.6</h1>
 <p>GeldStory Studio — German Documentary Video Creator</p>
 <div class="badge">
 Piper TTS • WAV • Smart Scenes • Character Director • Clean 16:9 Render
@@ -666,7 +666,7 @@ Karakter otomatik modda.
 <div>
 <label>Görsel motoru</label>
 <select id="imageMode">
-<option value="zimage">Z-IMAGE FAST — SAHNE YAZISINI GÖRSELE ÇEVİR — TEK GÖRSEL</option>
+<option value="zimage">Z-IMAGE FAST</option>
 <option value="realistic">REALISTIC</option>
 <option value="flux">FLUX FAST</option>
 </select>
@@ -1573,63 +1573,76 @@ function getShot(index){
    PROMPT
    ========================================================= */
 
-function zImageSingleFrameBlock(){
-  return "GENERATE EXACTLY ONE LARGE IMAGE. ONE SINGLE CONTINUOUS REAL-WORLD SCENE. ONE CAMERA VIEW. ONE MOMENT IN TIME. ONE PRIMARY VISUAL EVENT. ONE MAIN SUBJECT OR ONE CLEAR GROUP. ONE SINGLE COHERENT PHOTOGRAPHIC COMPOSITION. DO NOT CREATE A COLLAGE. DO NOT CREATE A GRID. DO NOT CREATE A CONTACT SHEET. DO NOT CREATE A STORYBOARD. DO NOT CREATE A MONTAGE. DO NOT CREATE PANELS. DO NOT CREATE A SPLIT SCREEN. DO NOT CREATE MULTIPLE VIEWS. DO NOT CREATE MULTIPLE SCENES. DO NOT CREATE MULTIPLE MOMENTS. DO NOT CREATE MULTIPLE SMALL IMAGES. DO NOT CREATE THUMBNAILS. DO NOT DUPLICATE PEOPLE OR SUBJECTS. DO NOT CREATE PICTURE-IN-PICTURE. DO NOT CREATE A COMPOSITE LAYOUT. FILL THE ENTIRE FRAME WITH ONE CONTINUOUS ENVIRONMENT. 16:9 LANDSCAPE. FULL FRAME. EDGE-TO-EDGE CINEMATIC IMAGE. KEEP THE MAIN SUBJECT AND FACE COMFORTABLY INSIDE THE CENTRAL SAFE AREA. NO BLACK BORDERS. ";
-}
-
-function cleanPromptValue(value,fallback){
-  var v=String(value==null?"":value).trim();
-  if(!v || v.toLowerCase()==="undefined" || v.toLowerCase()==="null") return fallback;
-  return v;
-}
-
 function buildPrompt(text,index){
 
-  var sceneText=String(text||"").trim();
-  var a=analyzeScene(sceneText);
+  var a=analyzeScene(text);
   var shot=getShot(index);
-  var mode=$("imageMode") ? $("imageMode").value : "zimage";
-  var frame=formatPromptText();
+
+  var mode=
+    $("imageMode")
+      ? $("imageMode").value
+      : "zimage";
 
   /*
-    V51.12.5 — SCENE-FIRST Z-IMAGE DIRECTOR
-    The original German scene text is now explicitly included in the prompt.
-    The semantic analysis is used as visual reinforcement, not as a replacement
-    for the actual scene description.
+     V51.12.6 Z-IMAGE FIX
+     The actual scene text is now passed directly into the prompt.
+     This prevents the image engine from relying only on keyword analysis.
   */
+  var originalScene=String(text||"")
+    .replace(/\s+/g," ")
+    .trim();
+
   if(mode==="zimage"){
 
     return [
-      "CREATE ONE SINGLE LARGE PHOTOREALISTIC CINEMATIC DOCUMENTARY IMAGE.",
-      "THE ORIGINAL SCENE DESCRIPTION BELOW IS THE PRIMARY VISUAL INSTRUCTION.",
-      "VISUALIZE THE EXACT ACTION, PEOPLE, PLACE, OBJECTS AND MOMENT DESCRIBED IN THE SCENE.",
-      "ORIGINAL SCENE DESCRIPTION: ["+sceneText+"].",
-      "IMPORTANT: THE SCENE DESCRIPTION IS IN GERMAN. UNDERSTAND IT AND VISUALIZE IT; DO NOT RENDER THE GERMAN WORDS AS TEXT IN THE IMAGE.",
+      "Create exactly ONE single image.",
+      "Create exactly ONE photorealistic cinematic documentary photograph.",
+      "The image must directly visualize the ORIGINAL SCENE below.",
+      "ORIGINAL SCENE: "+originalScene+".",
+      "VISUALIZE THE EXACT ACTION, PEOPLE, PLACE AND SITUATION DESCRIBED IN THIS SCENE.",
+      "Do not replace the scene with a different event.",
+      "Do not create a collection of scenes.",
       characterPrompt(),
-      "VISUAL EVENT: "+cleanPromptValue(a.event,"the exact action described in the scene")+".",
-      "LOCATION: "+cleanPromptValue(a.location,"a believable real-world location")+".",
-      "ENVIRONMENT: "+cleanPromptValue(a.environmentDetails,"authentic realistic environmental details")+".",
-      "IMPORTANT PROPS: "+cleanPromptValue(a.props,"objects relevant to the described action")+".",
-      "BACKGROUND: "+cleanPromptValue(a.background,"subtle realistic background details")+".",
-      "EMOTION: "+cleanPromptValue(a.emotion,"natural authentic emotion")+".",
-      "PERIOD: "+cleanPromptValue(a.period,"historically appropriate period")+".",
-      "LIGHTING: "+cleanPromptValue(a.lighting,"natural cinematic documentary lighting")+".",
+      "MAIN EVENT: "+a.event+".",
+      "LOCATION: "+a.location+".",
+      "ENVIRONMENT: "+a.environmentDetails+".",
+      "PROPS: "+a.props+".",
+      "BACKGROUND: "+a.background+".",
+      "EMOTION: "+a.emotion+".",
+      "PERIOD: "+a.period+".",
+      "LIGHTING: "+a.lighting+".",
       "CAMERA: "+shot.camera+".",
       "LENS: "+shot.lens+".",
-      "COMPOSITION: "+shot.composition+".",
-      frame+".",
-      "ONE CONTINUOUS REAL-WORLD SCENE. ONE MOMENT IN TIME. ONE CAMERA VIEW. ONE COHERENT COMPOSITION.",
-      "SHOW THE MAIN ACTION CLEARLY AND MAKE THE SUBJECTS AND IMPORTANT OBJECTS LARGE ENOUGH TO READ VISUALLY.",
-      "NATURAL REALISTIC PERSPECTIVE, REALISTIC SKIN, BELIEVABLE ANATOMY, AUTHENTIC PERIOD CLOTHING, REALISTIC MATERIALS.",
-      "NO COLLAGE, NO GRID, NO CONTACT SHEET, NO STORYBOARD, NO SPLIT SCREEN, NO MULTI-PANEL IMAGE, NO MONTAGE, NO MULTIPLE SMALL IMAGES, NO DUPLICATE PEOPLE, NO DUPLICATE SCENES.",
-      "NO TEXT, NO LETTERS, NO WORDS, NO NUMBERS, NO LOGOS, NO WATERMARKS. VISUAL ONLY."
+      "16:9 LANDSCAPE, FULL FRAME, EDGE TO EDGE.",
+      "ONE CAMERA VIEW.",
+      "ONE CONTINUOUS REAL-WORLD SCENE.",
+      "ONE MOMENT IN TIME.",
+      "ONE COHERENT COMPOSITION.",
+      "ONE PRIMARY VISUAL EVENT.",
+      "Keep the main subject fully visible with generous safe space around the subject.",
+      "Natural realistic perspective, realistic skin, believable anatomy, authentic clothing, realistic materials.",
+      "NO COLLAGE.",
+      "NO GRID.",
+      "NO CONTACT SHEET.",
+      "NO STORYBOARD.",
+      "NO MONTAGE.",
+      "NO SPLIT SCREEN.",
+      "NO MULTI-PANEL IMAGE.",
+      "NO MULTIPLE SMALL PICTURES.",
+      "NO DUPLICATE PEOPLE.",
+      "NO DUPLICATE SCENES.",
+      "NO DIVIDED SECTIONS.",
+      "NO PICTURE-IN-PICTURE.",
+      "NO TEXT, NO LETTERS, NO WORDS, NO NUMBERS, NO LOGOS, NO WATERMARKS.",
+      "VISUAL ONLY."
     ].join(" ");
   }
 
+  /* Existing non-Z-Image modes remain available. */
   var prompt=
     "Photorealistic cinematic documentary photograph. "+
-    "ORIGINAL SCENE DESCRIPTION: "+sceneText+". "+
-    "Visualize the exact action, people, location and objects described in this scene. "+
+    "ORIGINAL SCENE: "+originalScene+". "+
+    "VISUALIZE THE EXACT ACTION AND SITUATION DESCRIBED IN THE ORIGINAL SCENE. "+
     characterPrompt()+" "+
     "MAIN VISUAL EVENT: "+a.event+". "+
     "LOCATION: "+a.location+". "+
@@ -1643,10 +1656,12 @@ function buildPrompt(text,index){
     "CAMERA: "+shot.camera+". "+
     "LENS: "+shot.lens+". "+
     "COMPOSITION: "+shot.composition+". "+
-    frame+". "+
-    "ONE SINGLE LARGE IMAGE. ONE CONTINUOUS SCENE. ONE COHERENT CAMERA VIEW. "+
-    "NO COLLAGE. NO GRID. NO CONTACT SHEET. NO STORYBOARD. NO SPLIT SCREEN. NO MULTIPLE SMALL IMAGES. "+
-    "NO DUPLICATE PEOPLE OR SCENES. "+
+    "ONE SINGLE LARGE CINEMATIC IMAGE. "+
+    "ONE SINGLE CONTINUOUS SCENE. "+
+    "ONE COHERENT COMPOSITION. "+
+    "16:9 LANDSCAPE FULL FRAME. "+
+    "NO COLLAGE. NO GRID. NO CONTACT SHEET. NO STORYBOARD. NO SPLIT SCREEN. "+
+    "NO MULTIPLE SMALL IMAGES. NO DUPLICATE SUBJECTS. NO DIVIDED SECTIONS. "+
     "NO TEXT. NO LETTERS. NO WORDS. NO LOGOS. NO WATERMARKS. VISUAL ONLY. ";
 
   if(mode==="flux"){
@@ -1657,6 +1672,8 @@ function buildPrompt(text,index){
 
   return prompt;
 }
+
+
 /* =========================================================
    SCENE CREATION — FIXED
    ========================================================= */
@@ -1762,7 +1779,11 @@ function createScenes(){
         );
 
         prompt=
-          "Photorealistic cinematic documentary photograph. ONE SINGLE LARGE IMAGE. ONE SINGLE CONTINUOUS SCENE. ONE CAMERA VIEW. ONE PRIMARY VISUAL EVENT. 16:9 LANDSCAPE FULL FRAME. Main subject clearly visible with generous safe margins. NO COLLAGE. NO GRID. NO CONTACT SHEET. NO STORYBOARD. NO MULTIPLE SMALL IMAGES. NO DUPLICATE SUBJECTS. NO BLACK BORDERS. "+
+          "Photorealistic cinematic documentary scene. "+
+          "16:9 landscape full-screen composition. "+
+          "Main subject clearly visible. "+
+          "Wide safe framing. "+
+          "No black borders. "+
           noTextBlock()+".";
       }
 
@@ -2027,10 +2048,6 @@ function renderScenes(){
       '📋 Prompt Kopyala'+
       '</button>'+
 
-      '<button class="btn small primary" onclick="copyZImagePrompt('+i+')">'+
-      '🖼️ Z-IMAGE TEK GÖRSEL'+
-      '</button>'+
-
       '<button class="btn small" onclick="generateImagePlaceholder('+i+')">'+
       '🖼️ Görsel Üretim Bilgisi'+
       '</button>'+
@@ -2162,27 +2179,6 @@ async function copyPrompt(index){
     alert(
       scenes[index].prompt
     );
-  }
-}
-
-async function copyZImagePrompt(index){
-
-  if(!scenes[index]) return;
-
-  var originalMode=$("imageMode") ? $("imageMode").value : "zimage";
-  var prompt;
-
-  try{
-    prompt=buildPrompt(scenes[index].text,index);
-  }catch(e){
-    prompt=scenes[index].prompt;
-  }
-
-  try{
-    await navigator.clipboard.writeText(prompt);
-    status("🖼️ Z-Image TEK GÖRSEL promptu kopyalandı. ForVideo Z-Image'de 16:9 seç ve sadece bir kez Generate'e bas.");
-  }catch(error){
-    alert(prompt);
   }
 }
 
@@ -4619,7 +4615,7 @@ syncSubtitleToggle();
 resizeCanvas();
 
 status(
-  "🟢 Mina Video AI V51.12.4 hazır. Altyazı varsayılan olarak KAPALI."
+  "🟢 Mina Video AI V51.12.6 hazır. Altyazı varsayılan olarak KAPALI."
 );
 
 </script>
