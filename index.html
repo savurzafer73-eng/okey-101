@@ -1,25 +1,364 @@
+
 <!doctype html>
-<html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mina Ses Birleştirme</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#10131b;color:#f3f5ff;font:16px Arial,sans-serif}.wrap{max-width:900px;margin:auto;padding:22px}h1{font-size:clamp(28px,5vw,40px)}p{color:#b8c1d4;line-height:1.5}.panel{background:#1a2130;border:1px solid #354057;border-radius:16px;padding:18px;margin:15px 0}.drop{padding:24px;text-align:center;border:2px dashed #7169bd;border-radius:12px}.btn{border:0;border-radius:9px;padding:11px 15px;margin:5px 4px 5px 0;background:#877cff;color:white;font-weight:bold;cursor:pointer}.secondary{background:#2c374a}.green{background:#4bd6b0;color:#10201c}.file{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#121824;border:1px solid #344056;border-radius:10px;padding:10px;margin-top:8px}.name{flex:1;min-width:150px;overflow-wrap:anywhere}.muted{color:#aeb8cb;font-size:13px}.mini{background:#303950;color:white;border:1px solid #4a5670;border-radius:6px;padding:6px;cursor:pointer}.settings{display:flex;gap:14px;flex-wrap:wrap}.settings label{display:block;color:#bac4d6;font-size:13px;margin-bottom:5px}input[type=number],select{padding:9px;border-radius:8px;border:1px solid #46516b;background:#101722;color:white;width:160px}.status{white-space:pre-wrap;background:#111722;border:1px solid #344056;border-radius:9px;padding:12px;color:#b9c5d9;margin-top:12px}.ok{color:#9af0d4}.err{color:#ffb1c0}.bar{height:7px;background:#30394b;border-radius:8px;margin-top:12px;overflow:hidden}.bar div{height:100%;width:0;background:linear-gradient(90deg,#877cff,#4bd6b0)}audio{width:100%;margin-top:12px}.hidden{display:none}
-</style><body><main class="wrap">
-<h1>🎧 Mina Ses Birleştirme</h1><p>Sahne seslerini sırala, birleştir ve tek WAV dosyası olarak kaydet. Ücretsiz, API anahtarsız ve tarayıcı içinde çalışır; seslerin bir sunucuya yüklenmez.</p>
-<section class="panel"><h2>1. Ses dosyalarını ekle</h2><div class="drop" id="drop"><b>Dosyaları buraya bırak veya seç</b><br><span class="muted">MP3, WAV, M4A, OGG ve tarayıcının desteklediği sesler</span><br><button class="btn" id="pick">Ses dosyası seç</button><button class="btn secondary" id="clear">Listeyi temizle</button><input id="files" type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.aac,.flac,.webm" multiple hidden></div><div id="list"></div><p class="muted">↑ ↓ ile sıralamayı değiştir. Desteklenmeyen dosyalar atlanır.</p></section>
-<section class="panel"><h2>2. Birleştirme ayarları</h2><div class="settings"><div><label for="gap">Dosyalar arası sessizlik (sn)</label><input id="gap" type="number" min="0" max="30" step=".1" value=".3"></div><div><label for="rate">Örnekleme hızı</label><select id="rate"><option value="44100">44.100 Hz</option><option value="48000">48.000 Hz</option><option value="22050">22.050 Hz</option></select></div><div><label for="vol">Ses seviyesi (%)</label><input id="vol" type="number" min="0" max="200" value="100"></div></div><p><label><input type="checkbox" id="norm" checked> Tepe seviyesini güvenli düzeye getir</label></p><button id="merge" class="btn green" disabled>Sesleri birleştir</button><button id="download" class="btn secondary" disabled>WAV dosyasını indir</button><div class="bar"><div id="bar"></div></div><div id="status" class="status">Hazır. Önce ses dosyalarını ekle.</div><audio id="player" controls hidden></audio></section>
-<section class="panel"><h2>Bilgi</h2><p class="muted">Bu ilk sürüm WAV çıktısı üretir; MP3 dışa aktarma henüz yoktur. Uzun projeler çok bellek kullanabilir. İşlem sırasında sekmeyi kapatma.</p><p id="summary" class="muted">0 dosya</p></section></main>
+*{box-sizing:border-box}
+body{margin:0;background:#10131b;color:#f3f5ff;font:16px Arial,sans-serif}
+.wrap{max-width:900px;margin:auto;padding:22px}
+h1{font-size:clamp(28px,5vw,40px)}
+p{color:#b8c1d4;line-height:1.5}
+.panel{background:#1a2130;border:1px solid #354057;border-radius:16px;padding:18px;margin:15px 0}
+.drop{padding:24px;text-align:center;border:2px dashed #7169bd;border-radius:12px}
+.btn{border:0;border-radius:9px;padding:11px 15px;margin:5px 4px 5px 0;background:#877cff;color:white;font-weight:bold;cursor:pointer}
+.secondary{background:#2c374a}.green{background:#4bd6b0;color:#10201c}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.file{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#121824;border:1px solid #344056;border-radius:10px;padding:10px;margin-top:8px}
+.name{flex:1;min-width:150px;overflow-wrap:anywhere}
+.muted{color:#aeb8cb;font-size:13px}
+.mini{background:#303950;color:white;border:1px solid #4a5670;border-radius:6px;padding:6px;cursor:pointer}
+.settings{display:flex;gap:14px;flex-wrap:wrap}
+.settings label{display:block;color:#bac4d6;font-size:13px;margin-bottom:5px}
+input[type=number],select{padding:9px;border-radius:8px;border:1px solid #46516b;background:#101722;color:white;width:160px}
+.status{white-space:pre-wrap;overflow-wrap:anywhere;background:#111722;border:1px solid #344056;border-radius:9px;padding:12px;color:#b9c5d9;margin-top:12px;line-height:1.5}
+.ok{color:#9af0d4}.err{color:#ffb1c0}.warn{color:#ffdba1}
+.bar{height:7px;background:#30394b;border-radius:8px;margin-top:12px;overflow:hidden}
+.bar div{height:100%;width:0;background:linear-gradient(90deg,#877cff,#4bd6b0);transition:width .2s}
+audio{width:100%;margin-top:12px}
+.hidden{display:none!important}
+.diag{white-space:pre-wrap;overflow-wrap:anywhere;background:#111722;border:1px solid #344056;padding:12px;border-radius:8px;font-size:13px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>🎧 Mina Ses Birleştirme</h1>
+<p>MP3 ve diğer desteklenen sesleri sırala, birleştir ve WAV olarak kaydet. Ücretsizdir; API anahtarı gerekmez. Dosyalar tarayıcında işlenir.</p>
+
+<section class="panel">
+<h2>1. Ses dosyaları</h2>
+<div class="drop" id="drop">
+<b>Dosyaları buraya bırak veya seç</b><br>
+<span class="muted">MP3, WAV, M4A, OGG, AAC, FLAC</span><br>
+<button class="btn" id="pick" type="button">Ses dosyası seç</button>
+<button class="btn secondary" id="clear" type="button">Listeyi temizle</button>
+<input id="files" type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.aac,.flac,.webm" multiple hidden>
+</div>
+<div id="list"></div>
+<p class="muted">Dosyaları yukarı/aşağı taşıyabilir veya kaldırabilirsin.</p>
+</section>
+
+<section class="panel">
+<h2>2. Birleştirme ayarları</h2>
+<div class="settings">
+<div><label for="gap">Dosyalar arası sessizlik (sn)</label><input id="gap" type="number" min="0" max="30" step=".1" value=".3"></div>
+<div><label for="rate">Örnekleme hızı</label><select id="rate"><option value="44100">44.100 Hz</option><option value="48000">48.000 Hz</option><option value="22050">22.050 Hz</option></select></div>
+<div><label for="vol">Ses seviyesi (%)</label><input id="vol" type="number" min="0" max="200" value="100"></div>
+</div>
+<p><label><input type="checkbox" id="norm" checked> Tepe seviyesini güvenli düzeye getir</label></p>
+<button id="merge" class="btn green" disabled>Sesleri birleştir</button>
+<button id="download" class="btn secondary" disabled>WAV dosyasını indir</button>
+<button id="cancel" class="btn secondary" disabled>İşlemi iptal et</button>
+<div class="bar"><div id="bar"></div></div>
+<div id="status" class="status">Hazır. Önce ses dosyalarını ekle.</div>
+<audio id="player" controls class="hidden"></audio>
+</section>
+
+<section class="panel">
+<h2>3. Hata teşhisi</h2>
+<div id="diag" class="diag">Henüz hata yok.</div>
+<button id="copy" class="btn secondary">Hata raporunu kopyala</button>
+</section>
+
+<section class="panel">
+<h2>Bilgi</h2>
+<p class="muted">Çıktı WAV biçimindedir. MP3 dışa aktarma yoktur. Büyük projeler fazla bellek tüketebilir. Birleştirme için çok büyük dosyaları küçük gruplara ayır.</p>
+<p id="summary" class="muted">0 dosya</p>
+</section>
+</main>
+
 <script>
-(()=>{const $=id=>document.getElementById(id);let items=[],ctx=null,url=null,blob=null;
-function msg(t,c=''){ $('status').textContent=t;$('status').className='status '+c}
-function time(s){s=Math.max(0,Math.round(s||0));let h=Math.floor(s/3600),m=Math.floor(s%3600/60),v=s%60;return h?[h,m,v].map(x=>String(x).padStart(2,'0')).join(':'):[m,v].map(x=>String(x).padStart(2,'0')).join(':')}
-function invalidate(){if(url)URL.revokeObjectURL(url);url=null;blob=null;$('download').disabled=true;$('player').hidden=true;$('bar').firstElementChild.style.width='0%'}
-function draw(){let l=$('list');l.replaceChildren();items.forEach((it,i)=>{let row=document.createElement('div');row.className='file';let n=document.createElement('span');n.textContent=(i+1)+'.';let name=document.createElement('div');name.className='name';name.textContent=it.file.name;let meta=document.createElement('span');meta.className='muted';meta.textContent=time(it.duration)+' · '+(it.file.size/1048576).toFixed(2)+' MB';row.append(n,name,meta);[['↑',()=>move(i,-1),i===0],['↓',()=>move(i,1),i===items.length-1],['Kaldır',()=>{items.splice(i,1);invalidate();draw()},false]].forEach(([t,fn,dis])=>{let b=document.createElement('button');b.className='mini';b.textContent=t;b.disabled=dis;b.onclick=fn;row.append(b)});l.append(row)});$('merge').disabled=!items.length;$('summary').textContent=`${items.length} dosya · Yaklaşık süre ${time(items.reduce((s,x)=>s+x.duration,0)+Math.max(0,items.length-1)*Math.max(0,+$('gap').value||0))}`}
-function move(i,d){let j=i+d;if(j<0||j>=items.length)return;[items[i],items[j]]=[items[j],items[i]];invalidate();draw()}
-async function add(files){let a=[...files];if(!a.length)return;let AC=window.AudioContext||window.webkitAudioContext;if(!AC){msg('Tarayıcın ses işleme özelliğini desteklemiyor. Güncel Chrome veya Firefox dene.','err');return}ctx ||=new AC();msg('Dosyalar okunuyor...');for(let f of a){try{let b=await ctx.decodeAudioData(await f.arrayBuffer());items.push({file:f,buffer:b,duration:b.duration})}catch(e){msg('Bir dosya açılamadı: '+f.name+' — biçimi desteklenmiyor olabilir.','err')}}invalidate();draw();if(items.length)msg('Dosyalar hazır. Sıralamayı kontrol edip birleştirebilirsin.','ok')}
-$('pick').onclick=()=>$('files').click();$('files').onchange=async e=>{await add(e.target.files);e.target.value=''};$('clear').onclick=()=>{items=[];invalidate();draw();msg('Liste temizlendi.')};$('gap').oninput=draw;
-$('drop').ondragover=e=>{e.preventDefault();$('drop').style.borderColor='#4bd6b0'};$('drop').ondragleave=()=> $('drop').style.borderColor='#7169bd';$('drop').ondrop=e=>{e.preventDefault();$('drop').style.borderColor='#7169bd';add(e.dataTransfer.files)};
-function wav(ab,norm,vol){let ch=ab.numberOfChannels,len=ab.length,rate=ab.sampleRate,peak=0;if(norm)for(let c=0;c<ch;c++){let d=ab.getChannelData(c);for(let x of d)peak=Math.max(peak,Math.abs(x))}let g=(norm&&peak>0?Math.min(1,.98/peak):1)*vol/100,bytes=44+len*ch*2,out=new ArrayBuffer(bytes),v=new DataView(out),str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};str(0,'RIFF');v.setUint32(4,bytes-8,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,ch,true);v.setUint32(24,rate,true);v.setUint32(28,rate*ch*2,true);v.setUint16(32,ch*2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,bytes-44,true);let o=44;for(let i=0;i<len;i++)for(let c=0;c<ch;c++){let x=Math.max(-1,Math.min(1,ab.getChannelData(c)[i]*g));v.setInt16(o,x<0?x*32768:x*32767,true);o+=2}return new Blob([out],{type:'audio/wav'})}
-$('merge').onclick=async()=>{if(!items.length)return;invalidate();$('merge').disabled=true;try{let rate=+$('rate').value,gap=Math.max(0,Math.min(30,+$('gap').value||0)),ch=Math.max(...items.map(x=>x.buffer.numberOfChannels)),duration=items.reduce((s,x)=>s+x.duration,0)+gap*(items.length-1),len=Math.ceil(duration*rate);if(len*ch*4>1.5*1024**3)throw Error('Proje çok büyük. Daha küçük gruplar halinde birleştir.');msg('Birleştiriliyor... Bilgisayarına göre biraz sürebilir.');$('bar').firstElementChild.style.width='15%';let AC=window.OfflineAudioContext||window.webkitOfflineAudioContext,off=new AC(ch,len,rate),pos=0;items.forEach((it,i)=>{let src=off.createBufferSource();src.buffer=it.buffer;src.connect(off.destination);src.start(pos/rate);pos+=Math.ceil(it.duration*rate)+(i<items.length-1?Math.round(gap*rate):0);$('bar').firstElementChild.style.width=(15+60*(i+1)/items.length)+'%'});let rendered=await off.startRendering();blob=wav(rendered,$('norm').checked,Math.max(0,Math.min(200,+$('vol').value||0)));url=URL.createObjectURL(blob);$('player').src=url;$('player').hidden=false;$('download').disabled=false;$('bar').firstElementChild.style.width='100%';msg(`Tamamlandı! ${items.length} ses birleştirildi.\nSüre: ${time(rendered.duration)} · WAV · ${rate.toLocaleString('tr-TR')} Hz · ${(blob.size/1048576).toFixed(1)} MB`,'ok')}catch(e){msg('Birleştirme hatası: '+e.message,'err')}finally{$('merge').disabled=!items.length}};
-$('download').onclick=()=>{if(!url)return;let a=document.createElement('a');a.href=url;a.download='mina_birlestirilmis_ses.wav';a.click()};draw();
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+let items=[],ctx=null,outURL=null,outBlob=null,busy=false,cancelled=false;
+let errors=[],job=0;
+const AudioCtx=window.AudioContext||window.webkitAudioContext;
+
+function status(t,c){
+ $("status").textContent=t;
+ $("status").className="status "+(c||"");
+}
+function progress(n){$("bar").style.width=Math.max(0,Math.min(100,n))+"%";}
+function time(n){
+ n=Math.max(0,Math.round(n||0));
+ let h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;
+ return h?[h,m,s].map(x=>String(x).padStart(2,"0")).join(":"):
+ [m,s].map(x=>String(x).padStart(2,"0")).join(":");
+}
+function errText(e){
+ return (e&&e.name?e.name+": ":"")+(e&&e.message?e.message:String(e||"Bilinmeyen hata"));
+}
+function logError(stage,file,e){
+ errors.push(new Date().toLocaleString("tr-TR")+" | Aşama: "+stage+
+ "\nDosya: "+file+"\nHata: "+errText(e));
+ if(errors.length>40)errors.shift();
+ $("diag").textContent=errors.join("\n\n");
+ console.error("MINA:",stage,file,e);
+}
+function invalidate(){
+ if(outURL)URL.revokeObjectURL(outURL);
+ outURL=null;outBlob=null;
+ $("download").disabled=true;
+ $("player").pause();
+ $("player").removeAttribute("src");
+ $("player").load();
+ $("player").classList.add("hidden");
+}
+function render(){
+ const list=$("list");
+ list.replaceChildren();
+ items.forEach((it,i)=>{
+  const row=document.createElement("div");row.className="file";
+  const no=document.createElement("span");no.textContent=(i+1)+".";
+  const name=document.createElement("div");name.className="name";name.textContent=it.file.name;
+  const meta=document.createElement("span");meta.className="muted";
+  meta.textContent=time(it.duration)+" · "+(it.file.size/1048576).toFixed(2)+" MB";
+  row.append(no,name,meta);
+  [
+   ["↑",()=>move(i,-1),i===0],
+   ["↓",()=>move(i,1),i===items.length-1],
+   ["Kaldır",()=>{items.splice(i,1);invalidate();render();status("Dosya kaldırıldı.","ok");},false]
+  ].forEach(([label,fn,disabled])=>{
+   const b=document.createElement("button");
+   b.className="mini";b.textContent=label;b.disabled=disabled||busy;
+   b.onclick=fn;row.append(b);
+  });
+  list.append(row);
+ });
+ $("merge").disabled=!items.length||busy;
+ $("clear").disabled=busy;
+ $("summary").textContent=items.length+" dosya · Yaklaşık süre "+
+ time(items.reduce((s,x)=>s+x.duration,0)+
+ Math.max(0,items.length-1)*Math.max(0,Number($("gap").value)||0));
+}
+function move(i,d){
+ const j=i+d;
+ if(j<0||j>=items.length)return;
+ [items[i],items[j]]=[items[j],items[i]];
+ invalidate();render();
+}
+function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+
+async function decodeWithTimeout(buffer,ms,filename,token){
+ return new Promise((resolve,reject)=>{
+  let finished=false;
+  const timer=setTimeout(()=>{
+   if(finished)return;
+   finished=true;
+   reject(new Error("Zaman aşımı: "+filename+" dosyası "+Math.round(ms/1000)+
+   " saniyede çözümlenemedi. Dosya bozuk veya Chrome ile uyumsuz olabilir."));
+  },ms);
+  try{
+   ctx.decodeAudioData(buffer,
+    result=>{
+     if(finished)return;
+     finished=true;clearTimeout(timer);
+     if(token!==job)return;
+     resolve(result);
+    },
+    error=>{
+     if(finished)return;
+     finished=true;clearTimeout(timer);
+     reject(error||new Error("Tarayıcı ses dosyasını çözemedi."));
+    }
+   );
+  }catch(e){
+   if(!finished){finished=true;clearTimeout(timer);reject(e);}
+  }
+ });
+}
+
+async function addFiles(fileList){
+ if(busy){status("Önce devam eden işlemin bitmesini bekle.","warn");return;}
+ const files=Array.from(fileList||[]);
+ if(!files.length)return;
+ const accepted=files.filter(f=>f.type.startsWith("audio/")||
+ /\.(mp3|wav|m4a|ogg|aac|flac|webm|opus)$/i.test(f.name));
+ const ignored=files.filter(f=>!accepted.includes(f));
+ ignored.forEach(f=>logError("Dosya türü kontrolü",f.name,new Error("Ses dosyası olarak tanınmadı.")));
+ if(!accepted.length){status("Seçilen dosyalarda tanınan bir ses dosyası yok.","err");return;}
+ if(!AudioCtx){status("Bu tarayıcı Web Audio API desteklemiyor. Chrome'u güncelle.","err");return;}
+
+ const thisJob=++job;
+ busy=true;render();
+ $("cancel").disabled=false;
+ let added=0,failed=0;
+ try{
+  if(!ctx)ctx=new AudioCtx();
+  if(ctx.state==="suspended")await ctx.resume();
+ }catch(e){
+  logError("Ses motorunu başlatma","(genel)",e);
+  status("Ses motoru başlatılamadı: "+errText(e),"err");
+  busy=false;$("cancel").disabled=true;render();return;
+ }
+
+ for(let i=0;i<accepted.length;i++){
+  if(cancelled||thisJob!==job)break;
+  const f=accepted[i];
+  try{
+   if(!f.size)throw new Error("Dosya 0 bayt.");
+   status("Dosya okunuyor: "+f.name+"\n"+(i+1)+"/"+accepted.length);
+   const raw=await f.arrayBuffer();
+   if(cancelled||thisJob!==job)break;
+   if(!raw||!raw.byteLength)throw new Error("Dosya boş veya okunamadı.");
+
+   status("Ses çözümleniyor: "+f.name+"\n"+(i+1)+"/"+accepted.length);
+   // Dosya başına en fazla 25 saniye bekle.
+   const decoded=await decodeWithTimeout(raw.slice(0),25000,f.name,thisJob);
+   if(cancelled||thisJob!==job)break;
+   if(!decoded||!decoded.length||!decoded.numberOfChannels)
+    throw new Error("Tarayıcı geçerli ses verisi döndürmedi.");
+   items.push({file:f,buffer:decoded,duration:decoded.duration});
+   added++;
+  }catch(e){
+   if(cancelled||thisJob!==job)break;
+   failed++;
+   logError("Dosya okuma / ses çözümleme",f.name,e);
+  }
+  progress((i+1)/accepted.length*100);
+  render();
+  await wait(20);
+ }
+ busy=false;$("cancel").disabled=true;
+ invalidate();render();
+ if(cancelled){
+  status("İşlem kullanıcı tarafından iptal edildi. Başarıyla eklenen dosyalar korundu.","warn");
+  cancelled=false;
+ }else if(added&&failed){
+  status(added+" dosya eklendi, "+failed+" dosya okunamadı.\nHata ayrıntıları Hata Teşhisi bölümünde.","warn");
+ }else if(added){
+  status(added+" ses dosyası başarıyla eklendi. Birleştirmeye hazırsın.","ok");
+ }else{
+  status("Hiçbir dosya eklenemedi. Hata Teşhisi bölümünü kontrol et.","err");
+ }
+}
+
+function makeWav(ab,normalize,volume){
+ const channels=ab.numberOfChannels,length=ab.length,rate=ab.sampleRate;
+ let peak=0;
+ if(normalize){
+  for(let c=0;c<channels;c++){
+   const d=ab.getChannelData(c);
+   for(let i=0;i<d.length;i++)peak=Math.max(peak,Math.abs(d[i]));
+  }
+ }
+ const gain=(normalize&&peak>0?Math.min(1,.98/peak):1)*volume/100;
+ const dataSize=length*channels*2,total=44+dataSize;
+ if(total>0xffffffff)throw new Error("WAV dosyası 4 GB sınırını aşıyor.");
+ const out=new ArrayBuffer(total),v=new DataView(out);
+ function str(o,s){for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));}
+ str(0,"RIFF");v.setUint32(4,total-8,true);str(8,"WAVE");
+ str(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);
+ v.setUint16(22,channels,true);v.setUint32(24,rate,true);
+ v.setUint32(28,rate*channels*2,true);v.setUint16(32,channels*2,true);
+ v.setUint16(34,16,true);str(36,"data");v.setUint32(40,dataSize,true);
+ let offset=44;
+ for(let i=0;i<length;i++){
+  for(let c=0;c<channels;c++){
+   const x=Math.max(-1,Math.min(1,ab.getChannelData(c)[i]*gain));
+   v.setInt16(offset,x<0?x*32768:x*32767,true);offset+=2;
+  }
+ }
+ return new Blob([out],{type:"audio/wav"});
+}
+
+$("pick").onclick=()=>$("files").click();
+$("files").onchange=async e=>{
+ const chosen=Array.from(e.target.files||[]);
+ e.target.value="";
+ await addFiles(chosen);
+};
+$("clear").onclick=()=>{
+ if(busy)return;
+ items=[];invalidate();render();status("Liste temizlendi.");
+};
+$("gap").oninput=render;
+$("drop").ondragover=e=>{e.preventDefault();$("drop").style.borderColor="#4bd6b0";};
+$("drop").ondragleave=()=>$("drop").style.borderColor="#7169bd";
+$("drop").ondrop=e=>{
+ e.preventDefault();$("drop").style.borderColor="#7169bd";
+ addFiles(e.dataTransfer.files);
+};
+$("cancel").onclick=()=>{
+ if(!busy)return;
+ cancelled=true;job++;
+ status("İptal ediliyor… Bekleyen tarayıcı çözümleme işlemi hemen durdurulamayabilir.","warn");
+};
+$("merge").onclick=async()=>{
+ if(!items.length||busy)return;
+ busy=true;render();invalidate();
+ $("cancel").disabled=false;
+ const thisJob=++job;
+ try{
+  const rate=Number($("rate").value);
+  const gap=Math.max(0,Math.min(30,Number($("gap").value)||0));
+  const volume=Math.max(0,Math.min(200,Number($("vol").value)||0));
+  const channels=Math.max(...items.map(x=>x.buffer.numberOfChannels));
+  const duration=items.reduce((s,x)=>s+x.duration,0)+gap*(items.length-1);
+  const length=Math.ceil(duration*rate);
+  if(!Number.isFinite(length)||length<1)throw new Error("Çıktı süresi geçersiz.");
+  if(length*channels*4>900*1024*1024)
+   throw new Error("Proje çok büyük. Daha küçük gruplar hâlinde birleştir.");
+  const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  if(!Offline)throw new Error("OfflineAudioContext desteklenmiyor. Chrome'u güncelle.");
+  status("Sesler birleştiriliyor…");
+  const off=new Offline(channels,length,rate);
+  let pos=0;
+  items.forEach((it,i)=>{
+   const src=off.createBufferSource();src.buffer=it.buffer;src.connect(off.destination);
+   src.start(pos/rate);
+   pos+=it.duration+ (i<items.length-1?gap:0);
+   progress(10+30*(i+1)/items.length);
+  });
+  const rendered=await off.startRendering();
+  if(thisJob!==job)throw new Error("İşlem iptal edildi.");
+  progress(70);
+  outBlob=makeWav(rendered,$("norm").checked,volume);
+  outURL=URL.createObjectURL(outBlob);
+  $("player").src=outURL;$("player").classList.remove("hidden");
+  $("download").disabled=false;progress(100);
+  status("Tamamlandı!\n"+items.length+" ses birleştirildi.\nSüre: "+time(rendered.duration)+
+   " · WAV · "+rate.toLocaleString("tr-TR")+" Hz · "+(outBlob.size/1048576).toFixed(1)+" MB","ok");
+ }catch(e){
+  logError("Birleştirme","(tüm proje)",e);
+  status("Birleştirme hatası: "+errText(e),"err");
+ }finally{
+  busy=false;$("cancel").disabled=true;render();
+ }
+};
+$("download").onclick=()=>{
+ if(!outURL)return;
+ const a=document.createElement("a");
+ a.href=outURL;a.download="mina_birlestirilmis_ses.wav";
+ document.body.appendChild(a);a.click();a.remove();
+};
+$("copy").onclick=async()=>{
+ const report=errors.join("\n\n")||"Henüz hata yok.";
+ try{
+  await navigator.clipboard.writeText(report);
+  status("Hata raporu kopyalandı.","ok");
+ }catch(e){
+  const t=document.createElement("textarea");t.value=report;
+  document.body.appendChild(t);t.select();
+  const ok=document.execCommand("copy");t.remove();
+  status(ok?"Hata raporu kopyalandı.":"Rapor kopyalanamadı; metni seçerek kopyala.",ok?"ok":"warn");
+ }
+};
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
